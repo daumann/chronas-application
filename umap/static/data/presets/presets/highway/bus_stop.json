@@ -1,0 +1,18 @@
+{
+    "icon": "bus",
+    "fields": [
+        "operator",
+        "bench",
+        "shelter",
+        "covered"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "highway": "bus_stop"
+    },
+    "terms": [],
+    "name": "Bus Stop"
+}

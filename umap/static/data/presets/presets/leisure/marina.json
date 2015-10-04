@@ -1,0 +1,15 @@
+{
+    "icon": "harbor",
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "boat"
+    ],
+    "tags": {
+        "leisure": "marina"
+    },
+    "name": "Marina"
+}

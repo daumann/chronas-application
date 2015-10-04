@@ -1,0 +1,31 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "operator",
+        "address",
+        "emergency"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "clinic",
+        "doctor",
+        "emergency room",
+        "health service",
+        "hospice",
+        "infirmary",
+        "institution",
+        "nursing home",
+        "sanatorium",
+        "sanitarium",
+        "sick",
+        "surgery",
+        "ward"
+    ],
+    "tags": {
+        "amenity": "hospital"
+    },
+    "name": "Hospital Grounds"
+}

@@ -1,0 +1,89 @@
+# -*- coding:utf-8 -*-
+
+"""
+Example settings for local development
+
+Use this file as a base for your local development settings and copy
+it to umap/settings/local.py. It should not be checked into
+your code repository.
+
+"""
+
+from umap.settings.base import *   # pylint: disable=W0614,W0401
+
+SECRET_KEY = 'and the beer i had for breakfast'
+INTERNAL_IPS = ('127.0.0.1', )
+ALLOWED_HOSTS = ['*', ]
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    ('You', 'your@email'),
+)
+MANAGERS = ADMINS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'umap',
+    }
+}
+
+WSGI_APPLICATION = 'umap.wsgi.application'
+
+COMPRESS_ENABLED = False
+COMPRESS_OFFLINE = True
+
+LANGUAGE_CODE = 'en'
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.github.GithubOAuth2',
+    'social.backends.bitbucket.BitbucketOAuth',
+    'social.backends.twitter.TwitterOAuth',
+    'social.backends.openstreetmap.OpenStreetMapOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_GITHUB_KEY = 'xxx'
+SOCIAL_AUTH_GITHUB_SECRET = 'xxx'
+SOCIAL_AUTH_BITBUCKET_KEY = 'xxx'
+SOCIAL_AUTH_BITBUCKET_SECRET = 'xxx'
+# We need email to associate with other Oauth providers
+SOCIAL_AUTH_GITHUB_SCOPE = ["user:email", ]
+SOCIAL_AUTH_TWITTER_KEY = "xxx"
+SOCIAL_AUTH_TWITTER_SECRET = "xxx"
+SOCIAL_AUTH_OPENSTREETMAP_KEY = 'xxx'
+SOCIAL_AUTH_OPENSTREETMAP_SECRET = 'xxx'
+MIDDLEWARE_CLASSES += (
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+)
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+SOCIAL_AUTH_BACKEND_ERROR_URL = "/"
+
+# UMAP_DEMO_PK = 204
+# UMAP_SHOWCASE_PK = 1156
+LEAFLET_STORAGE_ALLOW_ANONYMOUS = True
+UMAP_DEMO_SITE = True
+SITE_URL = "http://localhost:8019"
+SHORT_SITE_URL = "http://s.hort"
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+#         'LOCATION': '/var/tmp/django_cache',
+#     }
+# }
+
+POSTGIS_VERSION = (2, 0, 3)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# You need to unable accent extension before using UMAP_USE_UNACCENT 
+# python manage.py dbshell
+# CREATE EXTENSION unaccent;
+UMAP_USE_UNACCENT = False
+
+# For static deployment
+STATIC_ROOT = '/home/aumannd/.virtualenvs/umap/var/static'
+
+# For users' statics (geojson mainly)
+MEDIA_ROOT = '/home/aumannd/.virtualenvs/umap/var/uploads'

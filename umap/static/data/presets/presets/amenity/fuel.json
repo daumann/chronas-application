@@ -1,0 +1,26 @@
+{
+    "icon": "fuel",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "petrol",
+        "fuel",
+        "propane",
+        "diesel",
+        "lng",
+        "cng",
+        "biodiesel"
+    ],
+    "tags": {
+        "amenity": "fuel"
+    },
+    "name": "Gas Station"
+}

@@ -1,0 +1,1895 @@
+{% load compress umap_tags i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block head_title %}uMap{% endblock %}</title>
+    <meta charset="utf-8">
+    {% compress css %}
+    <!-- Included CSS Files (Compressed) -->
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}staticReqs/light-gallery/css/lightGallery.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}staticReqs/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}staticReqs/storage.ui.default.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}staticReqs/chronas-default.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}umap/umap.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}staticReqs/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}staticReqs/bootstrap-toggle.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}staticReqs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}markercluster/MarkerCluster.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}markercluster/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}staticReqs/sequences.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}staticReqs/magnific-popup.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}staticReqs/nv.d3.css" />
+
+    {% endcompress css %}
+    <!-- IE Fix for HTML5 Tags -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% block extra_head %}
+    {% endblock extra_head %}
+    {% compress js %}
+    <script src="{{ STATIC_URL }}umap/js/autocomplete.js"></script>
+    {% endcompress js %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<body class="{% block body_class %}{% endblock %}">
+<div id="storage-ui-container"></div>
+<div id="storage-alert-container"></div>
+<div id="storage-tooltip-container"></div>
+
+<div id="template1" class="templateSec"  style="display:'none'">
+
+
+
+<div class="panewrap" style="right: -100%;">
+<div class="preset-list-pane pane">
+    <div class="header fillL cf">
+        <h3>Select feature type</h3>
+        <button onclick='$(".storage-close-link").click();' class="close"><span class="icon close"></span>
+        </button>
+    </div>
+
+    <div class="inspector-body">
+    <div class="preset-list fillL cf">
+    
+    <div class="preset-list-item preset-category-landuse" onclick="chooseFeature(event,this)" style="opacity: 1;">
+        <div class="preset-list-button-wrap category col12">
+            <button class="preset-list-button">
+                <div class="preset-icon-fill preset-icon-fill-area"></div>
+                <div class="feature-land-use preset-icon"></div>
+                <div class="label">Historical figure</div>
+            </button>
+        </div>
+        <div class="subgrid col12" style="max-height: 0px; opacity: 0; padding-bottom: 0px;">
+            <div class="arrow"></div>
+            <div class="preset-list fillL3 cf fl">
+                <div class="preset-list-item preset-landuse-residential"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-residential"></div>
+                            <div class="feature-building preset-icon"></div>
+                            <div class="label">Residential</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-industrial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-industrial"></div>
+                            <div class="feature-industrial preset-icon"></div>
+                            <div class="label">Industrial</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-commercial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-commercial"></div>
+                            <div class="feature-commercial preset-icon"></div>
+                            <div class="label">Commercial</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-retail"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-retail"></div>
+                            <div class="feature-shop preset-icon"></div>
+                            <div class="label">Retail</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-farm"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farm"></div>
+                            <div class="feature-farm preset-icon"></div>
+                            <div class="label">Farm</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-farmyard"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farmyard"></div>
+                            <div class="feature-farm preset-icon"></div>
+                            <div class="label">Farmyard</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-forest"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-forest"></div>
+                            <div class="feature-park2 preset-icon"></div>
+                            <div class="label">Forest</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-meadow"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-meadow"></div>
+                            <div class="feature-marker-stroked preset-icon"></div>
+                            <div class="label">Meadow</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-cemetery"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-cemetery"></div>
+                            <div class="feature-cemetery preset-icon"></div>
+                            <div class="label">Cemetery</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-military"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-military"></div>
+                            <div class="feature-marker-stroked preset-icon"></div>
+                            <div class="label">Military</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="preset-list-item preset-category-building"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+        <div class="preset-list-button-wrap category col12">
+            <button class="preset-list-button">
+                <div class="preset-icon-fill preset-icon-fill-area"></div>
+                <div class="feature-building preset-icon"></div>
+                <div class="label">Structure</div>
+            </button>
+        </div>
+        <div class="subgrid col12" style="max-height: 0px; opacity: 0;">
+            <div class="arrow"></div>
+            <div class="preset-list fillL3 cf fl">
+                <div class="preset-list-item preset-landuse-residential"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-residential"></div>
+                            <div class="feature-building preset-icon"></div>
+                            <div class="label">Residential</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-industrial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-industrial"></div>
+                            <div class="feature-industrial preset-icon"></div>
+                            <div class="label">Industrial</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-commercial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-commercial"></div>
+                            <div class="feature-commercial preset-icon"></div>
+                            <div class="label">Commercial</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-retail"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-retail"></div>
+                            <div class="feature-shop preset-icon"></div>
+                            <div class="label">Retail</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-farm"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farm"></div>
+                            <div class="feature-farm preset-icon"></div>
+                            <div class="label">Farm</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-farmyard"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farmyard"></div>
+                            <div class="feature-farm preset-icon"></div>
+                            <div class="label">Farmyard</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-forest"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-forest"></div>
+                            <div class="feature-park2 preset-icon"></div>
+                            <div class="label">Forest</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-meadow"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-meadow"></div>
+                            <div class="feature-marker-stroked preset-icon"></div>
+                            <div class="label">Meadow</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-cemetery"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-cemetery"></div>
+                            <div class="feature-cemetery preset-icon"></div>
+                            <div class="label">Cemetery</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-military"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-military"></div>
+                            <div class="feature-marker-stroked preset-icon"></div>
+                            <div class="label">Military</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="preset-list-item preset-category-water-area"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+        <div class="preset-list-button-wrap category col12">
+            <button class="preset-list-button">
+                <div class="preset-icon-fill preset-icon-fill-area"></div>
+                <div class="feature-water preset-icon"></div>
+                <div class="label">Event</div>
+            </button>
+        </div>
+        <div class="subgrid col12" style="max-height: 0px; opacity: 0;">
+            <div class="arrow"></div>
+            <div class="preset-list fillL3 cf fl">
+                <div class="preset-list-item preset-landuse-residential"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-residential"></div>
+                            <div class="feature-building preset-icon"></div>
+                            <div class="label">Residential</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-industrial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-industrial"></div>
+                            <div class="feature-industrial preset-icon"></div>
+                            <div class="label">Industrial</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-commercial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-commercial"></div>
+                            <div class="feature-commercial preset-icon"></div>
+                            <div class="label">Commercial</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-retail"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-retail"></div>
+                            <div class="feature-shop preset-icon"></div>
+                            <div class="label">Retail</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-farm"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farm"></div>
+                            <div class="feature-farm preset-icon"></div>
+                            <div class="label">Farm</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-farmyard"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farmyard"></div>
+                            <div class="feature-farm preset-icon"></div>
+                            <div class="label">Farmyard</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-forest"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-forest"></div>
+                            <div class="feature-park2 preset-icon"></div>
+                            <div class="label">Forest</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-meadow"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-meadow"></div>
+                            <div class="feature-marker-stroked preset-icon"></div>
+                            <div class="label">Meadow</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-cemetery"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-cemetery"></div>
+                            <div class="feature-cemetery preset-icon"></div>
+                            <div class="label">Cemetery</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="preset-list-item preset-landuse-military"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                    <div class="preset-list-button-wrap col12">
+                        <button class="preset-list-button">
+                            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-military"></div>
+                            <div class="feature-marker-stroked preset-icon"></div>
+                            <div class="label">Military</div>
+                        </button>
+                        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    </div>
+    </div>
+</div>
+
+<div class="entity-editor-pane pane" style="left: 50%;">
+<div class="header fillL cf">
+    <button onclick='$(".storage-close-link").click()' class="fr preset-close"><span class="icon close"></span>
+    </button>
+
+    <h3>Edit feature</h3>
+</div>
+
+    <div class="inspector-body">
+        <div class="preset-list-item inspector-inner">
+            <div class="preset-list-button-wrap">
+                <button class="preset-list-button preset-reset">
+                    <div class="tooltip bottom" style="left: 122px; top: 60px;">
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">Change feature</div>
+                    </div>
+                    <div class="label">Public Building</div>
+                    <div class="preset-icon-fill preset-icon-fill-point tag-building tag-building-public"></div>
+                    <div class="feature-building preset-icon"></div>
+                </button>
+                <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span>
+                </button>
+            </div>
+            <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+        </div>
+        <div class="inspector-border inspector-preset">
+            <div class="preset-form inspector-inner fillL3">
+                <div class="form-field form-field-name">
+                    <div class="form-label" for="preset-input-name">Name
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="text" id="preset-input-name" class="localized-main combobox-input" placeholder="Common name (if any)">
+
+                </div>
+                <div class="form-field form-field-address">
+                    <div class="form-label" for="preset-input-address">Address
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                    <div class="preset-input-wrap">
+                        <div class="addr-row">
+                            <input type="text" placeholder="123" class="addr-housenumber" style="width: 32.33333333333333%;">
+                            <input type="text" placeholder="Street" class="addr-street combobox-input" style="width: 65.06666666666666%;">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <div class="addr-row">
+                            <input type="text" placeholder="City" class="addr-city combobox-input" style="width: 50.333333333333336%;">
+                            <div class="combobox-caret"></div>
+                            <input type="text" placeholder="State" class="addr-state" style="width: 18%;">
+                            <input type="text" placeholder="Postcode" class="addr-postcode combobox-input" style="width: 26.666666666666668%;">
+                            <div class="combobox-caret"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-field form-field-levels modified present">
+                    <div class="form-label" for="preset-input-levels">Levels
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="text" id="preset-input-levels" placeholder="2, 4, 6...">
+                    <div class="spin-control">
+                        <button class="increment"></button>
+                        <button class="decrement"></button>
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="form-field form-field-smoking">
+                    <div class="form-label" for="preset-input-smoking">Smoking
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="text" id="preset-input-smoking" readonly="readonly" class="combobox-input" placeholder="No, Separated, Yes...">
+                    <div class="combobox-caret"></div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+            </div>
+            <div class="more-fields">
+                <label>Add field:</label>
+                <input class="value combobox-input" type="text" placeholder="Elevation, Note, Phone…">
+                <div class="combobox-caret"></div>
+            </div>
+        </div>
+        <div class="inspector-border raw-tag-editor inspector-inner"><a href="#" class="hide-toggle">All tags (2)</a>
+            <div class="hide">
+                <ul class="tag-list">
+                    <li class="tag-row cf">
+                        <div class="key-wrap">
+                            <input type="text" class="key combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <div class="input-wrap-position">
+                            <input type="text" class="value combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <button tabindex="-1" class="remove minor"><span class="icon delete"></span>
+                        </button>
+                        <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                    </li>
+                    <li class="tag-row cf">
+                        <div class="key-wrap">
+                            <input type="text" class="key combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <div class="input-wrap-position">
+                            <input type="text" class="value combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <button tabindex="-1" class="remove minor"><span class="icon delete"></span>
+                        </button>
+                        <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                    </li>
+                </ul>
+                <button class="add-tag"><span class="icon plus light"></span>
+                </button>
+            </div>
+        </div>
+        <div class="inspector-border raw-member-editor inspector-inner" style="display: none;"><a href="#" class="hide-toggle expanded">All members (3)</a>
+            <div>
+                <ul class="member-list">
+                    <li class="member-row form-field">
+                        <label class="form-label"><a href="#"><span class="member-entity-type">Line</span><span class="member-entity-name"></span></a>
+                        </label>
+                        <input class="member-role" type="text" maxlength="255" placeholder="Role">
+                        <button tabindex="-1" class="remove button-input-action member-delete minor"><span class="icon delete"></span>
+                        </button>
+                    </li>
+                    <li class="member-row form-field">
+                        <label class="form-label"><a href="#"><span class="member-entity-type">Line</span><span class="member-entity-name"></span></a>
+                        </label>
+                        <input class="member-role" type="text" maxlength="255" placeholder="Role">
+                        <button tabindex="-1" class="remove button-input-action member-delete minor"><span class="icon delete"></span>
+                        </button>
+                    </li>
+                    <li class="member-row form-field">
+                        <label class="form-label"><a href="#"><span class="member-entity-type">Line</span><span class="member-entity-name"></span></a>
+                        </label>
+                        <input class="member-role" type="text" maxlength="255" placeholder="Role">
+                        <button tabindex="-1" class="remove button-input-action member-delete minor"><span class="icon delete"></span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="raw-membership-editor inspector-inner"><a href="#" class="hide-toggle expanded">All relations (0)</a>
+            <div>
+                <ul class="member-list"></ul>
+                <button class="add-relation"><span class="icon plus light"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+    
+    
+    
+    
+</div>
+    
+    
+    
+    
+</div>
+
+<div id="template3"  class="templateSec" style="display:'none'">
+
+
+
+<div class="panewrap" style="right: -100%;">
+<div class="preset-list-pane pane">
+<div class="header fillL cf">
+    <h3>Select feature type</h3>
+    <button onclick='$(".storage-close-link").click();' class="close"><span class="icon close"></span>
+    </button>
+</div>
+
+<div class="inspector-body">
+<div class="preset-list fillL cf">
+
+<div class="preset-list-item preset-category-landuse" onclick="chooseFeature(event,this)" style="opacity: 1;">
+    <div class="preset-list-button-wrap category col12">
+        <button class="preset-list-button">
+            <div class="preset-icon-fill preset-icon-fill-area"></div>
+            <div class="feature-land-use preset-icon"></div>
+            <div class="label">Political Land</div>
+        </button>
+    </div>
+    <div class="subgrid col12" style="max-height: 0px; opacity: 0; padding-bottom: 0px;">
+        <div class="arrow"></div>
+        <div class="preset-list fillL3 cf fl">
+            <div class="preset-list-item preset-landuse-residential"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-residential"></div>
+                        <div class="feature-building preset-icon"></div>
+                        <div class="label">Residential</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-industrial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-industrial"></div>
+                        <div class="feature-industrial preset-icon"></div>
+                        <div class="label">Industrial</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-commercial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-commercial"></div>
+                        <div class="feature-commercial preset-icon"></div>
+                        <div class="label">Commercial</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-retail"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-retail"></div>
+                        <div class="feature-shop preset-icon"></div>
+                        <div class="label">Retail</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-farm"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farm"></div>
+                        <div class="feature-farm preset-icon"></div>
+                        <div class="label">Farm</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-farmyard"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farmyard"></div>
+                        <div class="feature-farm preset-icon"></div>
+                        <div class="label">Farmyard</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-forest"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-forest"></div>
+                        <div class="feature-park2 preset-icon"></div>
+                        <div class="label">Forest</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-meadow"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-meadow"></div>
+                        <div class="feature-marker-stroked preset-icon"></div>
+                        <div class="label">Meadow</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-cemetery"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-cemetery"></div>
+                        <div class="feature-cemetery preset-icon"></div>
+                        <div class="label">Cemetery</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-military"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-military"></div>
+                        <div class="feature-marker-stroked preset-icon"></div>
+                        <div class="label">Military</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="preset-list-item preset-category-building"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+    <div class="preset-list-button-wrap category col12">
+        <button class="preset-list-button">
+            <div class="preset-icon-fill preset-icon-fill-area"></div>
+            <div class="feature-building preset-icon"></div>
+            <div class="label">Religious Land</div>
+        </button>
+    </div>
+    <div class="subgrid col12" style="max-height: 0px; opacity: 0;">
+        <div class="arrow"></div>
+        <div class="preset-list fillL3 cf fl">
+            <div class="preset-list-item preset-landuse-residential"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-residential"></div>
+                        <div class="feature-building preset-icon"></div>
+                        <div class="label">Residential</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-industrial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-industrial"></div>
+                        <div class="feature-industrial preset-icon"></div>
+                        <div class="label">Industrial</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-commercial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-commercial"></div>
+                        <div class="feature-commercial preset-icon"></div>
+                        <div class="label">Commercial</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-retail"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-retail"></div>
+                        <div class="feature-shop preset-icon"></div>
+                        <div class="label">Retail</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-farm"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farm"></div>
+                        <div class="feature-farm preset-icon"></div>
+                        <div class="label">Farm</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-farmyard"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farmyard"></div>
+                        <div class="feature-farm preset-icon"></div>
+                        <div class="label">Farmyard</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-forest"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-forest"></div>
+                        <div class="feature-park2 preset-icon"></div>
+                        <div class="label">Forest</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-meadow"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-meadow"></div>
+                        <div class="feature-marker-stroked preset-icon"></div>
+                        <div class="label">Meadow</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-cemetery"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-cemetery"></div>
+                        <div class="feature-cemetery preset-icon"></div>
+                        <div class="label">Cemetery</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-military"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-military"></div>
+                        <div class="feature-marker-stroked preset-icon"></div>
+                        <div class="label">Military</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+</div>
+</div>
+
+<div class="entity-editor-pane pane" style="left: 50%;">
+    <div class="header fillL cf">
+        <button onclick='$(".storage-close-link").click();' class="fr preset-close"><span class="icon close"></span>
+        </button>
+
+        <h3>Edit feature</h3>
+    </div>
+
+    <div class="inspector-body">
+        <div class="preset-list-item inspector-inner">
+            <div class="preset-list-button-wrap">
+                <button class="preset-list-button preset-reset">
+                    <div class="tooltip bottom" style="left: 122px; top: 60px;">
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">Change feature</div>
+                    </div>
+                    <div class="label">Public Building</div>
+                    <div class="preset-icon-fill preset-icon-fill-point tag-building tag-building-public"></div>
+                    <div class="feature-building preset-icon"></div>
+                </button>
+                <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span>
+                </button>
+            </div>
+            <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+        </div>
+        <div class="inspector-border inspector-preset">
+            <div class="preset-form inspector-inner fillL3">
+                <div class="form-field form-field-name">
+                    <div class="form-label" for="preset-input-name">Name
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="text" id="preset-input-name" class="localized-main combobox-input" placeholder="Common name (if any)">
+
+                </div>
+                <div class="form-field form-field-address">
+                    <div class="form-label" for="preset-input-address">Address
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                    <div class="preset-input-wrap">
+                        <div class="addr-row">
+                            <input type="text" placeholder="123" class="addr-housenumber" style="width: 32.33333333333333%;">
+                            <input type="text" placeholder="Street" class="addr-street combobox-input" style="width: 65.06666666666666%;">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <div class="addr-row">
+                            <input type="text" placeholder="City" class="addr-city combobox-input" style="width: 50.333333333333336%;">
+                            <div class="combobox-caret"></div>
+                            <input type="text" placeholder="State" class="addr-state" style="width: 18%;">
+                            <input type="text" placeholder="Postcode" class="addr-postcode combobox-input" style="width: 26.666666666666668%;">
+                            <div class="combobox-caret"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-field form-field-levels modified present">
+                    <div class="form-label" for="preset-input-levels">Levels
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="text" id="preset-input-levels" placeholder="2, 4, 6...">
+                    <div class="spin-control">
+                        <button class="increment"></button>
+                        <button class="decrement"></button>
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="form-field form-field-smoking">
+                    <div class="form-label" for="preset-input-smoking">Smoking
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="text" id="preset-input-smoking" readonly="readonly" class="combobox-input" placeholder="No, Separated, Yes...">
+                    <div class="combobox-caret"></div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+            </div>
+            <div class="more-fields">
+                <label>Add field:</label>
+                <input class="value combobox-input" type="text" placeholder="Elevation, Note, Phone…">
+                <div class="combobox-caret"></div>
+            </div>
+        </div>
+        <div class="inspector-border raw-tag-editor inspector-inner"><a href="#" class="hide-toggle">All tags (2)</a>
+            <div class="hide">
+                <ul class="tag-list">
+                    <li class="tag-row cf">
+                        <div class="key-wrap">
+                            <input type="text" class="key combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <div class="input-wrap-position">
+                            <input type="text" class="value combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <button tabindex="-1" class="remove minor"><span class="icon delete"></span>
+                        </button>
+                        <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                    </li>
+                    <li class="tag-row cf">
+                        <div class="key-wrap">
+                            <input type="text" class="key combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <div class="input-wrap-position">
+                            <input type="text" class="value combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <button tabindex="-1" class="remove minor"><span class="icon delete"></span>
+                        </button>
+                        <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                    </li>
+                </ul>
+                <button class="add-tag"><span class="icon plus light"></span>
+                </button>
+            </div>
+        </div>
+        <div class="inspector-border raw-member-editor inspector-inner" style="display: none;"><a href="#" class="hide-toggle expanded">All members (3)</a>
+            <div>
+                <ul class="member-list">
+                    <li class="member-row form-field">
+                        <label class="form-label"><a href="#"><span class="member-entity-type">Line</span><span class="member-entity-name"></span></a>
+                        </label>
+                        <input class="member-role" type="text" maxlength="255" placeholder="Role">
+                        <button tabindex="-1" class="remove button-input-action member-delete minor"><span class="icon delete"></span>
+                        </button>
+                    </li>
+                    <li class="member-row form-field">
+                        <label class="form-label"><a href="#"><span class="member-entity-type">Line</span><span class="member-entity-name"></span></a>
+                        </label>
+                        <input class="member-role" type="text" maxlength="255" placeholder="Role">
+                        <button tabindex="-1" class="remove button-input-action member-delete minor"><span class="icon delete"></span>
+                        </button>
+                    </li>
+                    <li class="member-row form-field">
+                        <label class="form-label"><a href="#"><span class="member-entity-type">Line</span><span class="member-entity-name"></span></a>
+                        </label>
+                        <input class="member-role" type="text" maxlength="255" placeholder="Role">
+                        <button tabindex="-1" class="remove button-input-action member-delete minor"><span class="icon delete"></span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="raw-membership-editor inspector-inner"><a href="#" class="hide-toggle expanded">All relations (0)</a>
+            <div>
+                <ul class="member-list"></ul>
+                <button class="add-relation"><span class="icon plus light"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+<div id="template4" class="templateSec" style="display:'none'">
+
+
+
+<div class="panewrap" style="right: -100%;">
+<div class="preset-list-pane pane">
+<div class="header fillL cf">
+    <h3>Select feature type</h3>
+    <button onclick='$(".storage-close-link").click();' class="close"><span class="icon close"></span>
+    </button>
+</div>
+
+<div class="inspector-body">
+<div class="preset-list fillL cf">
+<div class="preset-list-item preset-landuse-industrial" onclick="chooseFeature(event,this)"  style="opacity: 1;">
+    <div class="preset-list-button-wrap col12">
+        <button class="preset-list-button">
+            <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-industrial"></div>
+            <div class="feature-industrial preset-icon"></div>
+            <div class="label">Industrial</div>
+        </button>
+        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+    </div>
+    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;">
+        <img class="wiki-image" src="http://wiki.openstreetmap.org/w/images/thumb/a/a1/Landuse-industrial.png/100px-Landuse-industrial.png">
+        <p>Predominantly workshops, factories or warehouses</p>
+        <a target="_blank" href="http://wiki.openstreetmap.org/wiki/Tag:landuse=industrial"><span class="icon icon-pre-text out-link"></span><span>View on OpenStreetMap Wiki</span></a>
+    </div>
+</div>
+<div class="preset-list-item preset-leisure-park"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+    <div class="preset-list-button-wrap col12">
+        <button class="preset-list-button">
+            <div class="preset-icon-fill preset-icon-fill-area tag-leisure tag-leisure-park"></div>
+            <div class="feature-park preset-icon"></div>
+            <div class="label">Park</div>
+        </button>
+        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+    </div>
+    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;">
+        <img class="wiki-image" src="http://wiki.openstreetmap.org/w/images/thumb/f/ff/Arena_Roundhay_07.jpg/100px-Arena_Roundhay_07.jpg">
+        <p>A park. Open, green area for recreation, usually municipal</p>
+        <a target="_blank" href="http://wiki.openstreetmap.org/wiki/Tag:leisure=park"><span class="icon icon-pre-text out-link"></span><span>View on OpenStreetMap Wiki</span></a>
+    </div>
+</div>
+<div class="preset-list-item preset-category-landuse" onclick="chooseFeature(event,this)" style="opacity: 1;">
+    <div class="preset-list-button-wrap category col12">
+        <button class="preset-list-button">
+            <div class="preset-icon-fill preset-icon-fill-area"></div>
+            <div class="feature-land-use preset-icon"></div>
+            <div class="label">Land Use</div>
+        </button>
+    </div>
+    <div class="subgrid col12" style="max-height: 0px; opacity: 0; padding-bottom: 0px;">
+        <div class="arrow"></div>
+        <div class="preset-list fillL3 cf fl">
+            <div class="preset-list-item preset-landuse-residential"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-residential"></div>
+                        <div class="feature-building preset-icon"></div>
+                        <div class="label">Residential</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-industrial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-industrial"></div>
+                        <div class="feature-industrial preset-icon"></div>
+                        <div class="label">Industrial</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-commercial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-commercial"></div>
+                        <div class="feature-commercial preset-icon"></div>
+                        <div class="label">Commercial</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-retail"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-retail"></div>
+                        <div class="feature-shop preset-icon"></div>
+                        <div class="label">Retail</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-farm"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farm"></div>
+                        <div class="feature-farm preset-icon"></div>
+                        <div class="label">Farm</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-farmyard"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farmyard"></div>
+                        <div class="feature-farm preset-icon"></div>
+                        <div class="label">Farmyard</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-forest"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-forest"></div>
+                        <div class="feature-park2 preset-icon"></div>
+                        <div class="label">Forest</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-meadow"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-meadow"></div>
+                        <div class="feature-marker-stroked preset-icon"></div>
+                        <div class="label">Meadow</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-cemetery"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-cemetery"></div>
+                        <div class="feature-cemetery preset-icon"></div>
+                        <div class="label">Cemetery</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-military"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-military"></div>
+                        <div class="feature-marker-stroked preset-icon"></div>
+                        <div class="label">Military</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="preset-list-item preset-category-building"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+    <div class="preset-list-button-wrap category col12">
+        <button class="preset-list-button">
+            <div class="preset-icon-fill preset-icon-fill-area"></div>
+            <div class="feature-building preset-icon"></div>
+            <div class="label">Building</div>
+        </button>
+    </div>
+    <div class="subgrid col12" style="max-height: 0px; opacity: 0;">
+        <div class="arrow"></div>
+        <div class="preset-list fillL3 cf fl">
+            <div class="preset-list-item preset-landuse-residential"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-residential"></div>
+                        <div class="feature-building preset-icon"></div>
+                        <div class="label">Residential</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-industrial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-industrial"></div>
+                        <div class="feature-industrial preset-icon"></div>
+                        <div class="label">Industrial</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-commercial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-commercial"></div>
+                        <div class="feature-commercial preset-icon"></div>
+                        <div class="label">Commercial</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-retail"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-retail"></div>
+                        <div class="feature-shop preset-icon"></div>
+                        <div class="label">Retail</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-farm"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farm"></div>
+                        <div class="feature-farm preset-icon"></div>
+                        <div class="label">Farm</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-farmyard"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farmyard"></div>
+                        <div class="feature-farm preset-icon"></div>
+                        <div class="label">Farmyard</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-forest"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-forest"></div>
+                        <div class="feature-park2 preset-icon"></div>
+                        <div class="label">Forest</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-meadow"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-meadow"></div>
+                        <div class="feature-marker-stroked preset-icon"></div>
+                        <div class="label">Meadow</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-cemetery"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-cemetery"></div>
+                        <div class="feature-cemetery preset-icon"></div>
+                        <div class="label">Cemetery</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-military"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-military"></div>
+                        <div class="feature-marker-stroked preset-icon"></div>
+                        <div class="label">Military</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="preset-list-item preset-category-water-area"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+    <div class="preset-list-button-wrap category col12">
+        <button class="preset-list-button">
+            <div class="preset-icon-fill preset-icon-fill-area"></div>
+            <div class="feature-water preset-icon"></div>
+            <div class="label">Water</div>
+        </button>
+    </div>
+    <div class="subgrid col12" style="max-height: 0px; opacity: 0;">
+        <div class="arrow"></div>
+        <div class="preset-list fillL3 cf fl">
+            <div class="preset-list-item preset-landuse-residential"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-residential"></div>
+                        <div class="feature-building preset-icon"></div>
+                        <div class="label">Residential</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-industrial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-industrial"></div>
+                        <div class="feature-industrial preset-icon"></div>
+                        <div class="label">Industrial</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-commercial"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-commercial"></div>
+                        <div class="feature-commercial preset-icon"></div>
+                        <div class="label">Commercial</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-retail"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-retail"></div>
+                        <div class="feature-shop preset-icon"></div>
+                        <div class="label">Retail</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-farm"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farm"></div>
+                        <div class="feature-farm preset-icon"></div>
+                        <div class="label">Farm</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-farmyard"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-farmyard"></div>
+                        <div class="feature-farm preset-icon"></div>
+                        <div class="label">Farmyard</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-forest"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-forest"></div>
+                        <div class="feature-park2 preset-icon"></div>
+                        <div class="label">Forest</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-meadow"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-meadow"></div>
+                        <div class="feature-marker-stroked preset-icon"></div>
+                        <div class="label">Meadow</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-cemetery"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-cemetery"></div>
+                        <div class="feature-cemetery preset-icon"></div>
+                        <div class="label">Cemetery</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+            <div class="preset-list-item preset-landuse-military"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-area tag-landuse tag-landuse-military"></div>
+                        <div class="feature-marker-stroked preset-icon"></div>
+                        <div class="label">Military</div>
+                    </button>
+                    <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+                </div>
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="preset-list-item preset-amenity-hospital"  onclick="chooseFeature(event,this)" style="opacity: 1;">
+    <div class="preset-list-button-wrap col12">
+        <button class="preset-list-button">
+            <div class="preset-icon-fill preset-icon-fill-area tag-amenity tag-amenity-hospital"></div>
+            <div class="feature-hospital preset-icon"></div>
+            <div class="label">Hospital Grounds</div>
+        </button>
+        <!--      <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span></button>     -->
+    </div>
+    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="entity-editor-pane pane" style="left: 50%;">
+    <div class="header fillL cf">
+        <button onclick='$(".storage-close-link").click();' class="fr preset-close"><span class="icon close"></span>
+        </button>
+
+        <h3>Edit feature</h3>
+    </div>
+
+    <div class="inspector-body">
+        <div class="preset-list-item inspector-inner">
+            <div class="preset-list-button-wrap">
+                <button class="preset-list-button preset-reset">
+                    <div class="tooltip bottom" style="left: 122px; top: 60px;">
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">Change feature</div>
+                    </div>
+                    <div class="label">Public Building</div>
+                    <div class="preset-icon-fill preset-icon-fill-point tag-building tag-building-public"></div>
+                    <div class="feature-building preset-icon"></div>
+                </button>
+                <button tabindex="-1" class="tag-reference-button"><span class="icon inspect"></span>
+                </button>
+            </div>
+            <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+        </div>
+        <div class="inspector-border inspector-preset">
+            <div class="preset-form inspector-inner fillL3">
+                <div class="form-field form-field-name">
+                    <div class="form-label" for="preset-input-name">Name
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="text" id="preset-input-name" class="localized-main combobox-input" placeholder="Common name (if any)">
+
+                </div>
+                <div class="form-field form-field-address">
+                    <div class="form-label" for="preset-input-address">Address
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                    <div class="preset-input-wrap">
+                        <div class="addr-row">
+                            <input type="text" placeholder="123" class="addr-housenumber" style="width: 32.33333333333333%;">
+                            <input type="text" placeholder="Street" class="addr-street combobox-input" style="width: 65.06666666666666%;">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <div class="addr-row">
+                            <input type="text" placeholder="City" class="addr-city combobox-input" style="width: 50.333333333333336%;">
+                            <div class="combobox-caret"></div>
+                            <input type="text" placeholder="State" class="addr-state" style="width: 18%;">
+                            <input type="text" placeholder="Postcode" class="addr-postcode combobox-input" style="width: 26.666666666666668%;">
+                            <div class="combobox-caret"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-field form-field-levels modified present">
+                    <div class="form-label" for="preset-input-levels">Levels
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="text" id="preset-input-levels" placeholder="2, 4, 6...">
+                    <div class="spin-control">
+                        <button class="increment"></button>
+                        <button class="decrement"></button>
+                    </div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+                <div class="form-field form-field-smoking">
+                    <div class="form-label" for="preset-input-smoking">Smoking
+                        <div class="form-label-button-wrap">
+                            <button class="remove-icon"><span class="icon delete"></span>
+                            </button>
+                            <button class="modified-icon" tabindex="-1">
+                                <div class="icon undo"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="text" id="preset-input-smoking" readonly="readonly" class="combobox-input" placeholder="No, Separated, Yes...">
+                    <div class="combobox-caret"></div>
+                    <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                </div>
+            </div>
+            <div class="more-fields">
+                <label>Add field:</label>
+                <input class="value combobox-input" type="text" placeholder="Elevation, Note, Phone…">
+                <div class="combobox-caret"></div>
+            </div>
+        </div>
+        <div class="inspector-border raw-tag-editor inspector-inner"><a href="#" class="hide-toggle">All tags (2)</a>
+            <div class="hide">
+                <ul class="tag-list">
+                    <li class="tag-row cf">
+                        <div class="key-wrap">
+                            <input type="text" class="key combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <div class="input-wrap-position">
+                            <input type="text" class="value combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <button tabindex="-1" class="remove minor"><span class="icon delete"></span>
+                        </button>
+                        <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                    </li>
+                    <li class="tag-row cf">
+                        <div class="key-wrap">
+                            <input type="text" class="key combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <div class="input-wrap-position">
+                            <input type="text" class="value combobox-input" maxlength="255">
+                            <div class="combobox-caret"></div>
+                        </div>
+                        <button tabindex="-1" class="remove minor"><span class="icon delete"></span>
+                        </button>
+                        <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+                    </li>
+                </ul>
+                <button class="add-tag"><span class="icon plus light"></span>
+                </button>
+            </div>
+        </div>
+        <div class="inspector-border raw-member-editor inspector-inner" style="display: none;"><a href="#" class="hide-toggle expanded">All members (3)</a>
+            <div>
+                <ul class="member-list">
+                    <li class="member-row form-field">
+                        <label class="form-label"><a href="#"><span class="member-entity-type">Line</span><span class="member-entity-name"></span></a>
+                        </label>
+                        <input class="member-role" type="text" maxlength="255" placeholder="Role">
+                        <button tabindex="-1" class="remove button-input-action member-delete minor"><span class="icon delete"></span>
+                        </button>
+                    </li>
+                    <li class="member-row form-field">
+                        <label class="form-label"><a href="#"><span class="member-entity-type">Line</span><span class="member-entity-name"></span></a>
+                        </label>
+                        <input class="member-role" type="text" maxlength="255" placeholder="Role">
+                        <button tabindex="-1" class="remove button-input-action member-delete minor"><span class="icon delete"></span>
+                        </button>
+                    </li>
+                    <li class="member-row form-field">
+                        <label class="form-label"><a href="#"><span class="member-entity-type">Line</span><span class="member-entity-name"></span></a>
+                        </label>
+                        <input class="member-role" type="text" maxlength="255" placeholder="Role">
+                        <button tabindex="-1" class="remove button-input-action member-delete minor"><span class="icon delete"></span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="raw-membership-editor inspector-inner"><a href="#" class="hide-toggle expanded">All relations (0)</a>
+            <div>
+                <ul class="member-list"></ul>
+                <button class="add-relation"><span class="icon plus light"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block bottom_js %}
+<script type="text/javascript">
+    L.S.on('ui:ready', function () {
+        L.S.AutoComplete.multiSelect('id_editors', {
+            placeholder: "{% trans 'Type editors nick to add…' %}"
+        });
+        L.S.AutoComplete.select('id_owner', {
+            placeholder: "{% trans 'Type new owner nick…' %}"
+        });
+    });
+</script>
+{% endblock %}
+{% block footer %}
+{% include "umap/footer.html" %}
+{% endblock footer %}
+</body>
+</html>
+
+        
+        <!--
+                <div class="preset-list fillL cf">
+            <div class="preset-list-item preset-leisure-park" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-point tag-leisure tag-leisure-park">
+                        </div>
+
+                        <div class="feature-park preset-icon"></div>
+
+                        <div class="label">
+                            Park
+                        </div>
+                    </button>
+                    <button class="tag-reference-button" tabindex="-1"><span class="icon inspect"></span>
+                    </button>
+                </div>
+
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+
+            <div class="preset-list-item preset-amenity-hospital" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button" onclick="chooseFeature(event,this)">
+                        <div class="preset-icon-fill preset-icon-fill-point tag-amenity tag-amenity-hospital">
+                        </div>
+
+                        <div class="feature-hospital preset-icon"></div>
+
+                        <div class="label">
+                            Hospital Grounds
+                        </div>
+                    </button>
+                    <button class="tag-reference-button" tabindex="-1"><span class="icon inspect"></span>
+                    </button>
+                </div>
+
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+
+            <div class="preset-list-item preset-amenity-place_of_worship" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-point tag-amenity tag-amenity-place_of_worship">
+                        </div>
+
+                        <div class="feature-place-of-worship preset-icon"></div>
+
+                        <div class="label">
+                            Place of Worship
+                        </div>
+                    </button>
+                    <button class="tag-reference-button" tabindex="-1"><span class="icon inspect"></span>
+                    </button>
+                </div>
+
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+
+            <div class="preset-list-item preset-amenity-cafe" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-point tag-amenity tag-amenity-cafe">
+                        </div>
+
+                        <div class="feature-cafe preset-icon"></div>
+
+                        <div class="label">
+                            Cafe
+                        </div>
+                    </button>
+                    <button class="tag-reference-button" tabindex="-1"><span class="icon inspect"></span>
+                    </button>
+                </div>
+
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+
+            <div class="preset-list-item preset-amenity-restaurant" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-point tag-amenity tag-amenity-restaurant">
+                        </div>
+
+                        <div class="feature-restaurant preset-icon"></div>
+
+                        <div class="label">
+                            Restaurant
+                        </div>
+                    </button>
+                    <button class="tag-reference-button" tabindex="-1"><span class="icon inspect"></span>
+                    </button>
+                </div>
+
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+
+            <div class="preset-list-item preset-amenity-bar" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-point tag-amenity tag-amenity-bar">
+                        </div>
+
+                        <div class="feature-bar preset-icon"></div>
+
+                        <div class="label">
+                            Bar
+                        </div>
+                    </button>
+                    <button class="tag-reference-button" tabindex="-1"><span class="icon inspect"></span>
+                    </button>
+                </div>
+
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+
+            <div class="preset-list-item preset-amenity-bank" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-point tag-amenity tag-amenity-bank">
+                        </div>
+
+                        <div class="feature-bank preset-icon"></div>
+
+                        <div class="label">
+                            Bank
+                        </div>
+                    </button>
+                    <button class="tag-reference-button" tabindex="-1"><span class="icon inspect"></span>
+                    </button>
+                </div>
+
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+
+            <div class="preset-list-item preset-shop-supermarket" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-point tag-shop tag-shop-supermarket">
+                        </div>
+
+                        <div class="feature-grocery preset-icon"></div>
+
+                        <div class="label">
+                            Supermarket
+                        </div>
+                    </button>
+                    <button class="tag-reference-button" tabindex="-1"><span class="icon inspect"></span>
+                    </button>
+                </div>
+
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+
+            <div class="preset-list-item preset-point current" style="opacity: 1;">
+                <div class="preset-list-button-wrap col12">
+                    <button class="preset-list-button">
+                        <div class="preset-icon-fill preset-icon-fill-point"></div>
+
+                        <div class="feature-marker-stroked preset-icon"></div>
+
+                        <div class="label">
+                            Point
+                        </div>
+                    </button>
+                    <button class="tag-reference-button" tabindex="-1"><span class="icon inspect"></span>
+                    </button>
+                </div>
+
+                <div class="tag-reference-body cf" style="max-height: 0px; opacity: 0;"></div>
+            </div>
+        </div>
+                
+                        -->

@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "marketplace"
+    },
+    "name": "Marketplace"
+}

@@ -1,0 +1,331 @@
+/* *********** */
+/*    forms    */
+/* *********** */
+input[type="text"], input[type="password"], input[type="date"],
+input[type="datetime"], input[type="email"], input[type="number"],
+input[type="search"], input[type="tel"], input[type="time"],
+input[type="url"], textarea {
+    /* background-color: white; */
+    /* border: 1px solid #CCCCCC; */
+    /* border-radius: 2px 2px 2px 2px; */
+    /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset; */
+    /* color: rgba(0, 0, 0, 0.75); */
+    /* display: block; */
+    /* font-family: inherit; */
+    /* font-size: 14px; */
+    /* height: 56px; */
+    /* margin: 0 0 14px; */
+    /* padding: 7px; */
+    /* width: 100%; */
+}
+textarea {
+    height: inherit;
+}
+select {
+    width: 100%;
+    background-color: #fff;
+    height: 28px;
+    line-height: 28px;
+    color: rgba(0, 0, 0, 0.75);
+    border: 1px solid #ddd;
+}
+select[multiple="multiple"] {
+    height: auto;
+}
+.button, input[type="submit"] {
+    display: block;
+    width: 100%;
+    background-color: SeaGreen;
+    color: #fff;
+    border: none;
+    margin-bottom: 14px;
+    text-align: center;
+    min-height: 56px;
+    line-height: 56px;
+    border-radius: 2px;
+    font-weight: normal;
+    cursor: pointer;
+}
+.button:hover, input[type="submit"]:hover {
+    background-color: MediumSeaGreen;
+}
+.help-text, .helptext {
+    display: block;
+    padding: 7px 7px;
+    margin-top: -14px;
+    margin-bottom: 14px;
+    background: #ddd;
+    color: #6f6f6f;
+    font-size: 11px;
+    border-radius: 0 2px;
+}
+.formbox {
+    border: 1px #ddd solid;
+    min-height: 28px;
+    line-height: 28px;
+    padding-left: 14px;
+    margin-bottom: 14px;
+}
+.formbox select {
+    width: calc(100% - 14px);
+}
+
+/*
+label {
+    display: block;
+    font-size: 14px;
+    line-height: 21px;
+    width: 100%;
+}
+*/
+
+input[type="checkbox"] + label, input[type="radio"] + label {
+    display: inline;
+    padding: 0 14px;
+}
+select + .error,
+input + .error {
+    display: block;
+    padding: 7px 7px;
+    margin-top: -14px;
+    margin-bottom: 14px;
+    background: #ddd;
+    color: #fff;
+    background-color: #cc0000;
+    font-size: 11px;
+    border-radius: 0 2px;
+}
+input[type="file"] + .error {
+    margin-top: 0;
+}
+fieldset.toggle > * {
+    display: none;
+}
+fieldset.toggle {
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 0 10px;
+}
+fieldset.toggle.on {
+    border: 1px solid #999;
+    padding-bottom: 5px;
+}
+
+fieldset.toggle .more_style_options,
+fieldset.toggle legend {
+    display: block;
+    cursor: pointer;
+}
+fieldset.toggle .more_style_options:before {
+    content: "…";
+}
+fieldset.toggle legend:before {
+    content: "▶";
+    padding-right: 5px;
+    color: #666;
+    font-size: 0.9em;
+    vertical-align: middle;
+}
+fieldset.toggle.on legend:before {
+    content: "▼";
+}
+fieldset.toggle.on > * {
+    display: block;
+}
+fieldset.toggle.on .more_style_options {
+    display: none;
+}
+
+
+
+/* *********** */
+/*    Panel    */
+/* *********** */
+
+#storage-ui-container {
+    width: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0 20px 23px 20px;
+    border-left: 1px solid #ddd;
+    display: none;
+    overflow-x: auto;
+    z-index: 10;
+    background-color: #fff;
+    opacity: 0.93;
+}
+#storage-ui-container.fullwidth {
+    width: 100%;
+    z-index: 10000;
+    padding-left: 0;
+    padding-right: 0;
+}
+.storage-edit-enabled #storage-ui-container {
+    top: 46px;
+}
+.storage-caption-bar-enabled #storage-ui-container {
+    bottom: 46px;
+}
+.storage-ui #storage-ui-container {
+    display: block;
+}
+.storage-ui .leaflet-right {
+    right: 50%;
+}
+#storage-ui-container,
+#storage-alert-container,
+#storage-tooltip-container {
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing: border-box;
+}
+#storage-ui-container .storage-popup-content img {
+    /* See https://github.com/Leaflet/Leaflet/commit/61d746818b99d362108545c151a27f09d60960ee#commitcomment-6061847 */
+    max-width: 99% !important;
+}
+#storage-ui-container .storage-popup-content {
+    max-height: inherit;
+}
+#storage-ui-container .body {
+    clear: both;
+    height: calc(100% - 46px); /* Minus size of toolbox */;
+}
+#storage-ui-container .toolbox li {
+    color: #464646;
+    line-height: 46px;
+    cursor: pointer;
+    float: right;
+    display: inline;
+    padding: 0 5px;
+}
+#storage-ui-container .toolbox li:hover {
+    text-decoration: underline;
+}
+#storage-ui-container .toolbox li + li {
+    margin-left: 10px;
+}
+
+/* *********** */
+/*   Alerts    */
+/* *********** */
+.storage-alert .leaflet-top {
+    top: 30px;
+}
+#storage-alert-container {
+    height: 46px;
+    line-height: 46px;
+    padding-left: 10px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 1px 7px #999999;
+    display: none;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.8em;
+    z-index: 10;
+}
+#storage-alert-container.error {
+    background-color: #c60f13;
+}
+.storage-alert #storage-alert-container {
+    display: block;
+}
+.storage-alert div.storage-main-edit-toolbox {
+    display: none;
+}
+.storage-alert .storage-action {
+    margin-left: 10px;
+    background-color: #fff;
+    color: #999;
+    padding: 5px;
+    border-radius: 4px;
+}
+.storage-alert .storage-action:hover {
+    color: #000;
+}
+.storage-alert .error .storage-action {
+    background-color: #666;
+    color: #eee;
+}
+.storage-alert .error .storage-action:hover {
+    color: #fff;
+}
+
+/* *********** */
+/*   Tooltip   */
+/* *********** */
+#storage-tooltip-container {
+    line-height: 20px;
+    padding: 5px 10px;
+    width: auto;
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    box-shadow: 0 1px 7px #999999;
+    display: none;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 0.8em;
+    border-radius: 2px;
+    z-index: 10;
+    font-weight: normal;
+    white-space: nowrap;
+}
+.storage-tooltip #storage-tooltip-container {
+    display: block;
+}
+
+.datetimeControl {
+
+    font-family: "Papyrus";
+    opacity: 0.6;
+    font-size: 70px;
+    margin-bottom: 100px;
+
+}
+/* *********** */
+/* Close link  */
+/* *********** */
+.storage-close-icon {
+    background-repeat: no-repeat;
+    background-image: url("/static/staticReqs/src/img/16.png");
+    background-position: -52px -9px;
+    display: inline;
+    padding: 0 10px;
+}
+.storage-alert .storage-close-link {
+    color: #fff;
+    float: right;
+    padding-right: 10px;
+}
+.storage-alert .storage-close-icon {
+    background-position: -128px -90px;
+}
+
+
+/* *********** */
+/*    Mobile   */
+/* *********** */
+@media all and (orientation:portrait) {
+    #storage-ui-container {
+        height: 50%;
+        max-height: 400px;
+        width: 100%;
+        top: inherit!important;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
+    .storage-ui .leaflet-right {
+        right: 0;
+    }
+}
+

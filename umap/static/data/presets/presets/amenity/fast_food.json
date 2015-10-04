@@ -1,0 +1,22 @@
+{
+    "icon": "fast-food",
+    "fields": [
+        "cuisine",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "smoking"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "fast_food"
+    },
+    "terms": [
+        "restaurant"
+    ],
+    "name": "Fast Food"
+}

@@ -1,0 +1,24 @@
+{
+    "icon": "museum",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "exhibition",
+        "foundation",
+        "gallery",
+        "hall",
+        "institution"
+    ],
+    "tags": {
+        "tourism": "museum"
+    },
+    "name": "Museum"
+}

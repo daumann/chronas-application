@@ -1,0 +1,17 @@
+{
+    "icon": "chemist",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "chemist"
+    },
+    "name": "Chemist"
+}

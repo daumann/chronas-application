@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "operator",
+        "building"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "power": "sub_station"
+    },
+    "name": "Substation",
+    "searchable": false
+}

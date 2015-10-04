@@ -1,0 +1,18 @@
+{
+    "icon": "college",
+    "fields": [
+        "operator",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "university"
+    ],
+    "tags": {
+        "amenity": "college"
+    },
+    "name": "College Grounds"
+}

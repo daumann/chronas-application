@@ -1,0 +1,22 @@
+{
+    "icon": "dog-park",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "cat",
+        "dog",
+        "fish"
+    ],
+    "tags": {
+        "shop": "pet"
+    },
+    "name": "Pet Store"
+}

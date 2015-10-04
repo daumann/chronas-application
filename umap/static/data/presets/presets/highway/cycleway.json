@@ -1,0 +1,21 @@
+{
+    "icon": "highway-cycleway",
+    "fields": [
+        "surface",
+        "lit",
+        "width",
+        "oneway",
+        "structure",
+        "access"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "cycleway"
+    },
+    "terms": [
+        "bike"
+    ],
+    "name": "Cycle Path"
+}

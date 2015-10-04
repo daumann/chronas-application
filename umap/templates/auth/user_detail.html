@@ -1,0 +1,20 @@
+{% extends "umap/content.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="col wide">
+  <h2 class="section">{% blocktrans %}Browse {{ current_user }}'s maps{% endblocktrans %}</h2>
+</div>
+<div class="wrapper">
+<div class="map_list row">
+  {% if maps %}
+    {% include "leaflet_storage/map_list.html" %}
+  {% else %}
+    <div>
+      {{ current_user }} has not map yet.
+    </div>
+  {% endif %}
+</div>
+</div>
+{% endblock content %}

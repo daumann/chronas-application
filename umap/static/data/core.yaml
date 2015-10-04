@@ -1,0 +1,680 @@
+en:
+  modes:
+    add_area:
+      title: Area
+      description: "Add parks, buildings, lakes or other areas to the map."
+      tail: "Click on the map to start drawing an area, like a park, lake, or building."
+    add_line:
+      title: Line
+      description: "Add highways, streets, pedestrian paths, canals or other lines to the map."
+      tail: "Click on the map to start drawing a road, path, or route."
+    add_point:
+      title: Point
+      description: "Add restaurants, monuments, postal boxes or other points to the map."
+      tail: Click on the map to add a point.
+    browse:
+      title: Browse
+      description: Pan and zoom the map.
+    draw_area:
+      tail: Click to add nodes to your area. Click the first node to finish the area.
+    draw_line:
+      tail: "Click to add more nodes to the line. Click on other lines to connect to them, and double-click to end the line."
+  operations:
+    add:
+      annotation:
+        point: Added a point.
+        vertex: Added a node to a way.
+        relation: Added a relation.
+    start:
+      annotation:
+        line: Started a line.
+        area: Started an area.
+    continue:
+      key: A
+      title: Continue
+      description: Continue this line.
+      not_eligible: No line can be continued here.
+      multiple: Several lines can be continued here. To choose a line, press the Shift key and click on it to select it.
+      annotation:
+        line: Continued a line.
+        area: Continued an area.
+    cancel_draw:
+      annotation: Canceled drawing.
+    change_role:
+      annotation: Changed the role of a relation member.
+    change_tags:
+      annotation: Changed tags.
+    circularize:
+      title: Circularize
+      description:
+        line: Make this line circular.
+        area: Make this area circular.
+      key: O
+      annotation:
+        line: Made a line circular.
+        area: Made an area circular.
+      not_closed: This can't be made circular because it's not a loop.
+      too_large: This can't be made circular because not enough of it is currently visible.
+      connected_to_hidden: This can't be made circular because it is connected to a hidden feature.
+    orthogonalize:
+      title: Square
+      description:
+        line: Square the corners of this line.
+        area: Square the corners of this area.
+      key: S
+      annotation:
+        line: Squared the corners of a line.
+        area: Squared the corners of an area.
+      not_squarish: This can't be made square because it is not squarish.
+      too_large: This can't be made square because not enough of it is currently visible.
+      connected_to_hidden: This can't be made square because it is connected to a hidden feature.
+    straighten:
+      title: Straighten
+      description: Straighten this line.
+      key: S
+      annotation: Straightened a line.
+      too_bendy: This can't be straightened because it bends too much.
+      connected_to_hidden: This line can't be straightened because it is connected to a hidden feature.
+    delete:
+      title: Delete
+      description: Delete object permanently.
+      annotation:
+        point: Deleted a point.
+        vertex: Deleted a node from a way.
+        line: Deleted a line.
+        area: Deleted an area.
+        relation: Deleted a relation.
+        multiple: "Deleted {n} objects."
+      incomplete_relation: This feature can't be deleted because it hasn't been fully downloaded.
+      connected_to_hidden: This can't be deleted because it is connected to a hidden feature.
+    add_member:
+      annotation: Added a member to a relation.
+    delete_member:
+      annotation: Removed a member from a relation.
+    connect:
+      annotation:
+        point: Connected a way to a point.
+        vertex: Connected a way to another.
+        line: Connected a way to a line.
+        area: Connected a way to an area.
+    disconnect:
+      title: Disconnect
+      description: Disconnect these lines/areas from each other.
+      key: D
+      annotation: Disconnected lines/areas.
+      not_connected: There aren't enough lines/areas here to disconnect.
+      connected_to_hidden: This can't be disconnected because it is connected to a hidden feature.
+    merge:
+      title: Merge
+      description: Merge these lines.
+      key: C
+      annotation: "Merged {n} lines."
+      not_eligible: These features can't be merged.
+      not_adjacent: These lines can't be merged because they aren't connected.
+      restriction: These lines can't be merged because at least one is a member of a "{relation}" relation.
+      incomplete_relation: These features can't be merged because at least one hasn't been fully downloaded.
+    move:
+      title: Move
+      description: Move this to a different location.
+      key: M
+      annotation:
+        point: Moved a point.
+        vertex: Moved a node in a way.
+        line: Moved a line.
+        area: Moved an area.
+        multiple: Moved multiple objects.
+      incomplete_relation: This feature can't be moved because it hasn't been fully downloaded.
+      too_large: This can't be moved because not enough of it is currently visible.
+      connected_to_hidden: This can't be moved because it is connected to a hidden feature.
+    rotate:
+      title: Rotate
+      description: Rotate this object around its center point.
+      key: R
+      annotation:
+        line: Rotated a line.
+        area: Rotated an area.
+      too_large: This can't be rotated because not enough of it is currently visible.
+      connected_to_hidden: This can't be rotated because it is connected to a hidden feature.
+    reverse:
+      title: Reverse
+      description: Make this line go in the opposite direction.
+      key: V
+      annotation: Reversed a line.
+    split:
+      title: Split
+      description:
+        line: Split this line into two at this node.
+        area: Split the boundary of this area into two.
+        multiple: Split the lines/area boundaries at this node into two.
+      key: X
+      annotation:
+        line: Split a line.
+        area: Split an area boundary.
+        multiple: "Split {n} lines/area boundaries."
+      not_eligible: Lines can't be split at their beginning or end.
+      multiple_ways: There are too many lines here to split.
+      connected_to_hidden: This can't be split because it is connected to a hidden feature.
+    restriction:
+      help:
+        select: Click to select a road segment.
+        toggle: Click to toggle turn restrictions.
+        toggle_on: 'Click to add a "{restriction}" restriction.'
+        toggle_off: 'Click to remove the "{restriction}" restriction.'
+      annotation:
+        create: Added a turn restriction
+        delete: Deleted a turn restriction
+  undo:
+    tooltip: "Undo: {action}"
+    nothing: Nothing to undo.
+  redo:
+    tooltip: "Redo: {action}"
+    nothing: Nothing to redo.
+  tooltip_keyhint: "Shortcut:"
+  browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map."
+  translate:
+    translate: Translate
+    localized_translation_label: Multilingual name
+    localized_translation_language: Choose language
+    localized_translation_name: Name
+  zoom_in_edit: Zoom in to Edit
+  logout: logout
+  loading_auth: "Connecting to OpenStreetMap..."
+  report_a_bug: report a bug
+  feature_info:
+    hidden_warning: "{count} hidden features"
+    hidden_details: "These features are currently hidden: {details}"
+  status:
+    error: Unable to connect to API.
+    offline: The API is offline. Please try editing later.
+    readonly: The API is read-only. You will need to wait to save your changes.
+  commit:
+    title: Save Changes
+    description_placeholder: Brief description of your contributions
+    message_label: Commit message
+    upload_explanation: "The changes you upload will be visible on all maps that use OpenStreetMap data."
+    upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
+    save: Save
+    cancel: Cancel
+    changes: "{count} Changes"
+    warnings: Warnings
+    modified: Modified
+    deleted: Deleted
+    created: Created
+  contributors:
+    list: "Edits by {users}"
+    truncated_list: "Edits by {users} and {count} others"
+  geocoder:
+    search: Search worldwide...
+    no_results_visible: No results in visible map area
+    no_results_worldwide: No results found
+  geolocate:
+    title: Show My Location
+  inspector:
+    no_documentation_combination: There is no documentation available for this tag combination
+    no_documentation_key: There is no documentation available for this key
+    show_more: Show More
+    view_on_osm: View on openstreetmap.org
+    all_tags: All tags
+    all_members: All members
+    all_relations: All relations
+    new_relation: New relation...
+    role: Role
+    choose: Select feature type
+    results: "{n} results for {search}"
+    reference: View on OpenStreetMap Wiki
+    back_tooltip: Change feature
+    remove: Remove
+    search: Search
+    multiselect: Selected items
+    unknown: Unknown
+    incomplete: <not downloaded>
+    feature_list: Search features
+    edit: Edit feature
+    check:
+      yes: Yes
+      no: No
+    none: None
+    node: Node
+    way: Way
+    relation: Relation
+    location: Location
+    add_fields: "Add field:"
+  background:
+    title: Background
+    description: Background settings
+    percent_brightness: "{opacity}% brightness"
+    none: None
+    custom: Custom
+    custom_button: Edit custom background
+    custom_prompt: "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
+    fix_misalignment: Fix alignment
+    reset: reset
+  map_data:
+    title: Map Data
+    description: Map Data
+    data_layers: Data Layers
+    fill_area: Fill Areas
+    map_features: Map Features
+    autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
+  feature:
+    points:
+      description: Points
+      tooltip: "Points of Interest"
+    major_roads:
+      description: Major Roads
+      tooltip: "Highways, Streets, etc."
+    minor_roads:
+      description: Minor Roads
+      tooltip: "Service Roads, Parking Aisles, Tracks, etc."
+    paths:
+      description: Paths
+      tooltip: "Sidewalks, Foot Paths, Cycle Paths, etc."
+    buildings:
+      description: Buildings
+      tooltip: "Buildings, Shelters, Garages, etc."
+    landuse:
+      description: Landuse Features
+      tooltip: "Forests, Farmland, Parks, Residential, Commercial, etc."
+    boundaries:
+      description: Boundaries
+      tooltip: "Administrative Boundaries"
+    water:
+      description: Water Features
+      tooltip: "Rivers, Lakes, Ponds, Basins, etc."
+    rail:
+      description: Rail Features
+      tooltip: "Railways"
+    power:
+      description: Power Features
+      tooltip: "Power Lines, Power Plants, Substations, etc."
+    past_future:
+      description: Past/Future
+      tooltip: "Proposed, Construction, Abandoned, Demolished, etc."
+    others:
+      description: Others
+      tooltip: "Everything Else"
+  area_fill:
+    wireframe:
+      description: No Fill (Wireframe)
+      tooltip: "Enabling wireframe mode makes it easy to see the background imagery."
+    partial:
+      description: Partial Fill
+      tooltip: "Areas are drawn with fill only around their inner edges. (Recommended for beginner mappers)"
+    full:
+      description: Full Fill
+      tooltip: "Areas are drawn fully filled."
+  restore:
+    heading: You have unsaved changes
+    description: "Do you wish to restore unsaved changes from a previous editing session?"
+    restore: Restore
+    reset: Reset
+  save:
+    title: Save
+    help: "Save changes to OpenStreetMap, making them visible to other users."
+    no_changes: No changes to save.
+    error: An error occurred while trying to save
+    unknown_error_details: "Please ensure you are connected to the internet."
+    uploading: Uploading changes to OpenStreetMap.
+    unsaved_changes: You have unsaved changes
+  success:
+    edited_osm: "Edited OSM!"
+    just_edited: "You just edited OpenStreetMap!"
+    view_on_osm: "View on OSM"
+    facebook: "Share on Facebook"
+    twitter: "Share on Twitter"
+    google: "Share on Google+"
+    help_html: |
+      Your changes should appear in the "Standard" layer in a few minutes. Other layers, and certain features, may take longer
+      (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).
+  confirm:
+    okay: "Okay"
+  splash:
+    welcome: Welcome to the iD OpenStreetMap editor
+    text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}."
+    walkthrough: "Start the Walkthrough"
+    start: "Edit Now"
+  source_switch:
+    live: live
+    lose_changes: "You have unsaved changes. Switching the map server will discard them. Are you sure you want to switch servers?"
+    dev: dev
+  tag_reference:
+    description: Description
+    on_wiki: "{tag} on wiki.osm.org"
+    used_with: "used with {type}"
+  validations:
+    untagged_point: Untagged point
+    untagged_line: Untagged line
+    untagged_area: Untagged area
+    many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org."
+    tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area"
+    untagged_point_tooltip: "Select a feature type that describes what this point is."
+    untagged_line_tooltip: "Select a feature type that describes what this line is."
+    untagged_area_tooltip: "Select a feature type that describes what this area is."
+    deprecated_tags: "Deprecated tags: {tags}"
+  zoom:
+    in: Zoom In
+    out: Zoom Out
+  cannot_zoom: "Cannot zoom out further in current mode."
+  gpx:
+    local_layer: "Local GPX file"
+    drag_drop: "Drag and drop a .gpx file on the page, or click the button to the right to browse"
+    zoom: "Zoom to GPX track"
+    browse: "Browse for a .gpx file"
+  mapillary:
+    tooltip: "Street-level photos from Mapillary"
+    title: "Photo Overlay (Mapillary)"
+    view_on_mapillary: "View this image on Mapillary"
+  help:
+    title: "Help"
+    help: |
+      # Help
+
+      This is an editor for [OpenStreetMap](http://www.openstreetmap.org/), the
+      free and editable map of the world. You can use it to add and update
+      data in your area, making an open-source and open-data map of the world
+      better for everyone.
+
+      Edits that you make on this map will be visible to everyone who uses
+      OpenStreetMap. In order to make an edit, you'll need a
+      [free OpenStreetMap account](https://www.openstreetmap.org/user/new).
+
+      The [iD editor](http://ideditor.com/) is a collaborative project with [source
+      code available on GitHub](https://github.com/openstreetmap/iD).
+    editing_saving: |
+      # Editing & Saving
+
+      This editor is designed to work primarily online, and you're accessing
+      it through a website right now.
+
+      ### Selecting Features
+
+      To select a map feature, like a road or point of interest, click
+      on it on the map. This will highlight the selected feature, open a panel with
+      details about it, and show a menu of things you can do with the feature.
+
+      To select multiple features, hold down the 'Shift' key. Then either click
+      on the features you want to select, or drag on the map to draw a rectangle.
+      This will draw a box and select all the points within it.
+
+      ### Saving Edits
+
+      When you make changes like editing roads, buildings, and places, these are
+      stored locally until you save them to the server. Don't worry if you make
+      a mistake - you can undo changes by clicking the undo button, and redo
+      changes by clicking the redo button.
+
+      Click 'Save' to finish a group of edits - for instance, if you've completed
+      an area of town and would like to start on a new area. You'll have a chance
+      to review what you've done, and the editor supplies helpful suggestions
+      and warnings if something doesn't seem right about the changes.
+
+      If everything looks good, you can enter a short comment explaining the change
+      you made, and click 'Save' again to post the changes
+      to [OpenStreetMap.org](http://www.openstreetmap.org/), where they are visible
+      to all other users and available for others to build and improve upon.
+
+      If you can't finish your edits in one sitting, you can leave the editor
+      window and come back (on the same browser and computer), and the
+      editor application will offer to restore your work.
+    roads: |
+      # Roads
+
+      You can create, fix, and delete roads with this editor. Roads can be all
+      kinds: paths, highways, trails, cycleways, and more - any often-crossed
+      segment should be mappable.
+
+      ### Selecting
+
+      Click on a road to select it. An outline should become visible, along
+      with a small tools menu on the map and a sidebar showing more information
+      about the road.
+
+      ### Modifying
+
+      Often you'll see roads that aren't aligned to the imagery behind them
+      or to a GPS track. You can adjust these roads so they are in the correct
+      place.
+
+      First click on the road you want to change. This will highlight it and show
+      control points along it that you can drag to better locations. If
+      you want to add new control points for more detail, double-click a part
+      of the road without a node, and one will be added.
+
+      If the road connects to another road, but doesn't properly connect on
+      the map, you can drag one of its control points onto the other road in
+      order to join them. Having roads connect is important for the map
+      and essential for providing driving directions.
+
+      You can also click the 'Move' tool or press the `M` shortcut key to move the entire road at
+      one time, and then click again to save that movement.
+
+      ### Deleting
+
+      If a road is entirely incorrect - you can see that it doesn't exist in satellite
+      imagery and ideally have confirmed locally that it's not present - you can delete
+      it, which removes it from the map. Be cautious when deleting features -
+      like any other edit, the results are seen by everyone and satellite imagery
+      is often out of date, so the road could simply be newly built.
+
+      You can delete a road by clicking on it to select it, then clicking the
+      trash can icon or pressing the 'Delete' key.
+
+      ### Creating
+
+      Found somewhere there should be a road but there isn't? Click the 'Line'
+      icon in the top-left of the editor or press the shortcut key `2` to start drawing
+      a line.
+
+      Click on the start of the road on the map to start drawing. If the road
+      branches off from an existing road, start by clicking on the place where they connect.
+
+      Then click on points along the road so that it follows the right path, according
+      to satellite imagery or GPS. If the road you are drawing crosses another road, connect
+      it by clicking on the intersection point. When you're done drawing, double-click
+      or press 'Return' or 'Enter' on your keyboard.
+    gps: |
+      # GPS
+
+      GPS data is the most trusted source of data for OpenStreetMap. This editor
+      supports local traces - `.gpx` files on your local computer. You can collect
+      this kind of GPS trace with a number of smartphone applications as well as
+      personal GPS hardware.
+
+      For information on how to perform a GPS survey, read
+      [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).
+
+      To use a GPX track for mapping, drag and drop the GPX file onto the map
+      editor. If it's recognized, it will be added to the map as a bright purple
+      line. Click on the 'Map Data' menu on the right side to enable,
+      disable, or zoom to this new GPX-powered layer.
+
+      The GPX track isn't directly uploaded to OpenStreetMap - the best way to
+      use it is to draw on the map, using it as a guide for the new features that
+      you add, and also to [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create)
+      for other users to use.
+    imagery: |
+      # Imagery
+
+      Aerial imagery is an important resource for mapping. A combination of
+      airplane flyovers, satellite views, and freely-compiled sources are available
+      in the editor under the 'Background Settings' menu on the right.
+
+      By default a [Bing Maps](http://www.bing.com/maps/) satellite layer is
+      presented in the editor, but as you pan and zoom the map to new geographical
+      areas, new sources will become available. Some countries, like the United
+      States, France, and Denmark have very high-quality imagery available for some areas.
+
+      Imagery is sometimes offset from the map data because of a mistake on the
+      imagery provider's side. If you see a lot of roads shifted from the background,
+      don't immediately move them all to match the background. Instead you can adjust
+      the imagery so that it matches the existing data by clicking 'Fix alignment' at
+      the bottom of the Background Settings UI.
+    addresses: |
+      # Addresses
+
+      Addresses are some of the most useful information for the map.
+
+      Although addresses are often represented as parts of streets, in OpenStreetMap
+      they're recorded as attributes of buildings and places along streets.
+
+      You can add address information to places mapped as building outlines
+      as well as those mapped as single points. The optimal source of address
+      data is from an on-the-ground survey or personal knowledge - as with any
+      other feature, copying from commercial sources like Google Maps is strictly
+      forbidden.
+    inspector: |
+      # Using the Inspector
+
+      The inspector is the section on the left side of the page that allows you to
+      edit the details of the selected feature.
+
+      ### Selecting a Feature Type
+
+      After you add a point, line, or area, you can choose what type of feature it
+      is, like whether it's a highway or residential road, supermarket or cafe.
+      The inspector will display buttons for common feature types, and you can
+      find others by typing what you're looking for in the search box.
+
+      Click the 'i' in the bottom-right-hand corner of a feature type button to
+      learn more about it. Click a button to choose that type.
+
+      ### Using Forms and Editing Tags
+
+      After you choose a feature type, or when you select a feature that already
+      has a type assigned, the inspector will display fields with details about
+      the feature like its name and address.
+
+      Below the fields you see, you can click icons to add other details,
+      like [Wikipedia](http://www.wikipedia.org/) information, wheelchair
+      access, and more.
+
+      At the bottom of the inspector, click 'Additional tags' to add arbitrary
+      other tags to the element. [Taginfo](http://taginfo.openstreetmap.org/) is a
+      great resource for learn more about popular tag combinations.
+
+      Changes you make in the inspector are automatically applied to the map.
+      You can undo them at any time by clicking the 'Undo' button.
+    buildings: |
+      # Buildings
+
+      OpenStreetMap is the world's largest database of buildings. You can create
+      and improve this database.
+
+      ### Selecting
+
+      You can select a building by clicking on its border. This will highlight the
+      building and open a small tools menu and a sidebar showing more information
+      about the building.
+
+      ### Modifying
+
+      Sometimes buildings are incorrectly placed or have incorrect tags.
+
+      To move an entire building, select it, then click the 'Move' tool. Move your
+      mouse to shift the building, and click when it's correctly placed.
+
+      To fix the specific shape of a building, click and drag the nodes that form
+      its border into better places.
+
+      ### Creating
+
+      One of the main questions around adding buildings to the map is that
+      OpenStreetMap records buildings both as shapes and points. The rule of thumb
+      is to _map a building as a shape whenever possible_, and map companies, homes,
+      amenities, and other things that operate out of buildings as points placed
+      within the building shape.
+
+      Start drawing a building as a shape by clicking the 'Area' button in the top
+      left of the interface, and end it either by pressing 'Return' on your keyboard
+      or clicking on the first node drawn to close the shape.
+
+      ### Deleting
+
+      If a building is entirely incorrect - you can see that it doesn't exist in satellite
+      imagery and ideally have confirmed locally that it's not present - you can delete
+      it, which removes it from the map. Be cautious when deleting features -
+      like any other edit, the results are seen by everyone and satellite imagery
+      is often out of date, so the building could simply be newly built.
+
+      You can delete a building by clicking on it to select it, then clicking the
+      trash can icon or pressing the 'Delete' key.
+    relations: |
+      # Relations
+
+      A relation is a special type of feature in OpenStreetMap that groups together
+      other features. For example, two common types of relations are *route relations*,
+      which group together sections of road that belong to a specific freeway or
+      highway, and *multipolygons*, which group together several lines that define
+      a complex area (one with several pieces or holes in it like a donut).
+
+      The group of features in a relation are called *members*. In the sidebar, you can
+      see which relations a feature is a member of, and click on a relation there
+      to select the it. When the relation is selected, you can see all of its
+      members listed in the sidebar and highlighted on the map.
+
+      For the most part, iD will take care of maintaining relations automatically
+      while you edit. The main thing you should be aware of is that if you delete a
+      section of road to redraw it more accurately, you should make sure that the
+      new section is a member of the same relations as the original.
+
+      ## Editing Relations
+
+      If you want to edit relations, here are the basics.
+
+      To add a feature to a relation, select the feature, click the "+" button in the
+      "All relations" section of the sidebar, and select or type the name of the relation.
+
+      To create a new relation, select the first feature that should be a member,
+      click the "+" button in the "All relations" section, and select "New relation...".
+
+      To remove a feature from a relation, select the feature and click the trash
+      button next to the relation you want to remove it from.
+
+      You can create multipolygons with holes using the "Merge" tool. Draw two areas (inner
+      and outer), hold the Shift key and click on each of them to select them both, and then
+      click the "Merge" (+) button.
+  intro:
+    navigation:
+      title: "Navigation"
+      drag: "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**"
+      select: "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**"
+      header: "The header shows us the feature type."
+      pane: "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor with the close button in the top right.**"
+    points:
+      title: "Points"
+      add: "Points can be used to represent features such as shops, restaurants and monuments. They mark a specific location, and describe what's there. **Click the Point button to add a new point.**"
+      place: "Click to place the point on the map. The point we are adding is a Cafe. **Place the point at the corner of This Street and That Street**"
+      place: "The point can be placed by clicking on the map. **Place the point on top of the building.**"
+      search: "There are many different features that can be represented by points. The point you just added is a Cafe. **Search for '{name}'**"
+      choose: "**Choose Cafe from the list.**"
+      describe: "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name**"
+      close: "The feature editor can be closed by clicking on the close button. **Close the feature editor**"
+      reselect: "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the point you just created.**"
+      fixname: "**Change the name and close the feature editor.**"
+      reselect_delete: "All features on the map can be deleted. **Click on the point you created.**"
+      delete: "The menu around the point contains operations that can be performed on it, including delete. **Delete the point.**"
+    areas:
+      title: "Areas"
+      add: "Areas are used to show the boundaries of features like lakes, buildings, and residential areas. They can be also be used for more detailed mapping of many features you might normally map as points. **Click the Area button to add a new area.**"
+      corner: "Areas are drawn by placing nodes that mark the boundary of the area. **Place the starting node on one of the corners of the playground.**"
+      place: "Draw the area by placing more nodes. Finish the area by clicking on the starting node. **Draw an area for the playground.**"
+      search: "**Search for '{name}'.**"
+      choose: "**Choose Playground from the list.**"
+      describe: "**Add a name, and close the feature editor**"
+    lines:
+      title: "Lines"
+      add: "Lines are used to represent features such as roads, railroads and rivers. **Click the Line button to add a new line.**"
+      start: "**Start the line by clicking on the end of the road.**"
+      intersect: "Click to add more nodes to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on Flower Street, to create an intersection connecting the two lines.**"
+      finish: "Lines can be finished by clicking on the last node again. **Finish drawing the road.**"
+      road: "**Select Road from the list**"
+      residential: "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**"
+      describe: "**Name the road and close the feature editor.**"
+      restart: "The road needs to intersect Flower Street."
+      "wrong_preset": "You didn't select the Residential road type. **Click here to choose again**"
+    startediting:
+      title: "Start Editing"
+      help: "More documentation and this walkthrough are available here."
+      save: "Don't forget to regularly save your changes!"
+      start: "Start mapping!"
+

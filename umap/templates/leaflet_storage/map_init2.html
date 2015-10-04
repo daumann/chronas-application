@@ -1,0 +1,1519 @@
+{% load leaflet_storage_tags %}
+        
+<div id="progress"><div id="progress-bar"></div></div>
+<div id="map" style="width: 100%;position: absolute;top: 0; /* bottom: 0; */left: 0;right: 0;bottom: 120px;">
+
+<div id="featureForms" style="display:none; position: relative; /*margin-top: 200px; margin-left: 20px;*/  z-index: 20; transition: all 0.5s ease;  /*width: 150px; */">
+        <div  >
+            <div id="featureTree" style="overflow: hidden; ">
+                <ul class="nav nav-list">
+                    <li class=""><label class="markerBullets tree-toggler nav-header justActive"><label id="markerIcon" class="tree-toggler nav-header hier2" title="Marker"></label>Marker&nbsp&nbsp&nbsp&nbsp</label>
+                        <ul class="nav nav-list tree">
+                            <li><input id="cityChecked" data-onstyle="default" type="checkbox" data-size="small" data-toggle="toggle" data-on="Cities" data-off="Cities"> <label class="tree-toggler nav-header advanced">>></label>
+                                <ul class="nav nav-list tree">
+                                    <li>
+
+                                        <div class="squaredOne">
+                                            <input type="checkbox" checked value="None" id="citiesBox" name="check" />
+                                            <label id="citiesBoxA" for="citiesBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Cities
+                                        </div>
+                                    </li>
+                                    <li>
+
+                                        <div class="squaredOne">
+                                            <input type="checkbox" checked value="None" id="castlesBox" name="check" />
+                                            <label id="castlesBoxA" for="castlesBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Castles
+                                        </div>
+                                    </li>
+                                    <li style="display: none">
+
+                                        <div class="squaredOne">
+                                            <input type="checkbox" value="None" id="buildingsBox" name="check" />
+                                            <label id="buildingsBoxA" for="buildingsBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Buildings
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li> <input id="peopleChecked" data-onstyle="default" type="checkbox" data-size="small" data-toggle="toggle" data-on="People" data-off="People"> <label class="tree-toggler nav-header advanced">>></label>
+                                <ul class="nav nav-list tree">
+
+                                    <li>
+
+                                        <div class="squaredOne">
+                                            <input type="checkbox" checked value="None" id="milBox" name="check" />
+                                            <label id="milBoxA" for="milBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Military
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="squaredOne">
+                                            <input type="checkbox" checked value="None" id="expBox" name="check" />
+                                            <label id="expBoxA" for="expBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Explorer
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="squaredOne">
+                                            <input type="checkbox" checked value="None" id="polBox" name="check" />
+                                            <label id="polBoxA" for="polBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Politician
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="squaredOne">
+                                            <input type="checkbox" checked value="None" id="sciBox" name="check" />
+                                            <label id="sciBoxA" for="sciBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Scientist
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="squaredOne">
+                                            <input type="checkbox" checked value="None" id="artBox" name="check" />
+                                            <label id="artBoxA" for="artBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Artist
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="squaredOne">
+                                            <input type="checkbox" checked value="None" id="relBox" name="check" />
+                                            <label  id="relBoxA" for="relBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Religious
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="squaredOne">
+                                            <input type="checkbox" checked value="None" id="athBox" name="check" />
+                                            <label id="athBoxA" for="athBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Athlete
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="squaredOne">
+                                            <input type="checkbox" value="None" id="uncBox" name="check" />
+                                            <label id="uncBoxA" for="uncBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Other
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><input id="eventsChecked" data-onstyle="default" type="checkbox" data-size="small" data-toggle="toggle" data-on="Battles" data-off="Battles">
+                            </li>
+                            <li><input id="artChecked"  data-onstyle="default"  type="checkbox" data-size="small" data-toggle="toggle" data-on="Artefacts" data-off="Artefacts" >
+                            </li>
+                            <li><input id="otherChecked"  data-onstyle="default"  type="checkbox" data-size="small" data-toggle="toggle" data-on="Other" data-off="Other" > <label class="tree-toggler nav-header advanced">>></label>
+                                <ul class="nav nav-list tree">
+                                    <li>
+
+                                        <div class="squaredOne">
+                                            <input type="checkbox" checked value="None" id="areaInfoBox" name="check" />
+                                            <label id="areaInfoBoxA" for="areaInfoBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Area Information
+                                        </div>
+                                    </li>
+                                    <li>
+
+                                        <div class="squaredOne">
+                                            <input type="checkbox" value="None" id="unclassifiedBox" name="check" />
+                                            <label id="unclassifiedBoxA" for="unclassifiedBox"></label>
+                                        </div>
+                                        <div class="labelForBox">
+                                            Unclassified
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="listPlaceholder">
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+                    <li class=""><label class="markerBullets tree-toggler nav-header justActive"><label id="areaIcon" class="tree-toggler nav-header hier2" title="Area"></label>Area</label>
+                        <ul class="nav nav-list tree">
+
+                            <table style="width:182px">
+                                <tr>
+                                    <td style="    width: 80px;"></td>
+                                    <td colspan="2" style="text-align: center;"><span style="    float: left;">Area</span>
+                                        <button onclick="lockFeatureSelection()"  id="lockFeatureButton" title="Always use labels of the area feature" type="submit"                                                class="btn btn-default lowerButton">
+                                            <i id="lockIcon" class="fa fa-lock"></i>
+                                        </button><span style="    float: right;">Label</span>
+                                    </td>
+                                </tr>
+                                <tr id="rulerTR">
+                                    <td>Ruler</td>
+                                    <td><input id="A-Country" data-style="sharp"  data-onstyle="info" type="checkbox" data-size="mini" data-toggle="toggle" checked data-on=" " data-off=" "></td>
+                                    <td><input id="T-Country"  data-style="sharp" data-onstyle="info" type="checkbox" data-size="mini" data-toggle="toggle" checked data-on=" " data-off=" "></td>
+                                </tr>
+                                <tr id="cultureTR">
+                                    <td>Culture</td>
+                                    <td><input id="A-Culture" data-style="sharp" data-onstyle="info" type="checkbox" data-size="mini" data-toggle="toggle" data-on=" " data-off=" "></td>
+                                    <td><input id="T-Culture" data-style="sharp" data-onstyle="info" type="checkbox" data-size="mini" data-toggle="toggle" data-on=" " data-off=" "></td>
+                                </tr>
+                                <tr id="religionTR">
+                                    <td>Religion</td>
+                                    <td><input id="A-Religion" data-style="sharp" data-onstyle="info" type="checkbox" data-size="mini" data-toggle="toggle" data-on=" " data-off=" "></td>
+                                    <td><input id="T-Religion" data-style="sharp" data-onstyle="info" type="checkbox" data-size="mini" data-toggle="toggle" data-on=" " data-off=" "></td>
+                                </tr>
+                                <tr id="mainreligionTR">
+                                    <td>Main Religion</td>
+                                    <td><input id="A-MainRel" data-style="sharp" data-onstyle="info" type="checkbox" data-size="mini" data-toggle="toggle" data-on=" " data-off=" "></td>
+                                    <td><input id="T-MainRel" data-style="sharp" data-onstyle="info" type="checkbox" data-size="mini" data-toggle="toggle" data-on=" " data-off=" "></td>
+                                </tr>
+                                <tr id="populationTR">
+                                    <td>Population</td>
+                                    <td><input id="A-Population" data-style="sharp" data-onstyle="info" type="checkbox" data-size="mini" data-toggle="toggle" data-on=" " data-off=" "></td>
+                                    <td><!--<input id="T-Population" data-style="sharp" data-onstyle="info" type="checkbox" disabled data-size="mini" data-toggle="toggle" data-on=" " data-off=" "> --></td>
+                                </tr>
+                            </table>
+
+                        </ul>
+                    </li>                    
+                </ul>
+            </div>
+        </div>
+        
+
+    </div>
+<a id ="CloseMarker" class="storage-close-icon storage-browse-toggle" href="#" style="float: right; margin-top: -50px; display: none"></a>
+
+<a id ="CloseAna" class="storage-close-icon storage-browse-hierarchy" href="#" style="float: right; margin-top: -50px;"></a>
+
+<div id="hierarchyForms" style="display:none; position: relative; /*margin-top: 200px; margin-left: 20px;*/  z-index: 20; transition: all 0.5s ease; /*width: 150px; */">
+    <div>
+        <div id="hierarchyTree" style="overflow-x: hidden; ">
+            <ul class="nav nav-list">
+                <li> 
+                    <label id="polHier" class="tree-toggler nav-header hier" title="Aggregation by ruler" ></label> 
+                    <label id="culHier" class="tree-toggler nav-header hier" title="Aggregation by culture" ></label> 
+                    <label id="relHier" class="tree-toggler nav-header hier" title="Aggregation by religion" ></label> 
+                    <label id="mrelHier" class="tree-toggler nav-header hier" title="Aggregation by main religion" ></label>
+                    <label id="allProvinces" class="tree-toggler nav-header hier" title="Aggregation by province" ></label>
+                    
+                    <label id="btn_sun-visualize" class="tree-toggler nav-header hier" title="Sunburst Visualization" ></label>
+                    <label id="btn_bub-visualize" class="tree-toggler nav-header hier" title="Clustering Visualization" ></label>
+                    
+                    <!-- <label id="btn_static-visualize" class="tree-toggler nav-header hier" ></label> -->
+                    <label id="btn_animFull" class="tree-toggler nav-header hier" title="All Years: Animated View"></label>
+                    <label id="btn_staticFull" class="tree-toggler nav-header hier" title="All Years: Static View"></label>
+                </li>
+                <br>
+                <div id="hierTables">
+                <table id="aggregatedDatatable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th id="metricName">Metric</th>
+                        <th>Total Area</th>
+                        <th>Total Population</th>
+                        <th>GoTo</th>
+                    </tr>
+                    </thead>
+                </table>
+                <table id="fullDatatable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Province</th>
+                        <th>Ruler</th>
+                        <th>Culture</th>
+                        <th>Religion</th>
+                        <th>Main Religion</th>
+                        <th>Capital</th>
+                        <th>Area</th>
+                        <th>Population</th>
+                        <th>GoTo</th>
+                    </tr>
+                    </thead>
+                </table>
+                </div>
+                
+                <div id="hierVis" style="display: none">
+                    <div id="main-sunburst">
+                        <div id="sequence"></div>
+                        <div id="sunBurstchart">
+                            <div id="explanation" style="visibility: hidden;">
+                                <span id="percentage"></span><br/>
+                                of people living in <span id="yearSB"></span> are estimated to belong to the selected group
+                            </div>
+                            <aside>Mouseover to query share of world population.</aside>
+                        </div>
+                    </div>
+                    <div id="sidebar2" style=" background-color: transparent; /* pointer-events: none; */  "> 
+                        <a title="Toggle grouping: Religion <-> Ruler" onclick="toggleSBData();" style=" float: left; " class="btn faButton">
+                        <i class="fa fa-exchange"></i></a>
+                        &nbsp;
+                        <a title="Legend" id="togglelegend" style=" float: right; " class="btn faButton">
+                            <i class="fa fa-list-ol"></i></a>
+                        <br></div>
+                    <div id="sidebar" style=" background-color: transparent;pointer-events: none;  ">
+                        
+                        <div id="legend" style="visibility: hidden; pointer-events: none;line-height: 15px;margin-top: 35px;">Circle layers<br>(inner to outer):<br><br></div>
+                    </div>
+                </div>
+                <div id="hierBubbs" style="display: none">
+                    <div role="main">
+                        <div id="view_selection" class="btn-group">
+                            <span style="float: left;margin-right: 5px;">Cluster by</span>
+                            <a href="#" id="allClustering" class="btn bubble-btn active activeClustering">All</a>
+                            <a href="#" id="rulClustering" class="btn bubble-btn">Ruler</a>                            
+                            <a href="#" id="relClustering" class="btn bubble-btn">Sub Religion</a>
+                            <a href="#" id="mRelClustering" class="btn bubble-btn">Main Religion</a>
+                        </div>
+                        <div class="btn-group" style="position: absolute; left:0px">
+                            <span style="float: left">Color by</span>
+                            <a class="btn dropdown-toggle btn-select" data-toggle="dropdown" href="#">Religion<span class="caret"></span></a>
+                            <ul id="coloring" class="dropdown-menu">
+                                <li><a href="#">Ruler</a></li>
+                                <li><a href="#">Culture</a></li>
+                                <li><a class="activeColoring" href="#">Religion</a></li>
+                                <li><a href="#">Main Religion</a></li>
+                            </ul>
+                        </div>
+
+                        <div id="bubbles_vis"></div>
+                        <aside>Mouseover for tooltips, click for center on province.</aside>
+                    </div>
+                </div>
+                <div id="hierStatic" style="display: none">
+                    
+                    <div id="staticFullView" style="display: none">
+                        <div id="view_selection_static" class="btn-group">
+                            <a href="#" id="rulStatic" class="btn bubble-btn active activeClustering">Ruler</a>
+                            <a href="#" id="relStatic" class="btn bubble-btn">Religion</a>
+                            <a href="#" id="mRelStatic" class="btn bubble-btn">Main Religion</a>
+                        </div>
+                        <div>
+                            <svg class="stackedChart" id="stackedRul" style="display: block"></svg>
+                            <svg class="stackedChart" id="stackedRel" style="display: none"></svg>
+                            <svg class="stackedChart" id="stackedmRel" style="display: none"></svg>
+                        </div>
+                    </div>
+                    <div id="animFullView" style="display: block">
+                        <div id="view_selection_anim" class="btn-group">
+                            <a href="#" id="rulAnim" class="btn bubble-btn active activeClustering">Ruler</a>
+                            <a href="#" id="relAnim" class="btn bubble-btn">Religion</a>
+                            <a href="#" id="mRelAnim" class="btn bubble-btn">Main Religion</a>
+                        </div>
+
+                        <aside>Mouseover the year to move forward and backwards through time, mouseover circles for labels or <span id="startAniRul" style="display:inline; text-decoration: underline;">restart locked animation</span><span id="startAniRel" style="display:none; text-decoration: underline;">restart locked animation</span><span id="startAnimRel" style="display:none; text-decoration: underline;">restart locked animation</span>.</aside>
+
+                        <div>
+                            <p id="aniRul" style="display: block"></p>
+                            <p id="aniRel" style="display: none"></p>
+                            <p id="animRel" style="display: none"></p>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+</div>
+        
+
+</div>
+<div id="timeline" style="height: 85px; position: absolute; left: 0; right: 0; bottom: 0;"></div>
+
+<script src="{{ STATIC_URL }}staticReqs/sequences.js"></script>
+<script src="{{ STATIC_URL }}staticReqs/nv.d3.js"></script>
+<script type="text/javascript">
+    
+    console.log("*** initializing map");
+
+    var b_area = true;
+    
+    var b_people = false;
+    var b_city = false;
+    var b_events = false;
+    var b_art = false;
+    var b_other = false;
+
+    var b_sub_areaInfo = true;
+    var b_sub_cities = true;
+    var b_sub_castles = true;
+    var b_sub_buildings = true;
+    
+    var b_sub_military = true;
+    var b_sub_politician = true;
+    var b_sub_scientist = true;
+    var b_sub_religious = true;
+    var b_sub_athlete = true;
+    var b_sub_uncP = false;  // !!
+    var b_sub_exp = true;
+    var b_sub_artist = true;
+    //var b_sub_battle = false;
+    //var b_sub_siege = false;
+    //var b_sub_artefact = true;
+    var b_sub_unclassified = false;
+    var a_hierLoaded = false;
+    var a_bubLoadedOnce = false;
+    var a_bubLoaded = false;
+    var a_fullTimeLoaded = false;
+    var rulAnimLoaded = false;
+    var relAnimLoaded = false;
+    var mRelAnimLoaded = false;
+    var rulStaticLoaded = false;
+    var relStaticLoaded = false;
+    var mRelStaticLoaded = false;
+    
+    var mapOptions = {"geometry":{"type":"Point","coordinates":[50,4]},"type":"Feature","properties":{"popupTemplate":"SimplePanel","miniMap":false,"description":"chronas map description","scrollWheelZoom":true,"color":"#1f6377","displayPopupFooter":false,"allowEdit":false,"slideshow":{},"shortUrl":"http://s.hort/m/6/","scaleControl":true,"tilelayer":{},"datalayers":[],"moreControl":true,"licence":"","tilelayersControl":true,"locale":"en","default_iconUrl":"/static/storage/src/img/marker.png","name":"testtName", "author":{"link":"/en/user/aumannd/","name":"aumannd"},"tilelayers":[{"attribution":"Stamen","name":"WaterColor", "bounds":[
+        new L.LatLng(71.343013,177.187500),
+        new L.LatLng(-56.712097,-179.296875)
+    ], "noWrap":true, "url_template":"http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg","rank":1,"minZoom":1,"maxZoom":18,"id":7},{"attribution":"Esi","name":"Satelite ","noWrap":true,
+        "url_template":"http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}","rank":4,"minZoom":0,"maxZoom":18,"id":9},{"attribution":"ttar","name":"z1","noWrap":true,"url_template":"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png","selected":true,"rank":5,"minZoom":0,"maxZoom":18,"id":6}],"zoom":6,"zoomControl":true,"limitBounds":{},"datalayersControl":true,"urls":{"map":"/en/map/{slug}_{pk}","datalayer_view":"/en/datalayer/{pk}/","map_update":"/en/map/{map_id}/update/settings/","map_old_url":"/en/map/{username}/{slug}/","ajax_proxy":"/ajax-proxy/?url={url}","map_geojson":"/en/map/{pk}/geojson/","map_short_url":"/en/m/{pk}/","map_anonymous_edit_url":"/en/map/anonymous-edit/{signature}","map_new":"/en/map/new/","datalayer_update":"/en/map/{map_id}/datalayer/update/{pk}/","map_delete":"/en/map/{map_id}/update/delete/","map_create":"/en/map/create/","logout":"/en/logout/","routing":"http://map.project-osrm.org/?loc={lat},{lng}&hl={locale}","datalayer_create":"/en/map/{map_id}/datalayer/create/","map_clone":"/en/map/{map_id}/update/clone/","login_popup_end":"/en/login/popup/end/","login":"/en/login/","datalayer_delete":"/en/map/{map_id}/datalayer/delete/{pk}/","pictogram_list_json":"/en/pictogram/json/","map_update_permissions":"/en/map/{map_id}/update/permissions/"},"storage_id":6,"captionBar":false,"licences":{"No licence set":{"url":"","name":"No licence set"},"Apache 2":{"url":"http://www.apache.org/licenses/LICENSE-2.0.html","name":"Apache 2"}}}}; //{//{ map_settings|notag|safe }//}
+   //  mapOptions.properties.datalayers = [];
+  //  console.debug("these settings were not necessarily taken: ", JSON.stringify(mapOptions))
+    var map = new L.Storage.Map("map", mapOptions);
+ //   map.setMaxBounds(L.latLngBounds(L.latLng(-90, -240), L.latLng(90, 240)));
+    map.options.maxZoom=9
+    map.options.minZoom=2
+    
+    map.on("viewreset", reset);
+    console.debug("before")
+    svgProv = d3.select(map.getPanes().overlayPane).append("svg");
+
+    svgProv.style("z-index","3");
+    
+    map.on("zoomstart", function () {
+        svgProv.attr("visibility", "hidden")
+    });
+    map.on("zoomend", function () {
+        svgProv.attr("visibility", "visible ")
+
+        if($("#seeLocationsButton").hasClass("activeToggle")  &&  $(".leaflet-right").css("display") !== "none"  &&  $("#lightGallery").css("display") !== "none" ){
+            $(".tempImageLine").parent().remove()
+            
+            $('#lightGallery').find("img").trigger('mouseout');
+            setTimeout(
+                    function(){ 
+                        $('#lightGallery').find("img").trigger('mouseover'); 
+                    },
+                    200);            
+        }
+        
+    });
+
+
+    map.on("dragend", function () {
+
+        if($("#seeLocationsButton").hasClass("activeToggle")  &&  $(".leaflet-right").css("display") !== "none"  &&  $("#lightGallery").css("display") !== "none"  ){
+            $(".tempImageLine").parent().remove();
+            
+            $('#lightGallery').find("img").trigger('mouseout');
+            setTimeout(
+                    function(){
+                        $('#lightGallery').find("img").trigger('mouseover');
+                    },
+                    200);
+        }
+
+    });
+
+
+
+    g00 = svgProv.append("g").attr("class", "leaflet-zoom-hide");
+
+    g1 = g00.append("g");
+    g0 = g00.append("g");
+
+
+    gProvinceAreas = g1.append("g").attr("id", "provinceAreas");
+    gProvinceLabels = g1.append("g").attr("id", "provinceLabels");
+
+    gActiveCouLabels = g0.append("g").attr("id", "activeCouLabels");
+    gActiveCulLabels = g0.append("g").attr("id", "activeCulLabels");
+    gActiveRelLabels = g0.append("g").attr("id", "activeRelLabels");
+    gActiveRelGenLabels = g0.append("g").attr("id", "activeRelGenLabels");
+    transform2 = d3.geo.transform({point: projectPoint});
+    path = d3.geo.path().projection(transform2);
+
+    var ttt = [];
+
+
+    /*
+     d3.json("/static/svgOverlay/DL500x.geojson", function (DL500) {
+
+     d3.json("/static/svgOverlay/DL50a.geojson", function (DL50) {
+
+     ttt = DL50;
+     activeYear = jQuery.extend({}, DL50);
+     dl50 = jQuery.extend({}, DL50);
+     dl500 = jQuery.extend({}, DL500);
+
+     provinceCollection = jQuery.extend({}, tprovinceCollection);
+
+     console.debug(provinceCollection);
+     setupCollections();
+     addTextFeat('country');
+     addAreaFeat('country');
+
+     });
+     });
+     });
+
+     */
+
+    $( "#timeline" ).mouseup(function(event) {
+
+        if (isdragging) return;
+        console.debug("!mouseup");
+        //      if (staticCore.eventParams.dragging) return;
+
+        var deltaX = event.clientX,
+                x = deltaX,
+
+                time = staticCore.body.util.toTime(x);
+
+        staticCore.setCustomTime(time);
+
+        // fire a timechange event
+        staticCore.body.emitter.emit('timechange', {
+            time: new Date(staticCore.customTime.valueOf())
+        });
+
+
+    });
+
+
+    $("#featureForms")
+            .prependTo(".storage-browse-actions");
+    $("#hierarchyForms")
+            .prependTo(".storage-browse-actions");
+
+    $("#CloseAna")
+            .prependTo("#hierarchyForms");
+    $("#CloseMarker")
+            .prependTo("#featureForms");
+    
+    $('#listPlaceholder').append($(".storage-browse-link").detach());
+    
+    
+    $(".markerBullets").click(function(){ 
+        if($(this).hasClass("justActive") )
+            $(this).removeClass("justActive")
+        else
+            $(this).addClass("justActive") 
+    });
+    
+    
+    $("#coloring li a").click(function(){
+        console.debug("changed coloring")
+        $('#coloring li a').removeClass('activeColoring');
+        $(this).toggleClass('activeColoring');
+        var selText = $(this).text();
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+
+        d3.select("#svg_vis").selectAll("circle").attr("r", function(d) {
+            return d.radius;
+        })
+
+        switch(selText){
+            case "Main Religion":
+
+                d3.select("#svg_vis").selectAll("circle").attr("fill", function(d) {
+                    return colorAreas[d.mRelB]
+                }).attr("stroke-width", 2).attr("stroke", function(d) {
+                            return d3.rgb(colorAreas[d.mRelB]).darker();
+                        });
+                break;
+            case "Culture":
+                d3.select("#svg_vis").selectAll("circle").attr("fill", function(d) {
+                    return colorAreas[d.culB]
+                }).attr("stroke-width", 2).attr("stroke", function(d) {
+                            return d3.rgb(colorAreas[d.culB]).darker();
+                        });
+                break;
+            case "Religion":
+                d3.select("#svg_vis").selectAll("circle").attr("fill", function(d) {
+                    return colorAreas[d.relB]
+                }).attr("stroke-width", 2).attr("stroke", function(d) {
+                            return d3.rgb(colorAreas[d.relB]).darker();
+                        });
+                break;
+            case "Ruler":
+                d3.select("#svg_vis").selectAll("circle").attr("fill", function(d) {
+                    return colorAreas[d.rulB]
+                }).attr("stroke-width", 2).attr("stroke", function(d) {
+                            return d3.rgb(colorAreas[d.rulB]).darker();
+                        });
+                break;
+        }
+    });
+
+
+    
+    $(".storage-browse-toggle").click(function(){ 
+        if($("#featureForms").css("display") == "none"){
+            $(".storage-browse-actions").css("display","block");
+            $("#featureForms").css("display","block");
+            
+            $("#hierarchyForms").css("display","none");
+            $(".storage-browse-toggle").addClass( "storage-browse-toggle-active" );
+            $(".storage-browse-hierarchy").removeClass( "storage-browse-toggle-active" );
+          //  $(".leaflet-control-browse.storage-control.leaflet-control").css("border","0px solid rgb(187, 187, 187)")
+            
+        }
+        else{
+            $("#featureForms").css("display","none");
+            $(".storage-browse-toggle").removeClass( "storage-browse-toggle-active" );
+           // $(".leaflet-control-browse.storage-control.leaflet-control").css("border","1px solid rgb(187, 187, 187)")
+            $(".storage-browse-actions").css("display","none");
+        }    
+    })
+
+    $(".storage-browse-hierarchy").click(function(){
+        console.debug($("#hierarchyForms").css("display"))
+        if($("#hierarchyForms").css("display") == "none"){
+            $(".storage-browse-hierarchyForms").css("display","block");
+            $(".storage-browse-actions").css("display","block");
+            $("#hierarchyForms").css("display","block");
+            $("#featureForms").css("display","none");
+            $(".storage-browse-hierarchy").addClass( "storage-browse-toggle-active" );
+            $(".storage-browse-toggle").removeClass( "storage-browse-toggle-active" );
+       //     $(".leaflet-control-browse.storage-control.leaflet-control").css("border","0px solid rgb(187, 187, 187)")
+
+        }
+        else{
+            $("#hierarchyForms").css("display","none");
+            $(".storage-browse-hierarchy").removeClass( "storage-browse-toggle-active" );
+        //    $(".leaflet-control-browse.storage-control.leaflet-control").css("border","1px solid rgb(187, 187, 187)")
+            $(".storage-browse-actions").css("display","none");
+        }
+
+    })
+/*
+$("input:checkbox").change(function(){
+    var group = ":checkbox[name='"+ $(this).attr("name") + "']";
+   
+    console.debug("group",group,$(this).prop('checked'),$(group).not($(this)))
+    
+    if($(this).prop('checked')){
+        console.debug("now doing it")
+        $(group).not($(this)).click();
+        $(this).parent().click();
+    }
+
+
+    });
+ */
+</script>
+
+<script class="cssdeck" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+<script src="{{ STATIC_URL }}staticReqs/bootstrap-toggle.min.js"></script>
+<script src="{{ STATIC_URL }}staticReqs/jquery.dataTables.min.js"></script>
+
+
+<script>
+    var aggTable, fulTable, myLightGallery;
+    $(document).ready(function () {
+
+
+        $(".leaflet-control-attribution.leaflet-control").html('<div id="attributionText" style="font-size: 15px; padding: 2px; background: white; margin-right: 10px; float:left; display: none">&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> Contributors & <a href="http://stamen.com">Stamen Design</a></div><div style=" height: 26px; font-size: 20px; float:right; cursor:pointer; " onclick="if (document.getElementById(\'attributionText\').style.display!==\'block\') { document.getElementById(\'attributionText\').style.display=\'block\';} else { document.getElementById(\'attributionText\').style.display=\'none\';} "><i class="fa fa-copyright"></i></div>');
+
+        $(".leaflet-control-attribution.leaflet-control").css("background","transparent");
+
+
+        $('#view_selection a').click(function() {
+            var view_type = $(this).attr('id');
+            $('#view_selection a').removeClass('active');
+            $('#view_selection a').removeClass('activeClustering');
+            $(this).toggleClass('active');
+            $(this).toggleClass('activeClustering');
+            toggle_view(view_type);
+            return false;
+        });
+
+        $('#view_selection_anim a').click(function() {
+            var view_type = $(this).attr('id');
+            $('#view_selection_anim a').removeClass('active');
+            $('#view_selection_anim a').removeClass('activeClustering');
+            $(this).toggleClass('active');
+            $(this).toggleClass('activeClustering');
+            toggle_animView(view_type);
+            return false;
+        });
+
+        $('#view_selection_static a').click(function() {
+            var view_type = $(this).attr('id');
+            $('#view_selection_static a').removeClass('active');
+            $('#view_selection_static a').removeClass('activeClustering');
+            $(this).toggleClass('active');
+            $(this).toggleClass('activeClustering');
+            toggle_staticView(view_type);
+            return false;
+        });
+        
+        function toggle_staticView(myId){
+            switch (myId){
+                case "rulStatic":
+
+                    $("#stackedRul").css("display","block")
+                    $("#stackedRel").css("display","none")
+                    $("#stackedmRel").css("display","none")
+
+
+                    if (!rulStaticLoaded){
+                        rulStaticLoaded = true;
+                        runStackedRul();
+                    }
+                    break;
+                case "relStatic":
+
+                    $("#stackedRul").css("display","none")
+                    $("#stackedRel").css("display","block")
+                    $("#stackedmRel").css("display","none")
+                    if (!relStaticLoaded){
+                        relStaticLoaded = true;
+                        runStackedRel();
+                    }
+                    break;
+                case "mRelStatic":
+
+                    $("#stackedRul").css("display","none")
+                    $("#stackedRel").css("display","none")
+                    $("#stackedmRel").css("display","block")
+                    if (!mRelStaticLoaded){
+                        mRelStaticLoaded = true;
+                        runStackedmRel();
+                    }
+                    break;
+            }
+        }
+        
+        function toggle_animView(myId){
+            switch (myId){
+                case "rulAnim":
+
+                    $("#aniRul").css("display","block")
+                    $("#animRel").css("display","none")
+                    $("#aniRel").css("display","none")
+
+                    $("#startAniRul").css("display","inline")
+                    $("#startAniRel").css("display","none")
+                    $("#startAnimRel").css("display","none")
+                    
+                        /* Is already initialy loaded!
+                    if (!rulAnimLoaded){
+                        rulAnimLoaded = true;
+                        runRulChart();
+                    }
+                        */
+                    break;
+                case "relAnim":
+
+                    $("#aniRul").css("display","none")
+                    $("#animRel").css("display","none")
+                    $("#aniRel").css("display","block")
+
+                    $("#startAniRul").css("display","none")
+                    $("#startAniRel").css("display","inline")
+                    $("#startAnimRel").css("display","none")
+                    if (!relAnimLoaded){
+                        relAnimLoaded = true;
+                        runRelChart();
+                    }
+                    break;
+                case "mRelAnim":
+
+                    $("#aniRul").css("display","none")
+                    $("#animRel").css("display","block")
+                    $("#aniRel").css("display","none")
+
+                    $("#startAniRul").css("display","none")
+                    $("#startAniRel").css("display","none")
+                    $("#startAnimRel").css("display","inline")
+                    if (!mRelAnimLoaded){
+                        mRelAnimLoaded = true;
+                        runmRelChart();
+                    }
+                    break;
+            }
+        }
+               
+        $(".leaflet-top.leaflet-right").prepend('<div class="leaflet-control" id="lightGallery" style="display:none"></div><div id="loadingGallery" style="display:none; float: right; margin-right: 90px; "> <img src="/static/staticReqs/customIcons/loadingCA.gif" style="opacity: 0.6; /* display: none; */" width="96" height="96" alt="loading gif"></div><div class="storage-control leaflet-control" style=" clear: none; float: none; position: absolute; right: 0px; top: 0px; "><a class="btnOpenGallery" href="#" title="Open Gallery" style=" text-align: center; vertical-align: middle; line-height: 35px; "><i class="fa fa-eye fa-2x btnOpenGalleryIcon" style="color: rgb(77, 77, 77); align-content: center; line-height: 35px; vertical-align: middle; text-align: center;"></i></a></div>')
+
+        $(".leaflet-top.leaflet-right").prepend('<ul id="galleryOptions" ondblclick="event.stopPropagation();" ondrag="event.stopPropagation();" onclick="event.stopPropagation();" style="transition: all 0.5s ease; clear: none; float: none; position: absolute; right: -200px; display: none; top: 14px;" class="leaflet-control nav nav-list tree"><li><button onclick="updateGeoGallery(newYear-parseInt($(\'#deviationYears\').val()), newYear+parseInt($(\'#deviationYears\').val()))"  id="reloadImagesButton" title="Reload Images" type="submit"                                                class="btn btn-default lowerButton"><i id="refreshIcon" class="fa fa-refresh"></i></button></li><li><button onclick="seeAllLocations()"  id="seeLocationsButton" title="See all Locations" type="submit" class="btn btn-default lowerButto"><i id="allLocationsIcon" class="fa fa-location-arrow"></i></button></li><li><div class="squaredOne"><input type="checkbox" checked value="None" id="peopleImgBox" name="check" /><label id="peopleImgBoxA" for="peopleImgBox"></label></div><div class="labelForBox">People</div></li><li>  <div class="squaredOne"><input type="checkbox" checked value="None" id="otherImgBox" name="check" /><label id="otherImgBoxA"  for="otherImgBox"></label></div><div class="labelForBox">Other</div></li><li><div class="input-group" style="width: 100px; margin-left: -71px;"><div class="input-group-addon">Deviation</div><input type="number" min="0" step="1" class="form-control" id="deviationYears" value="10"></div></li><li><div class="input-group" style="width: 100px; margin-left: -43px;"><div class="input-group-addon">Limit</div><input type="number" min="1" step="1" class="form-control" style="width: 60px;" id="limitYears" value="20"></div></li></ul>');
+                
+                // <li>  <div class="squaredOne"><input type="checkbox"  value="None" id="itemsImgBox" name="check" /><label for="itemsImgBox"  id="itemsImgBoxA"></label></div><div class="labelForBox">Items</div></li>
+        $(".leaflet-top.leaflet-right").css("width","96%")
+        $(".leaflet-top.leaflet-right").css("height","230px");
+
+        $(".btnOpenGallery").click(function () {
+            if($('#lightGallery').css("display") !== "none"){
+                allowGallery=false;
+                $('#lightGallery').css("display","none")
+                $('#loadingGallery').css("display","none")
+                
+                $('#galleryOptions').css("right","-200px")
+
+               
+                setTimeout(function(){  $('#galleryOptions').css("display","none") }, 500);
+                
+                $(".leaflet-top.leaflet-right").css("overflow","inherit");
+                $(".btnOpenGallery").css("background-color","rgba(255,255,255,0.4)");
+                $(".btnOpenGallery").removeClass( "activeToggle" );
+
+                $(".tempImageLine").parent().remove();
+                
+                
+            }
+            else {
+
+                allowGallery=true;
+                
+                if ($('#lightGallery').innerHTML !== ""){
+                    $('#lightGallery').css("display","block")
+                    $('#loadingGallery').css("display","none")
+                }
+                else {
+                    $('#loadingGallery').css("display","block")
+                }
+                
+                $('#galleryOptions').css("display","block");
+                $('#galleryOptions').css("right","3px")
+                
+                $(".leaflet-top.leaflet-right").css("overflow","hidden");
+
+                $(".btnOpenGallery").addClass( "activeToggle" );
+           //     $(".btnOpenGallery").css("background-color","rgba(255,255,255,0.8)");
+                
+                if($('#lightGallery').html() == ""){
+                    updateGeoGallery(newYear-parseInt($("#deviationYears").val()),newYear+parseInt($("#deviationYears").val()),"people");
+                }
+
+                $(".tempImageLine").parent().remove();
+                $('#lightGallery').find("img").trigger('mouseout');
+                
+                if($("#seeLocationsButton").hasClass("activeToggle")){
+                setTimeout(
+                        function(){
+                            $('#lightGallery').find("img").trigger('mouseover');
+                        },
+                200);
+                }
+            }
+            
+        });
+
+
+        $("#citiesBox").change(function(){
+            console.debug("start go")
+            b_sub_cities = document.getElementById("citiesBox").checked;
+            if(b_city && b_sub_cities){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_settlementsData)
+            }
+            else{
+                if ($.inArray(newYear, a_settlementsLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_settlementsData);
+                }
+            }
+            console.debug("end go")
+        });
+
+        $("#castlesBox").change(function(){
+            b_sub_castles = document.getElementById("castlesBox").checked;
+            if(b_city && b_sub_castles){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_castlesData)
+            }
+            else{
+                if ($.inArray(newYear, a_castlesLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_castlesData)
+                }
+            }
+        });
+
+        $("#unclassifiedBox").change(function(){
+            b_sub_unclassified = document.getElementById("unclassifiedBox").checked;
+            if(b_other && b_sub_unclassified){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_unclassifiedData)
+            }
+            else{
+                if ($.inArray(newYear, a_unclassifiedLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_unclassifiedData)
+                }
+            }
+        });
+
+        $("#areaInfoBox").change(function(){
+            b_sub_areaInfo = document.getElementById("areaInfoBox").checked;
+            if(b_other && b_sub_areaInfo){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_areaInfoData)
+            }
+            else{
+                if ($.inArray(newYear, a_areaInfoLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_areaInfoData)
+                }
+            }
+        });
+
+        $("#milBox").change(function(){
+            b_sub_military = document.getElementById("milBox").checked;
+            if(b_people && b_sub_military){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_milData)
+            }
+            else{
+                if ($.inArray(newYear, a_milLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_milData)
+                }
+            }
+        });
+
+        $("#polBox").change(function(){
+            b_sub_politician = document.getElementById("polBox").checked;
+            if(b_people && b_sub_politician){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_polData)
+            }
+            else{
+                if ($.inArray(newYear, a_polLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_polData)
+                }
+            }
+        });
+
+        $("#sciBox").change(function(){
+            b_sub_scientist = document.getElementById("sciBox").checked;
+            if(b_people && b_sub_scientist){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_sciData)
+            }
+            else{
+                if ($.inArray(newYear, a_sciLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_sciData)
+                }
+            }
+        });
+
+        $("#relBox").change(function(){
+            b_sub_religious = document.getElementById("relBox").checked;
+            if(b_people && b_sub_religious){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_relData)
+            }
+            else{
+                if ($.inArray(newYear, a_relLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_relData)
+                }
+            }
+        });
+
+        $("#uncBox").change(function(){
+            b_sub_uncP = document.getElementById("uncBox").checked;
+            if(b_people && b_sub_uncP){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_uncPData)
+            }
+            else{
+                if ($.inArray(newYear, a_uncPLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_uncPData)
+                }
+            }
+        });
+
+        $("#expBox").change(function(){
+            b_sub_exp = document.getElementById("expBox").checked;
+            if(b_people && b_sub_exp){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_expData)
+            }
+            else{
+                if ($.inArray(newYear, a_expLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_expData)
+                }
+            }
+        });
+
+        $("#artBox").change(function(){
+            b_sub_artist = document.getElementById("artBox").checked;
+            if(b_people && b_sub_artist){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_artistData)
+            }
+            else{
+                if ($.inArray(newYear, a_artistLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_artistData)
+                }
+            }
+        });
+
+        $("#athBox").change(function(){
+            b_sub_athlete = document.getElementById("athBox").checked;
+            if(b_people && b_sub_athlete){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                ClusterSuperGroup.addLayers(a_athData)
+            }
+            else{
+                if ($.inArray(newYear, a_athLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_athData)
+                }
+            }
+        });
+
+
+        $("#areaChecked").change(function(){
+            b_area = document.getElementById("areaChecked").checked;
+
+
+            if(b_area){
+                map.getDataLayerByStorageId(newYear).fetchData();
+                $('svg').show();
+            }
+            else{
+                //   if ($.inArray(newYear, a_area != -1){
+                $('svg').hide()
+                //   }
+            }
+        });
+
+        $("#peopleChecked").change(function(){
+            b_people = document.getElementById("peopleChecked").checked;
+            console.debug("map.datalayers:",map.datalayers);
+
+            if(b_people){
+                map.getDataLayerByStorageId(newYear).fetchData()
+            }
+
+            else{
+                if ($.inArray(newYear, a_peopleLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_peopleLoaded)
+                }
+
+                if ($.inArray(newYear, a_milLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_milData)
+                }
+                if ($.inArray(newYear, a_polLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_polData)
+                }
+                if ($.inArray(newYear, a_sciLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_sciData)
+                }
+                if ($.inArray(newYear, a_relLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_relData)
+                }
+                if ($.inArray(newYear, a_uncPLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_uncPData)
+                }
+                if ($.inArray(newYear, a_expLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_expData)
+                }
+                if ($.inArray(newYear, a_artistLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_artistData)
+                }
+                if ($.inArray(newYear, a_athLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_artistData)
+                }
+            }
+
+        });
+
+        $("#cityChecked").change(function(){
+            b_city = document.getElementById("cityChecked").checked;
+            console.debug("map.datalayers:",map.datalayers)
+            // search for storage id of iterate map.datalayers_index    year in object and do:
+
+            if(b_city){
+                if (b_sub_castles) ClusterSuperGroup.addLayers(a_castlesData)
+                else{
+                    ClusterSuperGroup.removeLayers(a_castlesData)
+                }
+                if (b_sub_cities) ClusterSuperGroup.addLayers(a_settlementsData)
+                else{
+                    ClusterSuperGroup.removeLayers(a_settlementsData)
+                }
+                map.getDataLayerByStorageId(newYear).fetchData()
+            }
+            else{
+                if ($.inArray(newYear, a_castlesLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_castlesData)
+                }
+                if ($.inArray(newYear, a_settlementsLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_settlementsData)
+                }
+            }
+
+        });
+
+        $("#artChecked").change(function(){
+            b_art = document.getElementById("artChecked").checked;
+            if(b_art){
+                ClusterSuperGroup.addLayers(a_artefactData)
+                map.getDataLayerByStorageId(newYear).fetchData()
+            }
+
+            else{
+                if ($.inArray(newYear, a_artefactLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_artefactData)
+                }
+            }
+        });
+
+        $("#eventsChecked").change(function(){
+            b_events = document.getElementById("eventsChecked").checked;
+            if(b_events){
+                ClusterSuperGroup.addLayers(a_eventsData)
+                map.getDataLayerByStorageId(newYear).fetchData()
+            }
+
+            else{
+                if ($.inArray(newYear, a_eventsLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_eventsData)
+                }
+            }
+        });
+
+        $("#otherChecked").change(function(){
+            b_other = document.getElementById("otherChecked").checked;
+            console.debug("map.datalayers:",map.datalayers)
+            // search for storage id of iterate map.datalayers_index    year in object and do:
+
+            if(b_other){
+                if(b_sub_unclassified) {
+                    ClusterSuperGroup.removeLayers(a_unclassifiedData)
+                }
+                else{
+                    ClusterSuperGroup.addLayers(a_unclassifiedData)
+                }
+                if(b_sub_areaInfo) {
+                    ClusterSuperGroup.addLayers(a_areaInfoData)
+                }
+                else{
+                    ClusterSuperGroup.removeLayers(a_areaInfoData)
+                }
+                map.getDataLayerByStorageId(newYear).fetchData()
+            }
+            else{
+                if ($.inArray(newYear, a_unclassifiedLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_unclassifiedData)
+                }
+                if ($.inArray(newYear, a_areaInfoLoaded) != -1){
+                    ClusterSuperGroup.removeLayers(a_areaInfoData)
+                }
+            }
+
+        });
+        
+        aggTable = $('#aggregatedDatatable').dataTable({
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": true,
+            "dom": '<"pull-left"f><"pull-right">tip',
+            "oLanguage": { "sSearch": "" },
+            "order": [[ 2, "desc" ]],
+            "bAutoWidth": false
+    });
+        fulTable = $('#fullDatatable').dataTable({
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": true,
+            "dom": '<"pull-left"f><"pull-right"l>tip',
+            "oLanguage": { "sSearch": "" },
+            "bAutoWidth": false
+    });
+
+    
+        
+        $("#fullDatatable_wrapper").css("display","none");
+        $("#aggregatedDatatable_wrapper").css("display","none");
+        
+        $('.dataTables_filter input').attr("placeholder", "Search");
+        
+        map.addLayer(ClusterSuperGroup);
+        
+        $('label.tree-toggler').click(function () {
+
+            $(this).parent().children('ul.tree').toggle(300);
+
+
+
+            setTimeout(function(){
+                if($(".nav.nav-list.tree")[0].style.display == "none" && $(".nav.nav-list.tree")[1].style.display == "none" )
+                    $("#CloseMarker").css("display","none")
+                else
+                    $("#CloseMarker").css("display","block")
+            }, 320);
+            
+        });
+
+        $('#featureTree .tree-toggler').click()
+        $('#markerIcon').click()
+        $('#areaIcon').click()
+       // $('#toggle-one').bootstrapToggle();
+
+
+
+        $( "#A-Country" ).parent().on( "click", function() {
+            hideAndAdd('A-Country','country');
+        });
+        $( "#T-Country" ).parent().on( "click", function() {
+            hideAndAdd('T-Country','country');
+        });
+        $( "#A-Culture" ).parent().on( "click", function() {
+            hideAndAdd('A-Culture','culture')
+        });
+        $( "#T-Culture" ).parent().on( "click", function() {
+            hideAndAdd('T-Culture','culture')
+        });
+        $( "#A-Religion" ).parent().on( "click", function() {
+            hideAndAdd('A-Religion','religion')
+        });
+        $( "#T-Religion" ).parent().on( "click", function() {
+            hideAndAdd('T-Religion','religion')
+        });
+        $( "#A-MainRel" ).parent().on( "click", function() {
+            hideAndAdd('A-MainRel','religionGeneral')
+        });
+        $( "#T-MainRel" ).parent().on( "click", function() {
+            hideAndAdd('T-MainRel','religionGeneral')
+        });
+        $( "#A-Population" ).parent().on( "click", function() {
+            hideAndAdd('A-Population','population')
+        });
+
+        $( "#relHier" ).on( "click", function() {
+            $(".background-active").removeClass( "background-active" );
+            $("#relHier").addClass( "background-active" );
+            
+            $("#hierTables").css("display","block");
+            $("#hierBubbs").css("display","none");
+            $("#hierStatic").css("display","none");
+            $("#hierVis").css("display","none");
+            
+            $("#fullDatatable_wrapper").css("display","none");
+            $("#aggregatedDatatable_wrapper").css("display","table");
+            if(!a_hierLoaded){
+                a_hierLoaded=true;
+                reloadHierarchy()
+            }
+            aggTable.fnClearTable();
+            aggTable.fnAddData( sortRel );
+            activeListFeature="rel";
+        });
+        $( "#mrelHier" ).on( "click", function() {
+            $(".background-active").removeClass( "background-active" );
+            $("#mrelHier").addClass( "background-active" );
+            
+            $("#hierTables").css("display","block");
+            $("#hierStatic").css("display","none");
+            $("#hierBubbs").css("display","none");
+            $("#hierVis").css("display","none");
+            $("#fullDatatable_wrapper").css("display","none");
+            $("#aggregatedDatatable_wrapper").css("display","table");
+            if(!a_hierLoaded){
+                a_hierLoaded=true;
+                reloadHierarchy()
+            }
+            aggTable.fnClearTable();
+            aggTable.fnAddData( sortmRel );
+            activeListFeature="mrel";
+        });
+        $( "#culHier" ).on( "click", function() {
+            $(".background-active").removeClass( "background-active" );
+            $("#culHier").addClass( "background-active" );
+            
+            $("#hierTables").css("display","block");
+            $("#hierStatic").css("display","none");
+            $("#hierBubbs").css("display","none");
+            $("#hierVis").css("display","none");
+            $("#fullDatatable_wrapper").css("display","none");
+            $("#aggregatedDatatable_wrapper").css("display","table");
+            if(!a_hierLoaded){
+                a_hierLoaded=true;
+                reloadHierarchy()
+            }
+
+            aggTable.fnClearTable();
+            aggTable.fnAddData( sortCul );
+            activeListFeature="cul";
+        });
+        $( "#polHier" ).on( "click", function() {
+
+            $(".background-active").removeClass( "background-active" );
+            $("#polHier").addClass( "background-active" );
+            
+            $("#hierTables").css("display","block");
+            $("#hierStatic").css("display","none");
+            $("#hierBubbs").css("display","none");
+            $("#hierVis").css("display","none");
+            $("#fullDatatable_wrapper").css("display","none");
+            $("#aggregatedDatatable_wrapper").css("display","table");
+            if(!a_hierLoaded){
+                a_hierLoaded=true;
+                reloadHierarchy()
+            }
+            aggTable.fnClearTable();
+            aggTable.fnAddData( sortRuler );
+            activeListFeature="rul";
+        });
+
+        $( "#allProvinces" ).on( "click", function() {
+
+            $(".background-active").removeClass( "background-active" );
+            $("#allProvinces").addClass( "background-active" );
+            
+            $("#hierTables").css("display","block");
+            $("#hierBubbs").css("display","none");
+            $("#hierVis").css("display","none");
+            $("#hierStatic").css("display","none");
+            $("#aggregatedDatatable_wrapper").css("display","none");
+            $("#fullDatatable_wrapper").css("display","table");
+            if(!a_hierLoaded){
+                a_hierLoaded=true;
+                reloadHierarchy()
+            }
+            fulTable.fnClearTable();
+            fulTable.fnAddData( sortAll );
+        });
+
+        
+
+        $( "#btn_sun-visualize" ).on( "click", function() {
+
+            $(".background-active").removeClass( "background-active" );
+            $("#btn_sun-visualize").addClass( "background-active" );
+            
+            $("#hierBubbs").css("display","none");
+            $("#hierTables").css("display","none");
+            $("#hierVis").css("display","block");
+            $("#hierStatic").css("display","none");
+            if(!a_hierLoaded){
+                a_hierLoaded=true;
+                reloadHierarchy()
+            }
+            switchSBData(currSB);
+        });
+
+        $( "#btn_bub-visualize" ).on( "click", function() {
+            
+            $(".background-active").removeClass( "background-active" );
+            $("#btn_bub-visualize").addClass( "background-active" );
+            
+            $("#hierTables").css("display","none");
+            $("#hierVis").css("display","none");
+            $("#hierBubbs").css("display","block");
+            $("#hierStatic").css("display","none");
+            if(!a_hierLoaded){
+                a_hierLoaded=true;
+                reloadHierarchy()
+            }
+            
+            if(!a_bubLoadedOnce){
+                
+                a_bubLoadedOnce=true;
+                a_bubLoaded=true;
+                runBubbles()
+             //   loadData();
+            }
+            else if (!a_bubLoaded){
+                a_bubLoaded=true;
+                reloadData();            
+            }
+            //switchSBData(currSB);
+        });
+/*
+        $( "#btn_static-visualize" ).on( "click", function() {
+
+            $(".background-active").removeClass( "background-active" );
+            $("#btn_static-visualize").addClass( "background-active" );
+            
+            $("#hierTables").css("display","none");
+            $("#hierVis").css("display","none");
+            $("#hierBubbs").css("display","none");
+            $("#hierStatic").css("display","block");
+
+            if(!a_fullTimeLoaded){
+                a_fullTimeLoaded=true;
+                loadFullTimeLoaded()
+            }
+
+        });
+*/
+        $("#peopleChecked").parent().find(".toggle-on").css({"background-color": "#899b37", "color": "white", "font-weight": "bolder"});
+        $("#milBox").parent().find("label").css({"background-color": "#899b37"});
+        $("#expBox").parent().find("label").css({"background-color": "#899b37"});
+        $("#polBox").parent().find("label").css({"background-color": "#899b37"});
+        $("#sciBox").parent().find("label").css({"background-color": "#899b37"});
+        $("#artBox").parent().find("label").css({"background-color": "#899b37"});
+        $("#relBox").parent().find("label").css({"background-color": "#899b37"});
+        $("#athBox").parent().find("label").css({"background-color": "#899b37"});
+        $("#uncBox").parent().find("label").css({"background-color": "#899b37"});    
+        
+        $("#cityChecked").parent().find(".toggle-on").css({"background-color": "#2e8282", "color": "white", "font-weight": "bolder"});
+        $("#citiesBox").parent().find("label").css({"background-color": "#2e8282"});
+        $("#castlesBox").parent().find("label").css({"background-color": "#2e8282"});
+        
+        
+        $("#eventsChecked").parent().find(".toggle-on").css({"background-color": "#c9352b", "color": "white", "font-weight": "bolder"});
+        
+        $("#otherChecked").parent().find(".toggle-on").css({"background-color": "#727272", "color": "white", "font-weight": "bolder"});
+        $("#areaInfoBox").parent().find("label").css({"background-color": "#727272"});
+        $("#unclassifiedBox").parent().find("label").css({"background-color": "#727272"});
+        
+        $("#artChecked").parent().find(".toggle-on").css({"background-color": "#764a25", "color": "white", "font-weight": "bolder"});
+        
+        
+        $( "#btn_staticFull" ).on( "click", function() {
+
+            $("#hierTables").css("display","none");
+            $("#hierVis").css("display","none");
+            $("#hierBubbs").css("display","none");
+            $("#hierStatic").css("display","block");
+            
+            $(".background-active").removeClass( "background-active" );
+            $("#btn_staticFull").addClass( "background-active" );
+            
+            $("#staticFullView").css("display","block");
+            $("#animFullView").css("display","none");
+
+            if(!a_fullTimeLoaded){
+                a_fullTimeLoaded=true;
+                loadFullTimeLoaded("static")
+            } else if(!rulStaticLoaded){
+                rulStaticLoaded = true;
+                runStackedRul();
+            }
+            
+        });
+
+        $( "#btn_animFull" ).on( "click", function() {
+
+            $("#hierTables").css("display","none");
+            $("#hierVis").css("display","none");
+            $("#hierBubbs").css("display","none");
+            $("#hierStatic").css("display","block");
+
+            if(!a_fullTimeLoaded){
+                a_fullTimeLoaded=true;
+                loadFullTimeLoaded("anim")
+            } else if(!rulAnimLoaded){
+                rulAnimLoaded = true;
+                runRulChart();
+            }
+            
+            $(".background-active").removeClass( "background-active" );
+            $("#btn_animFull").addClass( "background-active" );
+            
+            $("#staticFullView").css("display","none");
+            $("#animFullView").css("display","block");
+            
+        });
+        
+        lockFeatureSelection();
+        $(".leaflet-overlay-pane").find(".leaflet-zoom-animated").css("z-index","4")
+
+        $(".leaflet-overlay-pane").find(".leaflet-zoom-animated").css("pointer-events","none")
+        
+        // $(".datetimeControl").parent().css("pointer-events","none")
+        myLightGallery = $("#lightGallery").lightGallery();
+
+
+        $("#lightGallery").on("scrollstop",function(){
+            if($("#seeLocationsButton").hasClass("activeToggle")){
+
+                $(".tempImageLine").parent().remove();
+                
+                $('#lightGallery').find("img").trigger('mouseout');
+                setTimeout(
+                        function(){
+                            $('#lightGallery').find("img").trigger('mouseover');
+                        },
+                        200);
+            }
+        });
+
+        $( ".datetimeControl" ).append('<button type="button" onclick="changeTimeSpecific()" class="btn btn-default timeC timeOk"><i class="fa fa-check"></i></button><button type="button" onclick="$(\'.timeC\').hide(); document.getElementsByClassName(\'datetimeValue\')[0].value = new Date(staticCore.customTime.valueOf()).getFullYear();" class="btn btn-default timeC timeNOT"><i class="fa fa-times"></i></button><button type="button" onclick="changeTimeSpecific(true)" class="btn btn-default timeC timeRnd" );"></button>');
+
+        $(".datetimeControl").mouseenter(function() {
+            $(".timeC").show();
+        });
+        $(".datetimeControl").mouseleave(function() {
+            $(".timeC").hide();
+            document.getElementsByClassName("datetimeValue")[0].value = new Date(staticCore.customTime.valueOf()).getFullYear();
+        });
+
+
+
+        
+    });
+
+    function getJsonFromUrl() {
+        var query = location.hash.substr(location.hash.indexOf("?")+1);
+        var result = {};
+        query.split("&").forEach(function(part) {
+            var item = part.split("=");
+            result[item[0]] = decodeURIComponent(item[1]);
+        });
+        console.log("Url Parameters: ", result)
+        return result;
+    }
+
+    function changeTimeSpecific(randomB){
+        if (randomB){
+            $(".timeC").hide();
+
+            var tmpTime = new Date();
+            tmpTime.setFullYear(parseInt(getRandomArbitrary(0,2000)));
+            staticCore.setCustomTime(tmpTime);
+
+            staticCore.body.emitter.emit('timechange', {
+                time: new Date(staticCore.customTime.valueOf())
+            });
+        }
+        else {
+            $(".timeC").hide();
+
+            var tmpTime = new Date();
+            tmpTime.setFullYear(document.getElementsByClassName("datetimeValue")[0].value);
+            staticCore.setCustomTime(tmpTime);
+
+            staticCore.body.emitter.emit('timechange', {
+                time: new Date(staticCore.customTime.valueOf())
+            });
+        }
+
+    }
+    
+    function toggleSBData(){
+        if(currSB == "rel"){
+            currSB='rul';
+            switchSBData("rul");
+        }
+        else {
+            currSB='rel';
+            switchSBData("rel");
+        }               
+    }
+
+</script>

@@ -1,0 +1,16 @@
+{
+    "icon": "campsite",
+    "fields": [
+        "operator",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "tourism": "camp_site"
+    },
+    "name": "Camp Site"
+}
