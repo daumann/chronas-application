@@ -4002,7 +4002,7 @@ function runBubbles() {
             return function() {
                 return chart.display_by_year();
             };
-        })(this);um
+        })(this);
         root.toggle_view = (function(_this) {
             return function(view_type) {
                 if (view_type === 'allClustering') {

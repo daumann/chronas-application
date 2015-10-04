@@ -211,6 +211,7 @@ fieldset.toggle.on .more_style_options {
 }
 #storage-ui-container .toolbox li + li {
     margin-left: 0px;
+    /* margin-top: 10px; */
 }
 
 /* *********** */
@@ -1368,7 +1369,7 @@ $("#uncBox").parent().find("label").css({"background-color": "#899b37"});
 
     height: 30px;
     width: 30px;
-    background-image: url("http://127.0.0.1:8000/static/staticReqs/customIcons/dices.png") !important;
+    background-image: url("/static/staticReqs/customIcons/dices.png") !important;
     background-color: #FFFFFF !important;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -1379,4 +1380,13 @@ $("#uncBox").parent().find("label").css({"background-color": "#899b37"});
 
 .timeRnd:hover {
     background-color: #EEE !important;
+}
+
+#storage-ui-container > .toolbox >.storage-close-link > .storage-close-icon {
+    margin-right: -4px;
+}
+
+.leaflet-bottom.leaflet-left > .leaflet-control {
+    height: 100px;
+    margin-bottom: 100px;
 }
