@@ -1232,6 +1232,21 @@ function setupCollections(myActiveTextFeat) {
                 return d.properties.name.toUpperCase()
             })
 
+        dragBehavior = d3.behavior.drag()
+            .on('drag', onDrag)
+            .on('dragend', onDragEnd);
+
+        var dragBehavior,
+            wasDragged = false;
+
+        function onDrag() {
+            wasDragged = true;
+        }
+
+        function onDragEnd() {
+            wasDragged = false;
+        }
+
         activeAreaFeature = gProvinceAreas.selectAll("path")
             .data(provinceCollection.features)
             .enter().append("path")
@@ -1239,11 +1254,11 @@ function setupCollections(myActiveTextFeat) {
             .style("fill", function (d) {
                 return d.properties.Acolor; //._storage_options
             })
-           // .on("dragstart", function() { d3.event.sourceEvent.preventDefault(); })
+            .call(dragBehavior)
             .on('click', function (d, i) {
-                console.debug("clickevent",d3.event.defaultPrevented);
+                if (!d3.event.defaultPrevented){
               //  if (d3.event.defaultPrevented) return; // click suppressed
-                
+
                 console.debug(d)
 
                 var rulerWiki = "";
@@ -1508,6 +1523,7 @@ console.debug("!!!x")
                                     "\n(http://en.wikipedia.org/wiki/" + relGen[d.properties.Rel][2] +
                                     ")\n Population: " + d.properties.Pop)
                 */
+                }
                 }
             });
             

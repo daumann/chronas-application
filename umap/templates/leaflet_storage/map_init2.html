@@ -201,27 +201,27 @@
         
 
     </div>
-<a id ="CloseMarker" class="storage-close-icon storage-browse-toggle" href="#" style="float: right; margin-top: -50px; display: none"></a>
+<a id ="CloseMarker" class="storage-close-icon storage-browse-toggle" href="#"  style="float: right; margin-top: -50px; "></a>
 
 <a id ="CloseAna" class="storage-close-icon storage-browse-hierarchy" href="#" style="float: right; margin-top: -50px;"></a>
 
-<div id="hierarchyForms" style="display:none; position: relative; /*margin-top: 200px; margin-left: 20px;*/  z-index: 20; transition: all 0.5s ease; /*width: 150px; */">
+<div id="hierarchyForms"  style="display:none; position: relative; /*margin-top: 200px; margin-left: 20px;*/  z-index: 20; transition: all 0.5s ease; /*width: 150px; */">
     <div>
-        <div id="hierarchyTree" style="overflow-x: hidden; ">
+        <div id="hierarchyTree">
             <ul class="nav nav-list">
                 <li> 
-                    <label id="polHier" class="tree-toggler nav-header hier" title="Aggregation by ruler" ></label> 
-                    <label id="culHier" class="tree-toggler nav-header hier" title="Aggregation by culture" ></label> 
-                    <label id="relHier" class="tree-toggler nav-header hier" title="Aggregation by religion" ></label> 
-                    <label id="mrelHier" class="tree-toggler nav-header hier" title="Aggregation by main religion" ></label>
-                    <label id="allProvinces" class="tree-toggler nav-header hier" title="Aggregation by province" ></label>
+                    <label data-toggle="tooltip" data-delay='{"show":50000, "hide":10}' data-placement="top" id="polHier" class="tree-toggler nav-header hier" title="Aggregation by ruler" ></label>
+                    <label data-toggle="tooltip" data-placement="top" id="culHier" class="tree-toggler nav-header hier" title="Aggregation by culture" ></label>
+                    <label data-toggle="tooltip" data-placement="top" data-delay='{"show":0, "hide":0}' id="relHier" class="tree-toggler nav-header hier" title="Aggregation by religion" ></label>
+                    <label data-toggle="tooltip" data-placement="top" data-delay='{"show":0, "hide":0}'  id="mrelHier" class="tree-toggler nav-header hier" title="Aggregation by main religion" ></label>
+                    <label data-toggle="tooltip" data-placement="top" data-delay='{"show":0, "hide":0}'  id="allProvinces" class="tree-toggler nav-header hier" title="Aggregation by province" ></label>
                     
-                    <label id="btn_sun-visualize" class="tree-toggler nav-header hier" title="Sunburst Visualization" ></label>
-                    <label id="btn_bub-visualize" class="tree-toggler nav-header hier" title="Clustering Visualization" ></label>
+                    <label data-toggle="tooltip" data-placement="top" id="btn_sun-visualize" class="tree-toggler nav-header hier" title="Sunburst Visualization" ></label>
+                    <label data-toggle="tooltip" data-placement="top" id="btn_bub-visualize" class="tree-toggler nav-header hier" title="Clustering Visualization" ></label>
                     
                     <!-- <label id="btn_static-visualize" class="tree-toggler nav-header hier" ></label> -->
-                    <label id="btn_animFull" class="tree-toggler nav-header hier" title="All Years: Animated View"></label>
-                    <label id="btn_staticFull" class="tree-toggler nav-header hier" title="All Years: Static View"></label>
+                    <label data-toggle="tooltip" data-placement="top" id="btn_animFull" class="tree-toggler nav-header hier" title="All Years: Animated View"></label>
+                    <label data-toggle="tooltip" data-placement="top" id="btn_staticFull" class="tree-toggler nav-header hier" title="All Years: Static View"></label>
                 </li>
                 <br>
                 <div id="hierTables">
@@ -758,7 +758,7 @@ $("input:checkbox").change(function(){
             }
         }
                
-        $(".leaflet-top.leaflet-right").prepend('<div class="leaflet-control" id="lightGallery" style="display:none"></div><div id="loadingGallery" style="display:none; float: right; margin-right: 90px; "> <img src="/static/staticReqs/customIcons/loadingCA.gif" style="opacity: 0.6; /* display: none; */" width="96" height="96" alt="loading gif"></div><div class="storage-control leaflet-control" style=" clear: none; float: none; position: absolute; right: 0px; top: 0px; "><a class="btnOpenGallery" href="#" title="Open Gallery" style=" text-align: center; vertical-align: middle; line-height: 35px; "><i class="fa fa-eye fa-2x btnOpenGalleryIcon" style="color: rgb(77, 77, 77); align-content: center; line-height: 35px; vertical-align: middle; text-align: center;"></i></a></div>')
+        $(".leaflet-top.leaflet-right").prepend('<div class="leaflet-control" id="lightGallery" style="display:none"></div><div id="loadingGallery" style="display:none; float: right; margin-right: 90px; "> <img src="/static/staticReqs/customIcons/loadingCA.gif" style="opacity: 0.6; /* display: none; */" width="96" height="96" alt="loading gif"></div><div class="storage-control leaflet-control" style=" clear: none; float: none; position: absolute; right: 0px; top: 0px; "><a data-toggle="tooltip" data-placement="left" title="Load images related to the selected year" class="btnOpenGallery" href="#" style=" text-align: center; vertical-align: middle;  line-height: 35px; "><i class="fa fa-eye fa-2x btnOpenGalleryIcon" style="color: rgb(77, 77, 77); align-content: center; line-height: 35px; vertical-align: middle; text-align: center;"></i></a></div>')
 
         $(".leaflet-top.leaflet-right").prepend('<ul id="galleryOptions" ondblclick="event.stopPropagation();" ondrag="event.stopPropagation();" onclick="event.stopPropagation();" style="transition: all 0.5s ease; clear: none; float: none; position: absolute; right: -200px; display: none; top: 14px;" class="leaflet-control nav nav-list tree"><li><button onclick="updateGeoGallery(newYear-parseInt($(\'#deviationYears\').val()), newYear+parseInt($(\'#deviationYears\').val()))"  id="reloadImagesButton" title="Reload Images" type="submit"                                                class="btn btn-default lowerButton"><i id="refreshIcon" class="fa fa-refresh"></i></button></li><li><button onclick="seeAllLocations()"  id="seeLocationsButton" title="See all Locations" type="submit" class="btn btn-default lowerButto"><i id="allLocationsIcon" class="fa fa-location-arrow"></i></button></li><li><div class="squaredOne"><input type="checkbox" checked value="None" id="peopleImgBox" name="check" /><label id="peopleImgBoxA" for="peopleImgBox"></label></div><div class="labelForBox">People</div></li><li>  <div class="squaredOne"><input type="checkbox" checked value="None" id="otherImgBox" name="check" /><label id="otherImgBoxA"  for="otherImgBox"></label></div><div class="labelForBox">Other</div></li><li><div class="input-group" style="width: 100px; margin-left: -71px;"><div class="input-group-addon">Deviation</div><input type="number" min="0" step="1" class="form-control" id="deviationYears" value="10"></div></li><li><div class="input-group" style="width: 100px; margin-left: -43px;"><div class="input-group-addon">Limit</div><input type="number" min="1" step="1" class="form-control" style="width: 60px;" id="limitYears" value="20"></div></li></ul>');
                 
@@ -1159,10 +1159,10 @@ $("input:checkbox").change(function(){
 
 
             setTimeout(function(){
-                if($(".nav.nav-list.tree")[0].style.display == "none" && $(".nav.nav-list.tree")[1].style.display == "none" )
-                    $("#CloseMarker").css("display","none")
-                else
-                    $("#CloseMarker").css("display","block")
+               // if($(".nav.nav-list.tree")[0].style.display == "none" && $(".nav.nav-list.tree")[1].style.display == "none" )
+                  //  $("#CloseMarker").css("display","none")
+                //else
+                 //   $("#CloseMarker").css("display","block")
             }, 320);
             
         });
@@ -1465,7 +1465,7 @@ $("input:checkbox").change(function(){
 
 
 
-        
+        $('[data-toggle="tooltip"]').tooltip();
     });
 
     function getJsonFromUrl() {

@@ -9,7 +9,7 @@ $(function() {
     var d = new Date();
     d.setFullYear(2020);
     var d2 = new Date();
-    d2.setFullYear(-10000);
+    d2.setFullYear(0);
     // Set timeline options
     var timelineOptions = {
         "width":  "100%",
@@ -111,7 +111,7 @@ $(function() {
     // A callback so timeline is set after changing playback time
     function onPlaybackTimeChange (ms) {
         //   console.debug(ms);
-        timeline2.setCustomTime(new Date(ms));
+       // timeline2.setCustomTime(new Date(ms));
     };
 
     function onSliderChange(e) {

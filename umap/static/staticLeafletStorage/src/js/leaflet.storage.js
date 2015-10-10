@@ -325,9 +325,9 @@ L.Storage.Map.include({
         }
         if (this.options.moreControl) {
             this._controls.moreControl = (new L.Storage.MoreControls()).addTo(this);
-            this._controls.homeControl = (new L.Storage.HomeControl()).addTo(this);
+            //this._controls.homeControl = (new L.Storage.HomeControl()).addTo(this);
             this._controls.locateControl = (new L.Storage.LocateControl()).addTo(this);
-            this._controls.jumpToLocationControl = (new L.Storage.JumpToLocationControl()).addTo(this);
+            //this._controls.jumpToLocationControl = (new L.Storage.JumpToLocationControl()).addTo(this);
             //this._controls.embedControl = (new L.Control.Embed(this, this.options.embedOptions)).addTo(this);
             this._controls.tilelayersControl = new L.Storage.TileLayerControl().addTo(this);
             var editInOSMControlOptions = {

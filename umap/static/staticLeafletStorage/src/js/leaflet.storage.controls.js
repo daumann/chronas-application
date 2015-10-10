@@ -157,6 +157,18 @@ L.Storage.DataLayersControl = L.Control.extend({
         var toggle = L.DomUtil.create('a', 'storage-browse-toggle', container), hierarchy = L.DomUtil.create('a', 'storage-browse-hierarchy', container), actions = L.DomUtil.create('div', 'storage-browse-actions', container);
         toggle.href = '#';
         hierarchy.href = '#';
+
+        $(toggle).attr("data-toggle", "tooltip");
+        $(toggle).attr("data-placement","right");
+
+
+        $(hierarchy).attr("data-toggle", "tooltip");
+        $(hierarchy).attr("data-placement","right");
+
+        toggle.title="Change area dimension and add markers"
+
+        hierarchy.title="Browse specific tables and analytics"
+
         this._datalayers_container = L.DomUtil.create('ul', 'storage-browse-datalayers', actions);
 /*
         var link = L.DomUtil.create('a', 'storage-browse-link', actions);
@@ -379,6 +391,10 @@ L.Storage.TileLayerControl = L.Control.extend({
 
         var link = L.DomUtil.create('a', '', container);
         link.href = '#';
+
+        $(link).attr("data-toggle", "tooltip");
+        $(link).attr("data-placement","right");
+
         link.title = L._('Change map background');
 
         L.DomEvent
@@ -450,6 +466,7 @@ L.Storage.HomeControl = L.Control.extend({
     },
 
     onAdd: function (map) {
+
         var container = L.DomUtil.create('div', 'leaflet-control-home storage-control'),
             link = L.DomUtil.create('a', '', container);
 
@@ -457,6 +474,7 @@ L.Storage.HomeControl = L.Control.extend({
         link.title = L._('Go to community page');
 
         return container;
+
     }
 });
 
@@ -471,6 +489,11 @@ L.Storage.LocateControl = L.Control.extend({
         var container = L.DomUtil.create('div', 'leaflet-control-locate storage-control'),
             link = L.DomUtil.create('a', '', container);
         link.href = '#';
+
+        $(link).attr("data-toggle", "tooltip");
+        $(link).attr("data-placement","right");
+
+
         link.title = L._('Center map on your location');
         var fn = function (e) {
             map.locate({
@@ -497,6 +520,8 @@ L.Storage.JumpToLocationControl = L.Control.extend({
     },
 
     onAdd: function (map) {
+
+
         var container = L.DomUtil.create('div', 'leaflet-control-search storage-control'),
             self = this;
 
@@ -554,7 +579,12 @@ L.Storage.JumpToLocationControl = L.Control.extend({
             .on(link, 'click', fn)
             .on(link, 'dblclick', L.DomEvent.stopPropagation);
 
-        return container;    }
+        return container;
+
+
+        }
+
+
 });
 
 
