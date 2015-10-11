@@ -1407,3 +1407,11 @@ $("#uncBox").parent().find("label").css({"background-color": "#899b37"});
 .tooltip-arrow{
     /* border-left-color: #333 !important; */
 }
+
+#hierBubbs .tooltip{
+    opacity: 0.9 !important;
+}
+
+#hierStatic .tooltip{
+    opacity: 0.9 !important;
+}
