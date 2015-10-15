@@ -567,6 +567,9 @@ a.storage-control-text {
     border: 15px solid transparent;         /* padding: 10px 20px; */
 
     border-image: url("/static/staticReqs/customIcons/border.png") 64 64 repeat;
+    -moz-border-image:url("/static/staticReqs/customIcons/border.png") 64 64 repeat; /* Old Firefox */
+    -webkit-border-image:url("/static/staticReqs/customIcons/border.png") 64 64 repeat; /* Safari */
+    -o-border-image:url("/static/staticReqs/customIcons/border.png") 64 64 repeat; /* Opera */
 
 }
 .leaflet-control-browse .storage-browse-datalayers {

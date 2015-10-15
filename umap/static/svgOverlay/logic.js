@@ -1232,13 +1232,6 @@ function setupCollections(myActiveTextFeat) {
                 return d.properties.name.toUpperCase()
             })
 
-        dragBehavior = d3.behavior.drag()
-            .on('drag', onDrag)
-            .on('dragend', onDragEnd);
-
-        var dragBehavior,
-            wasDragged = false;
-
         function onDrag() {
             wasDragged = true;
         }
@@ -1246,6 +1239,15 @@ function setupCollections(myActiveTextFeat) {
         function onDragEnd() {
             wasDragged = false;
         }
+
+        dragBehavior = d3.behavior.drag()
+            .on('drag', onDrag)
+            .on('dragend', onDragEnd);
+
+        var dragBehavior,
+            wasDragged = false;
+
+
 
         activeAreaFeature = gProvinceAreas.selectAll("path")
             .data(provinceCollection.features)

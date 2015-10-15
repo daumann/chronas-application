@@ -339,6 +339,9 @@ body {
 
 
     border-image: url("/static/staticReqs/customIcons/border.png") 62 62 repeat;
+    -moz-border-image:url("/static/staticReqs/customIcons/border.png") 62 62 repeat; /* Old Firefox */
+    -webkit-border-image:url("/static/staticReqs/customIcons/border.png") 62 62 repeat; /* Safari */
+    -o-border-image:url("/static/staticReqs/customIcons/border.png") 62 62 repeat; /* Opera */
 
 
     padding: 0px 0px 10px 10px;
@@ -1009,6 +1012,9 @@ $("#uncBox").parent().find("label").css({"background-color": "#899b37"});
     border-top: 14px;
 
     border-image: url("/static/staticReqs/customIcons/border.png") 58 60 0 repeat;
+    -moz-border-image:url("/static/staticReqs/customIcons/border.png") 58 60 0 repeat; /* Old Firefox */
+    -webkit-border-image:url("/static/staticReqs/customIcons/border.png") 58 60 0 repeat; /* Safari */
+    -o-border-image:url("/static/staticReqs/customIcons/border.png") 58 60 0 repeat; /* Opera */
     padding: 0px 0px 0px 0px;
     background-color: rgba(245, 239, 233, 0.9);
 }

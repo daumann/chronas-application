@@ -65,6 +65,9 @@ hr {
     -moz-border-top-colors: none;
     border-color: #ddd;
     border-image: none;
+    -moz-border-image:none;
+    -webkit-border-image:none;
+    -o-border-image:none;
     border-style: solid;
     border-width: 1px 0 0;
 }
