@@ -17,7 +17,6 @@ iD.data = {
             path + 'data/feature-icons.json',
             path + 'data/operations-sprite.json',
             path + 'data/locales.json',
-            path + 'dist/locales/en.json',
             path + 'data/name-suggestions.json',
             path + 'data/address-formats.json'
             ], d3.json, function (err, data) {
