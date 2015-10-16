@@ -1,5 +1,5 @@
 {% load leaflet_storage_tags %}
-        
+
 <div id="progress"><div id="progress-bar"></div></div>
 <div id="map" style="width: 100%;position: absolute;top: 0; /* bottom: 0; */left: 0;right: 0;bottom: 120px;">
 
@@ -194,11 +194,11 @@
                             </table>
 
                         </ul>
-                    </li>                    
+                    </li>
                 </ul>
             </div>
         </div>
-        
+
 
     </div>
 <a id ="CloseMarker" class="storage-close-icon storage-browse-toggle" href="#"  style="float: right; margin-top: -50px; "></a>
@@ -209,16 +209,16 @@
     <div>
         <div id="hierarchyTree">
             <ul class="nav nav-list">
-                <li> 
+                <li>
                     <label data-toggle="tooltip" data-delay='{"show":50000, "hide":10}' data-placement="top" id="polHier" class="tree-toggler nav-header hier" title="Aggregation by ruler" ></label>
                     <label data-toggle="tooltip" data-placement="top" id="culHier" class="tree-toggler nav-header hier" title="Aggregation by culture" ></label>
                     <label data-toggle="tooltip" data-placement="top" data-delay='{"show":0, "hide":0}' id="relHier" class="tree-toggler nav-header hier" title="Aggregation by religion" ></label>
                     <label data-toggle="tooltip" data-placement="top" data-delay='{"show":0, "hide":0}'  id="mrelHier" class="tree-toggler nav-header hier" title="Aggregation by main religion" ></label>
                     <label data-toggle="tooltip" data-placement="top" data-delay='{"show":0, "hide":0}'  id="allProvinces" class="tree-toggler nav-header hier" title="Aggregation by province" ></label>
-                    
+
                     <label data-toggle="tooltip" data-placement="top" id="btn_sun-visualize" class="tree-toggler nav-header hier" title="Sunburst Visualization" ></label>
                     <label data-toggle="tooltip" data-placement="top" id="btn_bub-visualize" class="tree-toggler nav-header hier" title="Clustering Visualization" ></label>
-                    
+
                     <!-- <label id="btn_static-visualize" class="tree-toggler nav-header hier" ></label> -->
                     <label data-toggle="tooltip" data-placement="top" id="btn_animFull" class="tree-toggler nav-header hier" title="All Years: Animated View"></label>
                     <label data-toggle="tooltip" data-placement="top" id="btn_staticFull" class="tree-toggler nav-header hier" title="All Years: Static View"></label>
@@ -251,7 +251,7 @@
                     </thead>
                 </table>
                 </div>
-                
+
                 <div id="hierVis" style="display: none">
                     <div id="main-sunburst">
                         <div id="sequence"></div>
@@ -263,7 +263,7 @@
                             <aside>Mouseover to query share of world population.</aside>
                         </div>
                     </div>
-                    <div id="sidebar2" style=" background-color: transparent; /* pointer-events: none; */  "> 
+                    <div id="sidebar2" style=" background-color: transparent; /* pointer-events: none; */  ">
                         <a title="Toggle grouping: Religion <-> Ruler" onclick="toggleSBData();" style=" float: left; " class="btn faButton">
                         <i class="fa fa-exchange"></i></a>
                         &nbsp;
@@ -271,7 +271,7 @@
                             <i class="fa fa-list-ol"></i></a>
                         <br></div>
                     <div id="sidebar" style=" background-color: transparent;pointer-events: none;  ">
-                        
+
                         <div id="legend" style="visibility: hidden; pointer-events: none;line-height: 15px;margin-top: 35px;">Circle layers<br>(inner to outer):<br><br></div>
                     </div>
                 </div>
@@ -280,7 +280,7 @@
                         <div id="view_selection" class="btn-group">
                             <span style="float: left;margin-right: 5px;">Cluster by</span>
                             <a href="#" id="allClustering" class="btn bubble-btn active activeClustering">All</a>
-                            <a href="#" id="rulClustering" class="btn bubble-btn">Ruler</a>                            
+                            <a href="#" id="rulClustering" class="btn bubble-btn">Ruler</a>
                             <a href="#" id="relClustering" class="btn bubble-btn">Sub Religion</a>
                             <a href="#" id="mRelClustering" class="btn bubble-btn">Main Religion</a>
                         </div>
@@ -300,7 +300,7 @@
                     </div>
                 </div>
                 <div id="hierStatic" style="display: none">
-                    
+
                     <div id="staticFullView" style="display: none">
                         <div id="view_selection_static" class="btn-group">
                             <a href="#" id="rulStatic" class="btn bubble-btn active activeClustering">Ruler</a>
@@ -337,7 +337,7 @@
 </div>
 
 </div>
-        
+
 
 </div>
 <div id="timeline" style="height: 85px; position: absolute; left: 0; right: 0; bottom: 0;"></div>
@@ -345,11 +345,11 @@
 <script src="{{ STATIC_URL }}staticReqs/sequences.js"></script>
 <script src="{{ STATIC_URL }}staticReqs/nv.d3.js"></script>
 <script type="text/javascript">
-    
+
     console.log("*** initializing map");
 
     var b_area = true;
-    
+
     var b_people = false;
     var b_city = false;
     var b_events = false;
@@ -360,7 +360,7 @@
     var b_sub_cities = true;
     var b_sub_castles = true;
     var b_sub_buildings = true;
-    
+
     var b_sub_military = true;
     var b_sub_politician = true;
     var b_sub_scientist = true;
@@ -383,7 +383,7 @@
     var rulStaticLoaded = false;
     var relStaticLoaded = false;
     var mRelStaticLoaded = false;
-    
+
     var mapOptions = {"geometry":{"type":"Point","coordinates":[50,4]},"type":"Feature","properties":{"popupTemplate":"SimplePanel","miniMap":false,"description":"chronas map description","scrollWheelZoom":true,"color":"#1f6377","displayPopupFooter":false,"allowEdit":false,"slideshow":{},"shortUrl":"http://s.hort/m/6/","scaleControl":true,"tilelayer":{},"datalayers":[],"moreControl":true,"licence":"","tilelayersControl":true,"locale":"en","default_iconUrl":"/static/storage/src/img/marker.png","name":"testtName", "author":{"link":"/en/user/aumannd/","name":"aumannd"},"tilelayers":[{"attribution":"Stamen","name":"WaterColor", "bounds":[
         new L.LatLng(71.343013,177.187500),
         new L.LatLng(-56.712097,-179.296875)
@@ -395,13 +395,13 @@
  //   map.setMaxBounds(L.latLngBounds(L.latLng(-90, -240), L.latLng(90, 240)));
     map.options.maxZoom=9
     map.options.minZoom=2
-    
+
     map.on("viewreset", reset);
     console.debug("before")
     svgProv = d3.select(map.getPanes().overlayPane).append("svg");
 
     svgProv.style("z-index","3");
-    
+
     map.on("zoomstart", function () {
         svgProv.attr("visibility", "hidden")
     });
@@ -410,15 +410,15 @@
 
         if($("#seeLocationsButton").hasClass("activeToggle")  &&  $(".leaflet-right").css("display") !== "none"  &&  $("#lightGallery").css("display") !== "none" ){
             $(".tempImageLine").parent().remove()
-            
+
             $('#lightGallery').find("img").trigger('mouseout');
             setTimeout(
-                    function(){ 
-                        $('#lightGallery').find("img").trigger('mouseover'); 
+                    function(){
+                        $('#lightGallery').find("img").trigger('mouseover');
                     },
-                    200);            
+                    200);
         }
-        
+
     });
 
 
@@ -426,7 +426,7 @@
 
         if($("#seeLocationsButton").hasClass("activeToggle")  &&  $(".leaflet-right").css("display") !== "none"  &&  $("#lightGallery").css("display") !== "none"  ){
             $(".tempImageLine").parent().remove();
-            
+
             $('#lightGallery').find("img").trigger('mouseout');
             setTimeout(
                     function(){
@@ -512,18 +512,18 @@
             .prependTo("#hierarchyForms");
     $("#CloseMarker")
             .prependTo("#featureForms");
-    
+
     $('#listPlaceholder').append($(".storage-browse-link").detach());
-    
-    
-    $(".markerBullets").click(function(){ 
+
+
+    $(".markerBullets").click(function(){
         if($(this).hasClass("justActive") )
             $(this).removeClass("justActive")
         else
-            $(this).addClass("justActive") 
+            $(this).addClass("justActive")
     });
-    
-    
+
+
     $("#coloring li a").click(function(){
         console.debug("changed coloring")
         $('#coloring li a').removeClass('activeColoring');
@@ -569,24 +569,24 @@
     });
 
 
-    
-    $(".storage-browse-toggle").click(function(){ 
+
+    $(".storage-browse-toggle").click(function(){
         if($("#featureForms").css("display") == "none"){
             $(".storage-browse-actions").css("display","block");
             $("#featureForms").css("display","block");
-            
+
             $("#hierarchyForms").css("display","none");
             $(".storage-browse-toggle").addClass( "storage-browse-toggle-active" );
             $(".storage-browse-hierarchy").removeClass( "storage-browse-toggle-active" );
           //  $(".leaflet-control-browse.storage-control.leaflet-control").css("border","0px solid rgb(187, 187, 187)")
-            
+
         }
         else{
             $("#featureForms").css("display","none");
             $(".storage-browse-toggle").removeClass( "storage-browse-toggle-active" );
            // $(".leaflet-control-browse.storage-control.leaflet-control").css("border","1px solid rgb(187, 187, 187)")
             $(".storage-browse-actions").css("display","none");
-        }    
+        }
     })
 
     $(".storage-browse-hierarchy").click(function(){
@@ -612,9 +612,9 @@
 /*
 $("input:checkbox").change(function(){
     var group = ":checkbox[name='"+ $(this).attr("name") + "']";
-   
+
     console.debug("group",group,$(this).prop('checked'),$(group).not($(this)))
-    
+
     if($(this).prop('checked')){
         console.debug("now doing it")
         $(group).not($(this)).click();
@@ -671,7 +671,7 @@ $("input:checkbox").change(function(){
             toggle_staticView(view_type);
             return false;
         });
-        
+
         function toggle_staticView(myId){
             switch (myId){
                 case "rulStatic":
@@ -708,7 +708,7 @@ $("input:checkbox").change(function(){
                     break;
             }
         }
-        
+
         function toggle_animView(myId){
             switch (myId){
                 case "rulAnim":
@@ -720,7 +720,7 @@ $("input:checkbox").change(function(){
                     $("#startAniRul").css("display","inline")
                     $("#startAniRel").css("display","none")
                     $("#startAnimRel").css("display","none")
-                    
+
                         /* Is already initialy loaded!
                     if (!rulAnimLoaded){
                         rulAnimLoaded = true;
@@ -758,11 +758,11 @@ $("input:checkbox").change(function(){
                     break;
             }
         }
-               
+
         $(".leaflet-top.leaflet-right").prepend('<div class="leaflet-control" id="lightGallery" style="display:none"></div><div id="loadingGallery" style="display:none; float: right; margin-right: 90px; "> <img src="/static/staticReqs/customIcons/loadingCA.gif" style="opacity: 0.6; /* display: none; */" width="96" height="96" alt="loading gif"></div><div class="storage-control leaflet-control" style=" clear: none; float: none; position: absolute; right: 0px; top: 0px; "><a data-toggle="tooltip" data-placement="left" title="Load images related to the selected year" class="btnOpenGallery" href="#" style=" text-align: center; vertical-align: middle;  line-height: 35px; "><i class="fa fa-eye fa-2x btnOpenGalleryIcon" style="color: rgb(77, 77, 77); align-content: center; line-height: 35px; vertical-align: middle; text-align: center;"></i></a></div>')
 
         $(".leaflet-top.leaflet-right").prepend('<ul id="galleryOptions" ondblclick="event.stopPropagation();" ondrag="event.stopPropagation();" onclick="event.stopPropagation();" style="transition: all 0.5s ease; clear: none; float: none; position: absolute; right: -200px; display: none; top: 14px;" class="leaflet-control nav nav-list tree"><li><button onclick="updateGeoGallery(newYear-parseInt($(\'#deviationYears\').val()), newYear+parseInt($(\'#deviationYears\').val()))"  id="reloadImagesButton" title="Reload Images" type="submit"                                                class="btn btn-default lowerButton"><i id="refreshIcon" class="fa fa-refresh"></i></button></li><li><button onclick="seeAllLocations()"  id="seeLocationsButton" title="See all Locations" type="submit" class="btn btn-default lowerButto"><i id="allLocationsIcon" class="fa fa-location-arrow"></i></button></li><li><div class="squaredOne"><input type="checkbox" checked value="None" id="peopleImgBox" name="check" /><label id="peopleImgBoxA" for="peopleImgBox"></label></div><div class="labelForBox">People</div></li><li>  <div class="squaredOne"><input type="checkbox" checked value="None" id="otherImgBox" name="check" /><label id="otherImgBoxA"  for="otherImgBox"></label></div><div class="labelForBox">Other</div></li><li><div class="input-group" style="width: 100px; margin-left: -71px;"><div class="input-group-addon">Deviation</div><input type="number" min="0" step="1" class="form-control" id="deviationYears" value="10"></div></li><li><div class="input-group" style="width: 100px; margin-left: -43px;"><div class="input-group-addon">Limit</div><input type="number" min="1" step="1" class="form-control" style="width: 60px;" id="limitYears" value="20"></div></li></ul>');
-                
+
                 // <li>  <div class="squaredOne"><input type="checkbox"  value="None" id="itemsImgBox" name="check" /><label for="itemsImgBox"  id="itemsImgBoxA"></label></div><div class="labelForBox">Items</div></li>
         $(".leaflet-top.leaflet-right").css("width","96%")
         $(".leaflet-top.leaflet-right").css("height","230px");
@@ -772,24 +772,25 @@ $("input:checkbox").change(function(){
                 allowGallery=false;
                 $('#lightGallery').css("display","none")
                 $('#loadingGallery').css("display","none")
-                
+
                 $('#galleryOptions').css("right","-200px")
 
-               
-                setTimeout(function(){  $('#galleryOptions').css("display","none") }, 500);
-                
+
+                setTimeout(function(){  $("#loadingGallery").hide();
+                    $('#galleryOptions').css("display","none"); }, 500);
+
                 $(".leaflet-top.leaflet-right").css("overflow","inherit");
                 $(".btnOpenGallery").css("background-color","rgba(255,255,255,0.4)");
                 $(".btnOpenGallery").removeClass( "activeToggle" );
 
                 $(".tempImageLine").parent().remove();
-                
-                
+
+
             }
             else {
 
                 allowGallery=true;
-                
+
                 if ($('#lightGallery').innerHTML !== ""){
                     $('#lightGallery').css("display","block")
                     $('#loadingGallery').css("display","none")
@@ -797,22 +798,22 @@ $("input:checkbox").change(function(){
                 else {
                     $('#loadingGallery').css("display","block")
                 }
-                
+
                 $('#galleryOptions').css("display","block");
                 $('#galleryOptions').css("right","3px")
-                
+
                 $(".leaflet-top.leaflet-right").css("overflow","hidden");
 
                 $(".btnOpenGallery").addClass( "activeToggle" );
            //     $(".btnOpenGallery").css("background-color","rgba(255,255,255,0.8)");
-                
+
                 if($('#lightGallery').html() == ""){
                     updateGeoGallery(newYear-parseInt($("#deviationYears").val()),newYear+parseInt($("#deviationYears").val()),"people");
                 }
 
                 $(".tempImageLine").parent().remove();
                 $('#lightGallery').find("img").trigger('mouseout');
-                
+
                 if($("#seeLocationsButton").hasClass("activeToggle")){
                 setTimeout(
                         function(){
@@ -821,7 +822,7 @@ $("input:checkbox").change(function(){
                 200);
                 }
             }
-            
+
         });
 
 
@@ -1125,7 +1126,7 @@ $("input:checkbox").change(function(){
             }
 
         });
-        
+
         aggTable = $('#aggregatedDatatable').dataTable({
             "bLengthChange": false,
             "bFilter": true,
@@ -1144,15 +1145,15 @@ $("input:checkbox").change(function(){
             "bAutoWidth": false
     });
 
-    
-        
+
+
         $("#fullDatatable_wrapper").css("display","none");
         $("#aggregatedDatatable_wrapper").css("display","none");
-        
+
         $('.dataTables_filter input').attr("placeholder", "Search");
-        
+
         map.addLayer(ClusterSuperGroup);
-        
+
         $('label.tree-toggler').click(function () {
 
             $(this).parent().children('ul.tree').toggle(300);
@@ -1165,7 +1166,7 @@ $("input:checkbox").change(function(){
                 //else
                  //   $("#CloseMarker").css("display","block")
             }, 320);
-            
+
         });
 
         $('#featureTree .tree-toggler').click()
@@ -1206,12 +1207,12 @@ $("input:checkbox").change(function(){
         $( "#relHier" ).on( "click", function() {
             $(".background-active").removeClass( "background-active" );
             $("#relHier").addClass( "background-active" );
-            
+
             $("#hierTables").css("display","block");
             $("#hierBubbs").css("display","none");
             $("#hierStatic").css("display","none");
             $("#hierVis").css("display","none");
-            
+
             $("#fullDatatable_wrapper").css("display","none");
             $("#aggregatedDatatable_wrapper").css("display","table");
             if(!a_hierLoaded){
@@ -1225,7 +1226,7 @@ $("input:checkbox").change(function(){
         $( "#mrelHier" ).on( "click", function() {
             $(".background-active").removeClass( "background-active" );
             $("#mrelHier").addClass( "background-active" );
-            
+
             $("#hierTables").css("display","block");
             $("#hierStatic").css("display","none");
             $("#hierBubbs").css("display","none");
@@ -1243,7 +1244,7 @@ $("input:checkbox").change(function(){
         $( "#culHier" ).on( "click", function() {
             $(".background-active").removeClass( "background-active" );
             $("#culHier").addClass( "background-active" );
-            
+
             $("#hierTables").css("display","block");
             $("#hierStatic").css("display","none");
             $("#hierBubbs").css("display","none");
@@ -1263,7 +1264,7 @@ $("input:checkbox").change(function(){
 
             $(".background-active").removeClass( "background-active" );
             $("#polHier").addClass( "background-active" );
-            
+
             $("#hierTables").css("display","block");
             $("#hierStatic").css("display","none");
             $("#hierBubbs").css("display","none");
@@ -1283,7 +1284,7 @@ $("input:checkbox").change(function(){
 
             $(".background-active").removeClass( "background-active" );
             $("#allProvinces").addClass( "background-active" );
-            
+
             $("#hierTables").css("display","block");
             $("#hierBubbs").css("display","none");
             $("#hierVis").css("display","none");
@@ -1298,13 +1299,13 @@ $("input:checkbox").change(function(){
             fulTable.fnAddData( sortAll );
         });
 
-        
+
 
         $( "#btn_sun-visualize" ).on( "click", function() {
 
             $(".background-active").removeClass( "background-active" );
             $("#btn_sun-visualize").addClass( "background-active" );
-            
+
             $("#hierBubbs").css("display","none");
             $("#hierTables").css("display","none");
             $("#hierVis").css("display","block");
@@ -1317,10 +1318,10 @@ $("input:checkbox").change(function(){
         });
 
         $( "#btn_bub-visualize" ).on( "click", function() {
-            
+
             $(".background-active").removeClass( "background-active" );
             $("#btn_bub-visualize").addClass( "background-active" );
-            
+
             $("#hierTables").css("display","none");
             $("#hierVis").css("display","none");
             $("#hierBubbs").css("display","block");
@@ -1329,9 +1330,9 @@ $("input:checkbox").change(function(){
                 a_hierLoaded=true;
                 reloadHierarchy()
             }
-            
+
             if(!a_bubLoadedOnce){
-                
+
                 a_bubLoadedOnce=true;
                 a_bubLoaded=true;
                 runBubbles()
@@ -1339,7 +1340,7 @@ $("input:checkbox").change(function(){
             }
             else if (!a_bubLoaded){
                 a_bubLoaded=true;
-                reloadData();            
+                reloadData();
             }
             //switchSBData(currSB);
         });
@@ -1348,7 +1349,7 @@ $("input:checkbox").change(function(){
 
             $(".background-active").removeClass( "background-active" );
             $("#btn_static-visualize").addClass( "background-active" );
-            
+
             $("#hierTables").css("display","none");
             $("#hierVis").css("display","none");
             $("#hierBubbs").css("display","none");
@@ -1369,32 +1370,32 @@ $("input:checkbox").change(function(){
         $("#artBox").parent().find("label").css({"background-color": "#899b37"});
         $("#relBox").parent().find("label").css({"background-color": "#899b37"});
         $("#athBox").parent().find("label").css({"background-color": "#899b37"});
-        $("#uncBox").parent().find("label").css({"background-color": "#899b37"});    
-        
+        $("#uncBox").parent().find("label").css({"background-color": "#899b37"});
+
         $("#cityChecked").parent().find(".toggle-on").css({"background-color": "#2e8282", "color": "white", "font-weight": "bolder"});
         $("#citiesBox").parent().find("label").css({"background-color": "#2e8282"});
         $("#castlesBox").parent().find("label").css({"background-color": "#2e8282"});
-        
-        
+
+
         $("#eventsChecked").parent().find(".toggle-on").css({"background-color": "#c9352b", "color": "white", "font-weight": "bolder"});
-        
+
         $("#otherChecked").parent().find(".toggle-on").css({"background-color": "#727272", "color": "white", "font-weight": "bolder"});
         $("#areaInfoBox").parent().find("label").css({"background-color": "#727272"});
         $("#unclassifiedBox").parent().find("label").css({"background-color": "#727272"});
-        
+
         $("#artChecked").parent().find(".toggle-on").css({"background-color": "#764a25", "color": "white", "font-weight": "bolder"});
-        
-        
+
+
         $( "#btn_staticFull" ).on( "click", function() {
 
             $("#hierTables").css("display","none");
             $("#hierVis").css("display","none");
             $("#hierBubbs").css("display","none");
             $("#hierStatic").css("display","block");
-            
+
             $(".background-active").removeClass( "background-active" );
             $("#btn_staticFull").addClass( "background-active" );
-            
+
             $("#staticFullView").css("display","block");
             $("#animFullView").css("display","none");
 
@@ -1405,7 +1406,7 @@ $("input:checkbox").change(function(){
                 rulStaticLoaded = true;
                 runStackedRul();
             }
-            
+
         });
 
         $( "#btn_animFull" ).on( "click", function() {
@@ -1422,20 +1423,20 @@ $("input:checkbox").change(function(){
                 rulAnimLoaded = true;
                 runRulChart();
             }
-            
+
             $(".background-active").removeClass( "background-active" );
             $("#btn_animFull").addClass( "background-active" );
-            
+
             $("#staticFullView").css("display","none");
             $("#animFullView").css("display","block");
-            
+
         });
-        
+
         lockFeatureSelection();
         $(".leaflet-overlay-pane").find(".leaflet-zoom-animated").css("z-index","4")
 
         $(".leaflet-overlay-pane").find(".leaflet-zoom-animated").css("pointer-events","none")
-        
+
         // $(".datetimeControl").parent().css("pointer-events","none")
         myLightGallery = $("#lightGallery").lightGallery();
 
@@ -1444,7 +1445,7 @@ $("input:checkbox").change(function(){
             if($("#seeLocationsButton").hasClass("activeToggle")){
 
                 $(".tempImageLine").parent().remove();
-                
+
                 $('#lightGallery').find("img").trigger('mouseout');
                 setTimeout(
                         function(){
@@ -1467,6 +1468,7 @@ $("input:checkbox").change(function(){
 
 
         $('[data-toggle="tooltip"]').tooltip();
+
     });
 
     function getJsonFromUrl() {
@@ -1505,7 +1507,7 @@ $("input:checkbox").change(function(){
         }
 
     }
-    
+
     function toggleSBData(){
         if(currSB == "rel"){
             currSB='rul';
@@ -1514,7 +1516,7 @@ $("input:checkbox").change(function(){
         else {
             currSB='rel';
             switchSBData("rel");
-        }               
+        }
     }
 
 </script>
