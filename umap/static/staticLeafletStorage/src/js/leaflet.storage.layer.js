@@ -248,7 +248,7 @@ function loadFeatures(that,newYear,type){
             tmpFix="24"+(newYear);
     }
 
-    that.map.get("/en/datalayer/"+tmpFix+"/", {
+    that.map.get("/en/app/datalayer/"+tmpFix+"/", {
         callback: function (geojson, response) {
             var  tmpDataArray = []
             if (geojson._storage) {
@@ -1472,7 +1472,7 @@ L.Storage.DataLayer = L.Class.extend({
                 tmpFix="10"+(newYear);
             
             b_areaLoaded = true;
-            this.map.get("/en/datalayer/"+tmpFix+"/", {
+            this.map.get("/en/app/datalayer/"+tmpFix+"/", {
 
                 callback: function (geojson, response) {
                     
