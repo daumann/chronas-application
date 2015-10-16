@@ -9,7 +9,7 @@ from django.template.defaultfilters import slugify
 # Generic Django project settings
 #==============================================================================
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 SITE_ID = 1
