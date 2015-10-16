@@ -585,7 +585,7 @@ path:hover {
     text-anchor: middle;
     alignment-baseline: central;
     font-family: 'Cinzel', serif;
-    opacity:0.8
+    fill-opacity:0.8
 }
 
 .shadow {
@@ -594,7 +594,7 @@ path:hover {
     font-family: 'Cinzel', serif;
     stroke: #FFFBE5;
     stroke-width: 4px;
-    opacity: 0.4;
+    stroke-opacity: 0.5;
 }
 
 .templateSec {
