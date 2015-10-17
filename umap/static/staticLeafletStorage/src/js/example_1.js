@@ -10,7 +10,7 @@ $(function() {
     var d = new Date();
     d.setFullYear(2020);
     var d2 = new Date();
-    d2.setFullYear(0);
+    d2.setFullYear(-1);
     // Set timeline options
     var timelineOptions = {
         "width":  "100%",
