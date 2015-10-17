@@ -776,8 +776,7 @@ $("input:checkbox").change(function(){
                 $('#galleryOptions').css("right","-200px")
 
 
-                setTimeout(function(){  $("#loadingGallery").hide();
-                    $('#galleryOptions').css("display","none"); }, 500);
+                setTimeout(function(){ $('#galleryOptions').css("display","none"); }, 500);
 
                 $(".leaflet-top.leaflet-right").css("overflow","inherit");
                 $(".btnOpenGallery").css("background-color","rgba(255,255,255,0.4)");
@@ -825,7 +824,7 @@ $("input:checkbox").change(function(){
 
         });
 
-
+        setTimeout(function(){  $("#loadingGallery").hide(); }, 500);
         $("#citiesBox").change(function(){
             console.debug("start go")
             b_sub_cities = document.getElementById("citiesBox").checked;
