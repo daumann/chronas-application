@@ -80,16 +80,6 @@
         var settings = $.extend(true, {}, defaults, options);
         var lightGallery = {
             init: function () {
-
-
-                $(this).on("scrollstop",function(e){
-                    console.debug("!!!! scrolling!",e);
-                });
-
-                $(document).on("scrollstop",function(e){
-                    console.debug("!!!!! scrolling!",e);
-                });
-                
                 
                 el.each(function () {
                     var $this = $(this);
@@ -246,7 +236,6 @@
                     e.stopPropagation();
                     e.preventDefault();
 
-                    console.debug("mouseup",e)
                     xEnd = e.pageX;
                     if (xEnd - xStart > 20) {
                         $this.prevSlide();
@@ -574,7 +563,6 @@
             keyPress: function () {
                 var $this = this;
                 $(window).bind('keyup.lightGallery', function (e) {
-                    console.debug("!! ",e)
                     e.preventDefault();
                     e.stopPropagation();
                     if (e.keyCode === 37) {

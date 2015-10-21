@@ -661,8 +661,6 @@ L.Playback.DateControl = L.Control.extend({
                 lastDate = newDate;
                 
                 self._date.value = (newDate.toString().indexOf("-") === -1) ? newDate : newDate; //newDate.toString().substr(1) + " BC"; // L.Playback.Util.DateStr(1369786384250);
-                console.debug("year changed");
-                
                 //hideAllUnchecked();
                 
 
@@ -755,13 +753,10 @@ L.Playback.SliderControl = L.Control.extend({
     },
 
     initialize : function (playback) {
-        console.debug("hier");
         this.playback = playback;
     },
 
     onAdd : function (map) {
-        
-        console.debug("onAdd",map);
         
         this._container = L.DomUtil.create('div', 'leaflet-control-layers leaflet-control-layers-expanded');
 
@@ -788,20 +783,17 @@ L.Playback.SliderControl = L.Control.extend({
 
 
         function onSliderChange(e) {
-            console.debug("onSliderChange",e);
             var val = Number(e.target.value);
             playback.setCursor(val);
         }
 
         playback.addCallback(function (ms) {
-            console.debug("hier")
             self._slider.value = ms;
         });
         
         
         map.on('playback:add_tracks', function(){
-            console.debug("self._slider.value = playback.getTime();",playback.getTime());
-            
+
             self._slider.min = playback.getStartTime();
             self._slider.max = playback.getEndTime();
             self._slider.value = playback.getTime();
@@ -895,8 +887,6 @@ L.Playback = L.Playback.Clock.extend({
 
         // bad implementation
         addData : function (geoJSON, ms) {
-            console.debug("hier");
-            // return if data not set
             if (!geoJSON){
                 return;
             }
@@ -918,7 +908,6 @@ L.Playback = L.Playback.Clock.extend({
     });
 
 L.Map.addInitHook(function () {
-    console.debug("hier");
     if (this.options.playback) {
         this.playback = new L.Playback(this);
     }

@@ -881,9 +881,6 @@
    * @returns {Object} Returns the new object.
    */
   function baseCreate(prototype, properties) {
-      console.debug("!!properties",properties);
-      console.debug(JSON.stringify(properties));
-      
     return isObject(prototype) ? nativeCreate(prototype) : {};
   }
   // fallback for browsers without `Object.create`

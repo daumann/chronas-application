@@ -6,8 +6,6 @@ iD.ui.PresetList = function(context) {
 
     function presetList(selection) {
         
-        console.debug("presetList", selection);
-        
         var geometry = context.geometry(id),
             presets = context.presets().matchGeometry(geometry);
 
@@ -18,7 +16,6 @@ iD.ui.PresetList = function(context) {
 
         var message = messagewrap.append('h3')
             .text(t('inspector.choose'));
-        console.debug("1");
         if (context.entity(id).isUsed(context.graph())) {
             messagewrap.append('button')
                 .attr('class', 'preset-choose')
@@ -36,8 +33,7 @@ iD.ui.PresetList = function(context) {
         }
 
         function keydown() {
-            console.debug("keydown")
-            
+
             // hack to let delete shortcut work when search is autofocused
             if (search.property('value').length === 0 &&
                 (d3.event.keyCode === d3.keybinding.keyCodes['⌫'] ||
@@ -57,16 +53,13 @@ iD.ui.PresetList = function(context) {
         }
 
         function keypress() {
-            console.debug("keypress")
             // enter
             var value = search.property('value');
             if (d3.event.keyCode === 13 && value.length) {
                 list.selectAll('.preset-list-item:first-child').datum().choose();
             }
         }
-        console.debug("2");
         function inputevent() {
-            console.debug("inputevent");
             var value = search.property('value');
             list.classed('filtered', value.length);
             if (value.length) {
@@ -92,7 +85,6 @@ iD.ui.PresetList = function(context) {
             .on('keydown', keydown)
             .on('keypress', keypress)
             .on('input', inputevent);
-        console.debug("3");
         searchWrap.append('span')
             .attr('class', 'icon search');
 
@@ -103,15 +95,12 @@ iD.ui.PresetList = function(context) {
         var listWrap = selection.append('div')
             .attr('class', 'inspector-body');
 
-        console.debug("4 drawing list now ...",context.presets().defaults(geometry, 36), context.presets(), geometry)
-        
         var list = listWrap.append('div')
             .attr('class', 'preset-list fillL cf')
             .call(drawList, context.presets().defaults(geometry, 36));
     }
 
     function drawList(list, presets) {
-        console.debug("inside drawList, presets", list, presets);
         var collection = presets.collection.map(function(preset) {
             return preset.members ? CategoryItem(preset) : PresetItem(preset);
         });
@@ -165,7 +154,6 @@ iD.ui.PresetList = function(context) {
         }
 
         item.choose = function() {
-            console.debug("choosing item")
             if (shown) {
                 shown = false;
                 box.transition()

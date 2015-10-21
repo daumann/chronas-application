@@ -254,13 +254,10 @@ function loadFeatures(that,newYear,type){
             if (geojson._storage) {
                 that.setOptions(geojson._storage);
             }
-            console.debug("x1")
             that._etag = response.getResponseHeader('ETag');
             if (that.isRemoteLayer()) {
-                console.debug("fetching remote layer");
                 that.fetchRemoteData(tmpDataArray);
             } else {
-                console.debug("fetching local layer");
                 that.fromGeoJSON(geojson,tmpDataArray);
             }
  
@@ -360,8 +357,6 @@ function getExtrema(listOfPoints){
 
 function get_polygon_centroid(pts) {
     
-    console.debug('get_polygon_centroid with pts', JSON.stringify(pts))
-    
     var twicearea=0,
         x=0, y=0,
         nPts = pts.length,
@@ -386,15 +381,10 @@ function getCoordsForPolyLine(myCoords){
         myCoords.push([myCoorrds[i].lat,myCoorrds[i].lng]);
     }    
         */
-    console.debug("getCoordsForPolyLine", myCoords);
-    
-    
+
     var extremas = getExtrema(myCoords);
     var point = get_polygon_centroid(myCoords);
     
-console.debug("extremas, centroid",extremas,point,[[extremas[1][0],extremas[1][1]],point,[extremas[3][0],extremas[3][1]]]);
-
-  
     if ( (Math.abs(extremas[0][0]-extremas[2][0])) > Math.abs((extremas[1][1]-extremas[3][1])) ) {
 
         currLabelSize = Math.sqrt( (  (extremas[0][1]-point[1]) * (extremas[0][1]-point[1])
@@ -403,9 +393,7 @@ console.debug("extremas, centroid",extremas,point,[[extremas[1][0],extremas[1][1
             Math.sqrt( (extremas[2][1]-point[1]) * (extremas[2][1]-point[1])
                 +  (extremas[2][0]-point[0]) * (extremas[2][0]-point[0])  );
         
-        console.debug("currLabelSize changed to: ", currLabelSize);
-        
-        
+
         return [new L.LatLng(extremas[0][1],extremas[0][0]),new L.LatLng(point[1],point[0]),new L.LatLng(extremas[2][1],extremas[2][0])];  //angle != 0
     }
           
@@ -417,8 +405,6 @@ console.debug("extremas, centroid",extremas,point,[[extremas[1][0],extremas[1][1
             Math.sqrt( (extremas[2][1]-point[1]) * (extremas[2][1]-point[1])
                 +  (extremas[2][0]-point[0]) * (extremas[2][0]-point[0])  );
 
-        console.debug("currLabelSize changed to: ", currLabelSize);
-        
         return [new L.LatLng(extremas[1][1],extremas[1][0]),new L.LatLng(point[1],point[0]),new L.LatLng(extremas[3][1],extremas[3][0])];
     }
 }
@@ -444,7 +430,6 @@ L.S.Layer.Default = L.FeatureGroup.extend({
         
         this.datalayer = datalayer;
         this.datalayer.visible = false;
-        console.debug("XXXXXXXXX init datalayer",datalayer)
         L.FeatureGroup.prototype.initialize.call(this);
         if(ultimateMarker === undefined){
             ultimateMarker = new L.Storage.Marker(map, new L.LatLng(42.5,1.4833))
@@ -570,7 +555,6 @@ L.Storage.DataLayer = L.Class.extend({
 
     initialize: function (map, data) {
         
-        console.debug("DataLayer initializing with ", map, JSON.stringify(data))
         this.map = map;
         this._index = Array();
         this._layers = {};
@@ -658,7 +642,6 @@ L.Storage.DataLayer = L.Class.extend({
         this.eachLayer(function (layer) {
             this.layer.addLayer(layer);
         });
-        console.debug("!-! 1")
         if (visible) {
             this.map.addLayer(this.layer);
         }
@@ -919,7 +902,6 @@ L.Storage.DataLayer = L.Class.extend({
                 self.clear();
                 self.rawToGeoJSON(raw, self.options.remoteData.format, function (geojson) {self.fromGeoJSON(geojson,myDataArray);});
 
-                console.debug("fetched remote data ",self, raw)
             }
         });
     },
@@ -1127,15 +1109,9 @@ L.Storage.DataLayer = L.Class.extend({
                 break;
             case 'Polygon':
                 
-                console.debug("inside case Polygon");
-                
-
-                
                 latlngs = L.GeoJSON.coordsToLatLngs(coords, 1);
                 layer = this._polygonToLayer(geojson, latlngs);
-                console.debug("preparing to create Poly with coords: ", coords, "and properties:", geojson.properties);
 
-                
 /*
                 var polyline = new L.Polyline(getCoordsForPolyLine(coords[0]), {
                     color: 'red',
@@ -1171,7 +1147,6 @@ L.Storage.DataLayer = L.Class.extend({
                 L.S.fire('ui:alert', {content: L._('Skipping unkown geometry.type: {type}', {type: geometry.type}), level: 'error'});
         }
         if (layer) {
-            console.debug("!-! 6")
             myDataArray.push(layer)
           //  this.addLayer(layer);
          //   ClusterSuperGroup.addLayer(layer);
@@ -1203,7 +1178,6 @@ L.Storage.DataLayer = L.Class.extend({
         // for (var i = latlngs.length - 1; i > 0; i--) {
         //     if (!latlngs.slice()[i].length) latlngs.splice(i, 1);
         // }
-        console.debug("creating Polygon 2");
         return new L.Storage.Polygon(
             this.map,
             latlngs,
@@ -1464,7 +1438,6 @@ L.Storage.DataLayer = L.Class.extend({
             
             //query then draw
             var tmpFix;
-            console.debug("starting call",newYear)
 
             if (newYear<0)
                 tmpFix="11"+(newYear*-1);
@@ -1476,12 +1449,8 @@ L.Storage.DataLayer = L.Class.extend({
 
                 callback: function (geojson, response) {
                     
-                    console.debug("ending call")
-
                     changeYear(newYear,geojson);
 
-
-                    console.debug("area data load complete", geojson)
                 },
                 context: this
             });
@@ -1500,15 +1469,12 @@ L.Storage.DataLayer = L.Class.extend({
  //       clusterCount = 0;
         ClusterSuperGroup.clearLayers();
 
-        
-        
-        console.debug("!-! 7")
+
         this.fire('show');
     }
     },
 
     hide: function () {
-        console.log("*** hiding (removing) layer")
         this.map.removeLayer(this.layer);
         this.fire('hide');
     },
@@ -1581,17 +1547,14 @@ L.Storage.DataLayer = L.Class.extend({
     },
 
     save: function () {
-        console.debug("inside save");
-       // formData.append('name', formData.append('name',document.getElementById("preset-input-name").value));
-        
+
         if (this.isDeleted) {
             this.saveDelete();
             return;
         }
         if (!this.isLoaded()) {return;}
         this._geojson
-        console.debug("SSSSSSSSAAAAAAAAAAVVVVVVVVVVVIIIIIINNNNNNNGGGGGGGGG",this.featuresToGeoJSON());
-        
+
         var geojson = {
             type: 'FeatureCollection',
             features: this.isRemoteLayer() ? [] : this.featuresToGeoJSON(),
@@ -1599,10 +1562,6 @@ L.Storage.DataLayer = L.Class.extend({
         };
         this.backupOptions();
         var formData = new FormData();
-        console.debug(this.options.name);
-
-
-        console.debug(this.options);
         // console.debug(document.getElementsByName("name")[0].value)
         
         

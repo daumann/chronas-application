@@ -4,31 +4,22 @@ var nextLoop = true;
 var isEditing = false;
 
 function myLoop (that) {
-    console.debug("!!!!! save options to DB! STARTING loop "+ $(document.getElementsByName('datalayer')).find('option:selected').text() +" until "+ untilD);
-    
+
     currentDatalayerSelect.sync();
     
     setTimeout(function () {          
-        console.debug("START SAVING!! (Click)");
         //that.save;
         $("#realSave")[0].click()
         
         setTimeout(function () {
 
-            console.debug("COMPARE",parseInt($(document.getElementsByName("datalayer")).find("option:selected").text() ),
-            "(?) <",
-                parseInt(untilD)
-            );
             if (parseInt($(document.getElementsByName("datalayer")).find("option:selected").text() ) < parseInt(untilD) ) {
-                console.debug("START SAVE");
-                console.debug("!!!!! changing datalayer from "+ $(document.getElementsByName("datalayer")).val());
-                    
+
                 $(document.getElementsByName("datalayer")).val(
                     $(document.getElementsByName("datalayer")).find("option").filter(function() {
                         return $(this).text() == parseInt($(document.getElementsByName("datalayer")).find("option:selected").text()) + 1;             }).val()
                 );
-                console.debug("!!!!! to " + $(document.getElementsByName("datalayer")).val());
-                
+
                 if($(document.getElementsByName("datalayer")).find("option:selected").text() == untilD){
                     insideLoop = false;
                 }
@@ -38,8 +29,6 @@ function myLoop (that) {
             else{
                 insideLoop = false;
                 dontDrawLabels = false;
-                console.debug("!!!!! EXITING loop");
-               
             }
         }, 2000)
        
@@ -374,7 +363,6 @@ L.Storage.Map.include({
     },
 
     initDatalayers: function () {
-        console.debug("*** iniializing all datalayers");
         staticLayerThis = this;
         /*
         var toload = 0, datalayer, seen = 0, self = this;
@@ -418,8 +406,6 @@ L.Storage.Map.include({
     },
 
     backupOptions: function () {
-        console.debug(this.options);
-        console.debug(this.options.tilelayer);
         this._backupOptions = L.extend({}, this.options);
         this._backupOptions.tilelayer = L.extend({}, this.options.tilelayer);
         this._backupOptions.limitBounds = L.extend({}, this.options.limitBounds);
@@ -458,7 +444,6 @@ L.Storage.Map.include({
         try {
             this.fire('baselayerchange', {layer: tilelayer});
             this.addLayer(tilelayer);
-            console.debug("!-! 4")
             if (this.selected_tilelayer) {
                 this.removeLayer(this.selected_tilelayer);
             }
@@ -950,12 +935,8 @@ L.Storage.Map.include({
         
         for (var i = editableOptions.length - 1; i >= 0; i--) {
             if (typeof this.options[editableOptions[i]] !== 'undefined') {
-                console.debug(i,editableOptions[i]," is ",this.options[editableOptions[i]])
-                
+
                 properties[editableOptions[i]] = this.options[editableOptions[i]];
-            }
-            else{
-                console.debug ("isundefined = "+editableOptions[i])
             }
           
         }
@@ -982,9 +963,6 @@ L.Storage.Map.include({
         formData.append('center', JSON.stringify(this.geometry()));
         formData.append('settings', JSON.stringify(geojson));
 
-            //console.debug("!j!:",j);
-        console.debug("JSON.stringify(geojson)2",JSON.stringify(geojson));
-        console.debug("formData1",formData);
 
                 
 
@@ -992,10 +970,6 @@ L.Storage.Map.include({
             this.post(this.getSaveUrl(), {
             data: formData,
             callback: function (data) {
-                
-                console.debug("saving data: ");
-                console.debug(data);
-                console.debug(this);
                 
                 var duration = 3000;
                 if (!this.options.storage_id) {
@@ -1064,11 +1038,9 @@ L.Storage.Map.include({
     },
 
     defaultDataLayer: function () {
-        console.debug("inside defaultDataLayer ")
         var datalayer, fallback;
         for (var i in this.datalayers) {
             if (this.datalayers.hasOwnProperty(i)) {
-                console.debug("option ",this.datalayers[i])
                 datalayer = this.datalayers[i];
                 if (!datalayer.isRemoteLayer() && datalayer.isBrowsable()) {
                     if (datalayer.isVisible()) {
@@ -1081,7 +1053,6 @@ L.Storage.Map.include({
         }
         if (fallback) {
             // No datalayer visible, let's force one
-            console.debug("No datalayer visible, let's force one ")
             this.addLayer(fallback.layer);
             return fallback;
         }
@@ -1089,7 +1060,6 @@ L.Storage.Map.include({
     },
 
     getDataLayerByStorageId: function (storage_id) {
-        console.debug("getDataLayerByStorageId");
         var datalayer;
         for (var i in this.datalayers) {
             if (this.datalayers.hasOwnProperty(i)) {
@@ -1343,19 +1313,13 @@ L.Storage.Map.include({
         saveDummy.innerHTML = L._('Save');
         saveDummy.onclick = function(){
 
-            console.debug("save button clicked");
-
             untilD = $('#dateEnd').val();
-
-            console.debug('from - ', $(document.getElementsByName("datalayer")).val())
 
             $(document.getElementsByName("datalayer")).val(
                 $(document.getElementsByName("datalayer")).find("option").filter(function() {
                     return $(this).text() == $('#dateStart').val();             }).val()
             );
             
-            console.debug('to -> ', $(document.getElementsByName("datalayer")).val())
-
             setTimeout(function () {
                 insideLoop = true;
                 myLoop(this);
@@ -1530,7 +1494,6 @@ L.Storage.Map.include({
         options = options || {};
         options.listener = this;
         L.S.Xhr.post(url, options);
-        console.debug(options);
     },
 
     get: function (url, options) {

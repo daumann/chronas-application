@@ -8,7 +8,6 @@ iD.ui.Inspector = function(context) {
         newFeature = false;
 
     function inspector(selection) {
-        console.debug("inspector with selection",selection);
         presetList
             .entityID(entityID)
             .autofocus(newFeature)
@@ -59,7 +58,6 @@ iD.ui.Inspector = function(context) {
                 .entityID(entityID));
 
         function showList(preset) {
-            console.debug("showing List");
             wrap2 = $wrap;
             $wrap.transition()
                 .styleTween('right', function() { return d3.interpolate('0%', '-100%'); });
@@ -70,7 +68,6 @@ iD.ui.Inspector = function(context) {
         }
 
         function setPreset(preset) {
-            console.debug("setting Preeset", $wrap);
             wrap2 = $wrap;
             $wrap.transition()
                 .styleTween('right', function() { return d3.interpolate('-100%', '0%'); });

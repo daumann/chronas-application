@@ -655,7 +655,6 @@ L.Draw.Polygon = L.Draw.Polyline.extend({
 	},
 
 	initialize: function (map, options) {
-        console.debug("1. init polygon");
 		L.Draw.Polyline.prototype.initialize.call(this, map, options);
 
 		// Save the type so super can fire, need to do this as cannot do this.TYPE :(
@@ -1866,7 +1865,6 @@ L.Control.Draw = L.Control.extend({
 	},
 
 	initialize: function (options) {
-        console.debug("2. init polygon");
 		if (L.version < '0.7') {
 			throw new Error('Leaflet.draw 0.2.3+ requires Leaflet 0.7.0+. Download latest from https://github.com/Leaflet/Leaflet/');
 		}
@@ -2465,7 +2463,6 @@ L.EditToolbar = L.Toolbar.extend({
 
 	_save: function () {
         
-        console.debug("_save: function () {");
 		this._activeMode.handler.save();
 		this._activeMode.handler.disable();
 	},

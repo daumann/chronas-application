@@ -85,7 +85,6 @@ function switchSBData(mySBdata){
 
 // Main function to draw and set up the visualization, once we have the data.
 function createVisualization(json) {
-console.debug("creating visSB with json:",json)
   // Basic setup of page elements.
   initializeBreadcrumbTrail();
   drawLegend();

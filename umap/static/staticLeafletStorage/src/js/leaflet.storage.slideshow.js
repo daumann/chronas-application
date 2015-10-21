@@ -63,11 +63,9 @@ L.S.Slideshow = L.Class.extend({
     },
 
     defaultDatalayer: function () {
-        console.debug("defaultDatalayer");
         var datalayer;
         for (var i in this.map.datalayers) {
             if (this.map.datalayers.hasOwnProperty(i)) {
-                console.debug("this.map.datalayers[i]",this.map.datalayers[i]);
                 datalayer = this.map.datalayers[i];
                 if (datalayer.isVisible() && datalayer.isBrowsable()) {
                     return datalayer;

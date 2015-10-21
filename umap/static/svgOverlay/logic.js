@@ -46,8 +46,7 @@ function getRelevantKing(monarchObj){
     keys =  prekeys.sort(sortNumber);
     
     var selectedPart;
-    console.debug("keys",keys);
-    
+
     for (var j=0; j<keys.length; j++){
         if (newYear > keys[j])
             selectedPart = monarchObj[keys[j]]
@@ -72,7 +71,6 @@ function detailsToAll(e) {
             $('#chronasWiki').load(function(){
                 $('#loader1').hide();
                 $('#chronasWiki').show();
-                console.debug("~");
             });
             
             break;
@@ -218,7 +216,7 @@ function detailsToRul(e) {
             $('#chronasWiki').hide();
             $('#loader1').show();
             $('#chronasWiki').load(function(){
-                $('#loader1').hide();$('#chronasWiki').show();console.debug("~");
+                $('#loader1').hide();$('#chronasWiki').show();
             });
             break;
         }
@@ -236,7 +234,7 @@ function detailsToCul(e) {
             $('#chronasWiki').hide();
             $('#loader1').show();
             $('#chronasWiki').load(function(){
-                $('#loader1').hide();$('#chronasWiki').show();console.debug("~");
+                $('#loader1').hide();$('#chronasWiki').show();
             });
             break;
         }
@@ -255,7 +253,7 @@ function detailsToRel(e) {
             $('#chronasWiki').hide();
             $('#loader1').show();
             $('#chronasWiki').load(function(){
-                $('#loader1').hide();$('#chronasWiki').show();console.debug("~");
+                $('#loader1').hide();$('#chronasWiki').show();
             });
             break;
         }
@@ -273,7 +271,7 @@ function detailsTomRel(e) {
                 $('#chronasWiki').hide();
                 $('#loader1').show();
                 $('#chronasWiki').load(function(){
-                    $('#loader1').hide();$('#chronasWiki').show();console.debug("~");
+                    $('#loader1').hide();$('#chronasWiki').show();
                 });
                 break;
             }
@@ -461,7 +459,6 @@ var transform2;
 
 function CustomTooltip(tooltipId, width){
     
-    console.debug("inside custom tooltip with", tooltipId, width)
     var tooltipId = tooltipId;
     
     if(tooltipId == "gates_tooltip")
@@ -477,8 +474,6 @@ function CustomTooltip(tooltipId, width){
     hideTooltip();
 
     function showTooltip(content, event){
-        console.debug("show content", content, event)
-        
         $("#"+tooltipId).html(content);
         $("#"+tooltipId).show();
 
@@ -539,7 +534,6 @@ function addCommas(nStr)
 function changeYear(newYear,myActiveYear) {
     a_hierLoaded=false;
     a_bubLoaded=false;
-    console.debug("*** changing area year", newYear,activeYear)
     $("#yearSB").html(newYear)
     activeYear = jQuery.extend({}, myActiveYear);
     myLightGallery.destroy();
@@ -613,11 +607,8 @@ function changeYear(newYear,myActiveYear) {
 
     addAreaFeat(activeAreaFeat);
 
-    console.debug("finished loading")
-
 }
 function getExtrema(listOfPoints) {
-    console.debug("getting list of points", listOfPoints)
     var minX = [listOfPoints[0][0], listOfPoints[0][1]];
     var minY = [listOfPoints[0][0], listOfPoints[0][1]];
     var maxX = [listOfPoints[0][0], listOfPoints[0][1]];
@@ -1023,8 +1014,6 @@ function fillCollectionId(myId, addTo, postfix) {
         }
     }
 
-    console.debug("finished myColl", myColl)
-
     activeFeature0 = addTo.selectAll("path")
         .data(myColl.features)
         .enter();
@@ -1171,7 +1160,6 @@ function setupCollections(myActiveTextFeat) {
 
 
     if (!provinceLoaded) {
-        console.debug("setting up provinces (only once)");
         provinceLoaded = true;
 
         provinceTextLine = {
@@ -1261,8 +1249,6 @@ function setupCollections(myActiveTextFeat) {
                 if (!d3.event.defaultPrevented){
               //  if (d3.event.defaultPrevented) return; // click suppressed
 
-                console.debug(d)
-
                 var rulerWiki = "";
                 
                 var i = 0;
@@ -1291,7 +1277,7 @@ function setupCollections(myActiveTextFeat) {
                                             $('#chronasWiki').hide();
                                             $('#loader1').show();
 
-                                            $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){   $('#loader1').hide();$('#chronasWiki').show();console.debug("~"); $('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show();  $('#loader1').hide();alert('loaded!'); }
+                                            $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){   $('#loader1').hide();$('#chronasWiki').show(); $('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show();  $('#loader1').hide();alert('loaded!'); }
                                             });
                                         }
                                         
@@ -1307,7 +1293,6 @@ function setupCollections(myActiveTextFeat) {
                     
                     i++;
                 }
-                console.debug(rulerWiki);
 
                 ultimateMarker.properties.name = "ulti"
 
@@ -1349,14 +1334,13 @@ function setupCollections(myActiveTextFeat) {
                 if (ultimateMarker.properties.wikiUrl !== ""){
 
                                         ultimateMarker.properties.wikiUrl = ultimateMarker.properties.wikiUrl.replace(/ /g,"_")
-                console.debug(getAreaChecked(),"->",ultimateMarker.properties.wikiUrl)
-                
+
                 ultimateMarker.attachPopup()
 
                     $('#chronasWiki').hide();
                     $('#loader1').show();
                     $('#chronasWiki').load(function(){
-                        $('#loader1').hide();$('#chronasWiki').show();console.debug("~");
+                        $('#loader1').hide();$('#chronasWiki').show();
                     });
 
                     $(".overviewContainer").css("display","block")
@@ -1412,7 +1396,7 @@ function setupCollections(myActiveTextFeat) {
                     $("#chronasWiki")[0].src = tmpURL;
                     $('#loader1').show();
                     $('#chronasWiki').hide();
-                    $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){   $('#loader1').hide(); $('#chronasWiki').show();console.debug("~"); alert('loaded!'); $('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show();  $('#loader1').hide();alert('loaded!'); }
+                    $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){   $('#loader1').hide(); $('#chronasWiki').show();$('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show();  $('#loader1').hide();alert('loaded!'); }
                     });
                 }
                 
@@ -1432,7 +1416,7 @@ function setupCollections(myActiveTextFeat) {
                     $("#chronasWiki")[0].src = tmpURL;
                     $('#loader1').show();
                     $('#chronasWiki').hide();
-                    $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){ $('#loader1').hide();$('#chronasWiki').show();console.debug("~"); $('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show(); $('#loader1').hide(); alert('loaded!'); }
+                    $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){ $('#loader1').hide();$('#chronasWiki').show();$('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show(); $('#loader1').hide(); alert('loaded!'); }
                     });
                 }
                 
@@ -1452,7 +1436,7 @@ function setupCollections(myActiveTextFeat) {
                     $("#chronasWiki")[0].src = tmpURL;
                     $('#loader1').show();
                     $('#chronasWiki').hide();
-                    $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){ $('#loader1').hide();$('#chronasWiki').show(); console.debug("~"); $('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show();  $('#loader1').hide();alert('loaded!'); }
+                    $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){ $('#loader1').hide();$('#chronasWiki').show(); $('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show();  $('#loader1').hide();alert('loaded!'); }
                     });
                 }
                 
@@ -1472,7 +1456,7 @@ function setupCollections(myActiveTextFeat) {
                     $("#chronasWiki")[0].src = tmpURL;
                     $('#loader1').show();
                     $('#chronasWiki').hide();
-                    $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){ $('#loader1').hide(); $('#chronasWiki').show();console.debug("~"); $('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show();  $('#loader1').hide(); alert('loaded!'); }
+                    $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){ $('#loader1').hide(); $('#chronasWiki').show(); $('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show();  $('#loader1').hide(); alert('loaded!'); }
                     });
                 }
                 //       $("#regionSpec")[0].value = d.properties.name;
@@ -1483,7 +1467,7 @@ function setupCollections(myActiveTextFeat) {
                     callback: function (geojson, response) { console.debug(geojson) } });
     */            
                 var js = "';alert('loaded!2'); $('#notFoundNotice').hide(); $('#chronasWiki').hide(); $('#overview')[0].style.display = 'none'; $('#loader1')[0].style.display = 'block';  $('#specific')[0].style.display = 'block';  var tmpURL='http://en.wikipedia.org/wiki/"
-                var jsRight = "'; alert('loaded!'); $('.GoToWikipedia')[0].href=tmpURL;  if($('#storage-ui-container')[0].style.width != '100%'){tmpURL=tmpURL+'?printable=yes'} ; $('iframe')[0].src=tmpURL; $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){  $('#loader1').hide();$('#chronasWiki').show(); console.debug('~'); $('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show();  $('#loader1').hide();alert('loaded!'); }    }); $('.overview')[0].innerHTML = 'Overview';     ";
+                var jsRight = "'; alert('loaded!'); $('.GoToWikipedia')[0].href=tmpURL;  if($('#storage-ui-container')[0].style.width != '100%'){tmpURL=tmpURL+'?printable=yes'} ; $('iframe')[0].src=tmpURL; $('#chronasWiki').load(function(){ if(tmpURL != 'http://en.wikipedia.org/wiki/' && tmpURL != 'http://en.wikipedia.org/wiki/?printable=yes'){  $('#loader1').hide();$('#chronasWiki').show(); $('#notFoundNotice').hide() } else { $('#missingEntry')[0].innerHTML = tmpTitle;  $('#chronasWiki').hide(); $('#notFoundNotice').show();  $('#loader1').hide();alert('loaded!'); }    }); $('.overview')[0].innerHTML = 'Overview';     ";
                 
                 $("#cultureSpec").click(new Function("tmpTitle = 'culture: "+$("#cultureSpec")[0].innerHTML+js+tmpculture+jsRight))
                 $("#religionSpec").click(new Function("tmpTitle = 'religion: "+$("#religionSpec")[0].innerHTML+js+tmpreligion+jsRight))
@@ -1492,12 +1476,9 @@ function setupCollections(myActiveTextFeat) {
                 $("#capitalSpec").click(new Function("tmpTitle = 'capital: "+$("#capitalSpec")[0].innerHTML+js+tmpcapital+jsRight))
                 $("#regionSpec").click(new Function("tmpTitle = 'region: "+$("#regionSpec")[0].innerHTML+js+tmpregion+jsRight))
 
-console.debug("!!!x")
-
-                if($("iframe")[0].src != 'http://en.wikipedia.org/wiki/' && $("iframe")[0].src != 'http://en.wikipedia.org/wiki/?printable=yes'){   $('#notFoundNotice').hide(); /*$('#loader1').hide(); $('#chronasWiki').show();*/  } 
+                if($("iframe")[0].src != 'http://en.wikipedia.org/wiki/' && $("iframe")[0].src != 'http://en.wikipedia.org/wiki/?printable=yes'){   $('#notFoundNotice').hide(); /*$('#loader1').hide(); $('#chronasWiki').show();*/  }
                 else { 
                     
-                    console.debug("inside not show with tmpTitle",tmpTitle)
                     $('#chronasWiki').hide();
                     $('#missingEntry')[0].innerHTML = tmpTitle;
                     $('#notFoundNotice').show()
@@ -1555,7 +1536,6 @@ function hideAndAdd(idNotTo,selectedFeat){
                 }
             }
         }
-        console.debug("activeCount is ",activeCount)
         if(!deselect || activeCount == 0){
             addTextFeat(selectedFeat);
         }
@@ -1603,10 +1583,7 @@ function addAreaFeat(setActiveFeat) {
     }
     else {
         $("#provinceAreas").css("visibility", "visible")
-        console.debug("setting active Area to " + setActiveFeat)
-        
-    
-    
+
         switch (activeAreaFeat) {
             case "country":
     
@@ -1687,20 +1664,12 @@ function addAreaFeat(setActiveFeat) {
 
 function addTextFeat(setActiveFeat) {
 
-
-    console.debug("setting active text to " + setActiveFeat)
-
     activeTextFeat = setActiveFeat; //"country";
-
 
     if ((activeTextFeat == "country" && !countryIsSetup) ||
         (activeTextFeat == "culture" && !culIsSetup) ||
         (activeTextFeat == "religion" && !relIsSetup) ||
         (activeTextFeat == "religionGeneral" && !relGenIsSetup)) {
-        console.debug("setting up Rest");
-
-        console.debug(activeTextFeat, "---", countryIsSetup, culIsSetup, relIsSetup, relGenIsSetup);
-
 
         countriesArea = {"type": "FeatureCollection",
             "features": []
@@ -1927,8 +1896,6 @@ function reset() {
         if (activeTextFeat != "none") {
             gProvinceLabels.attr("visibility", "visible")
         }
-
-        console.debug("FERTIG");
 
     }
 
@@ -2401,7 +2368,7 @@ function closeAndOpenWikipediaTab(myWikiUrl,myCoords){
     $('#chronasWiki').hide();
     $('#loader1').show();
     $('#chronasWiki').load(function(){
-        $('#loader1').hide();$('#chronasWiki').show();console.debug("~");
+        $('#loader1').hide();$('#chronasWiki').show();
     });
     
     panImage(myCoords)
@@ -2417,7 +2384,7 @@ function openWikipediaTab(myWikiUrl,myCoords){
     $('#loader1').show();
     $('#chronasWiki').load(function(){
         $('#loader1').hide();
-        $('#chronasWiki').show();console.debug("~");
+        $('#chronasWiki').show();
     });
 
     $(".overviewContainer").css("display","none")
@@ -2685,7 +2652,6 @@ function runRulChart(){
                 .style("fill-opacity", "1")
                 .style("stroke","black");
             
-            console.debug("inputing ",Math.round(d.area),Math.round(d.pops));
              var content = "<h4 class=\"name\">"+ d.name+"</h4>";
              content += "<span class=\"name\">Area:</span><span class=\"value\"> " +  (addCommas(Math.round(d.area))) + "</span><br/>";
              content += "<span class=\"name\">Population:</span><span class=\"value\"> " + (addCommas(Math.round(d.pops))) + "</span>";
@@ -3231,7 +3197,6 @@ function runmRelChart(){
                 .style("fill-opacity", "1")
                 .style("stroke","black");
 
-            console.debug("inputing ",Math.round(d.area),Math.round(d.pops));
             var content = "<h4 class=\"name\">"+ d.name+"</h4>";
             content += "<span class=\"name\">Area:</span><span class=\"value\"> " +  (addCommas(Math.round(d.area))) + "</span><br/>";
             content += "<span class=\"name\">Population:</span><span class=\"value\"> " + (addCommas(Math.round(d.pops))) + "</span>";
@@ -3581,9 +3546,6 @@ function runBubbles() {
 
             }
 
-            console.debug("this.data.length",data.length)
-
-            //  console.debug("bc  with data",data)
             this.hide_details = __bind(this.hide_details, this);
             this.show_details = __bind(this.show_details, this);
             this.hide_years = __bind(this.hide_years, this);
@@ -3972,7 +3934,6 @@ function runBubbles() {
         //    console.debug("recreating max with this.data",sortAll[0][7])
             //United States of America
 
-            console.debug("chart.nodes.length",chart.nodes.length, "vs sortAll",sortAll.length )
             var sortLength = sortAll.length-1;
             for(var i=0; i<chart.nodes.length; i++){
     //            console.debug("updating ", chart.nodes[i].provB, sortAll[i][0])

@@ -2159,7 +2159,6 @@ var newObject;
 
             for (var i = 0, len = layers.length; i < len; i++) {
                 this.addLayer(layers[i]);
-                console.debug("!-! 11")
             }
         },
 
@@ -2599,7 +2598,6 @@ var newObject;
         },
 
         addTo: function (map) {
-            console.debug("!-! 12")
             map.addLayer(this);
             return this;
         },
@@ -3347,7 +3345,6 @@ var newObject;
         },
 
         _initImage: function () {
-            console.debug("!! initImage")
             this._image = L.DomUtil.create('img', 'leaflet-image-layer');
 
             if (this._map.options.zoomAnimation && L.Browser.any3d) {
@@ -3669,11 +3666,8 @@ var newObject;
         },
 
         _initIcon: function () {
-            console.debug("!! initIcon")
-
             if(this._childCount === undefined){
                 var tmpURL = this._getIconUrl('icon')
-                console.debug("!! looking up icon",tmpURL)
                 var tmpOptions = {
                     iconUrl: '/static/staticReqs/customIcons/otherMarkerArea.png',
                     // shadowUrl: 'leaf-shadow.png',
@@ -3769,9 +3763,7 @@ var newObject;
                 this.options.icon = L.icon(tmpOptions);
 
             }
-            //console.debug("!! initIcon",this._getIconUrl('icon'))
-            
-            
+
             var options = this.options,
                 map = this._map,
                 animation = (map.options.zoomAnimation && map.options.markerZoomAnimation),
@@ -3834,7 +3826,6 @@ var newObject;
             var panes = this._map._panes;
 
             if (addIcon) {
-                console.debug(addIcon,this._icon)
                 panes.markerPane.appendChild(this._icon);
             }
 
@@ -4754,9 +4745,6 @@ var newObject;
         },
 
         onRemove: function (map) {
-            if(!this._container){
-                console.debug("ERROR: this._container not found. this: ",this);
-            }
             if(this._container && this._container.parentNode === $("#areaPolys")[0]){
                 $("#areaPolys")[0].removeChild(this._container);
             }
@@ -4799,8 +4787,6 @@ var newObject;
             if (this._map) {
                 this.projectLatlngs();
                 this._updatePath();
-
-                console.debug("!!!!   redraw   this._updatePath()");
             }
             return this;
         }
@@ -4827,18 +4813,12 @@ var newObject;
 
     L.Browser.svg = !!(document.createElementNS && document.createElementNS(L.Path.SVG_NS, 'svg').createSVGRect);
 
-    console.debug("creating svg", L.Browser.svg);
-
-    // staticSVG =  L.Browser.svg;
-    //   L.Browser.svg.appendChild(svgFilter);
-
     L.Path = L.Path.extend({
         statics: {
             SVG: L.Browser.svg
         },
 
         setYearEvent: function () {
-            console.debug("testing;")
         },
 
         bringToFront: function () {
@@ -4867,7 +4847,6 @@ var newObject;
         },
 
         _createElement: function (name) {
-            console.debug("inside create Element");
             return document.createElementNS(L.Path.SVG_NS, name);
         },
 
@@ -4901,7 +4880,6 @@ var newObject;
             
             //	this._container = this._createElement('g'); //setAttribute("id",iterator);  //$("#areaPolys")[0];
             //  this._container.setAttribute('filter', 'url(#blur)');
-            //    console.debug("g created ",this, $("#areaPolys")[0])
             //     this._container.setAttribute('filter', iterator);     TODO   ---> typeof $("#areaPolys")[0] === "undefined"
             //iterator++;
             /*
@@ -4910,7 +4888,6 @@ var newObject;
              this._container.setAttribute('filter', 'url(#blur)');
 
 
-             console.debug("g aftercreated ",this._container, $("#areaPolys")[0])
              //   this._container.setAttribute("id",iterator);
              */
             /*
@@ -4986,7 +4963,6 @@ var newObject;
         //L.Draggable._disabled = false;                  
 
         _updatePath: function () {
-            console.debug("!!!!   updating path");
             var str = this.getPathString();
             if (!str) {
                 // fix webkit empty string parsing bug
@@ -4998,17 +4974,13 @@ var newObject;
         // TODO remove duplication with L.Map
         _initEvents: function () {
 
-            console.debug("insideLoop:"+insideLoop);
             if(this._path.id == "" && !$("body").hasClass("storage-edit-enabled")){//!insideLoop !dontDrawLabels
-                console.debug("is this the place where I call reset?")
-                // drawLabels(this);
             }
             else{
                 console.debug("not drawing labels because edit is enabled.")
             }
 
 
-            console.debug("creating svgg", this, L.Browser.svg);
             if (this.options.clickable) {
 
                 if(isCurved){
@@ -5027,7 +4999,6 @@ var newObject;
                         L.DomUtil.addClass($(".datetimeValue")[0], 'leaflet-clickable');
                         newObject = jQuery.extend({}, this);
                         newObject.properties.name = $(".datetimeValue")[0].value;
-                        console.debug("props:",newObject.properties);
                         isNewDate = false;
                         if(true) { //$(".datetimeValue")[0].innerHTML.substring(0,1) != "-"){
                             newObject.properties.description = "chronasYear"+$(".datetimeValue")[0].value;
@@ -5041,8 +5012,6 @@ var newObject;
 
 
                 }
-
-                console.debug("init event",this._path, this._container,this); //$("#areaPolys")[0]
 
                 L.DomEvent.on(this._container, 'click', this._onMouseClick, this);
 
@@ -5069,8 +5038,6 @@ var newObject;
                 layerPoint = map.containerPointToLayerPoint(containerPoint),
                 latlng = map.layerPointToLatLng(layerPoint);
 
-            // console.debug("_fireMouseEvent",containerPoint,layerPoint,latlng)
-
             this.fire(e.type, {
                 latlng: latlng,
                 layerPoint: layerPoint,
@@ -5093,16 +5060,12 @@ var newObject;
             if (!this._pathRoot) {
                 this._pathRoot = L.Path.prototype._createElement('svg');
 
-                console.debug("init svg", this._pathRoot);
                 /** DEPRECATED
                  //       this._pathRoot.appendChild(svgFilter);
 
                  //        var useElement = document.createElementNS("http://www.w3.org/2000/svg","use");
                  //        useElement.setAttributeNS("http://www.w3.org/1999/xlink", 'href', '#labels');
                  //        this._pathRoot.appendChild(useElement);
-
-                 console.debug("svg this",this._pathRoot)
-
 
                  d3.select(this._pathRoot).append("g").attr("id", "areaPolys") //.attr('filter', 'url(#blur)')
 
@@ -5121,7 +5084,6 @@ var newObject;
                         'zoomend': this._endPathZoom
                     });
                 } else {
-                    console.debug("!! initElse")
                     L.DomUtil.addClass(this._pathRoot, 'leaflet-zoom-hide');
                 }
 
@@ -5175,7 +5137,6 @@ var newObject;
                 pane.removeChild(root);
             }
 
-            //   console.debug("setting attribute of what?", root);
             L.DomUtil.setPosition(root, min);
             root.setAttribute('width', width);
             root.setAttribute('height', height);
@@ -5431,7 +5392,6 @@ var newObject;
         },
 
         onRemove: function (map) {
-            console.debug("onRemove!")
             map
                 .off('viewreset', this.projectLatlngs, this)
                 .off('moveend', this._updatePath, this);
@@ -5907,12 +5867,10 @@ var newObject;
                 }
                 if (this.options.curved && this.options.curved == true && len2==3)
                 {
-                    //    console.debug("inside curved with points: ", points)
                     if (j==0)
                         str = 'M' + points[j].x + ' ' + points[j].y + 'Q'+ points[j+1].x + ' ' + points[j+1].y + ' ' + points[j+2].x + ' ' + points[j+2].y;
                 }
                 else{
-                    //     console.debug("inside not curved with points: ", points)
                     str += (j ? 'L' : 'M') + p.x + ' ' + p.y;
                 }
 
@@ -6048,7 +6006,6 @@ var newObject;
         },
 
         initialize: function (latlngs, options) {
-            console.debug("init polygon")
             L.Polyline.prototype.initialize.call(this, latlngs, options);
             this._initWithHoles(latlngs);
         },
@@ -6129,7 +6086,6 @@ var newObject;
     });
 
     L.polygon = function (latlngs, options) {
-        console.debug("3. init polygon");
         return new L.Polygon(latlngs, options);
     };
 
@@ -6823,8 +6779,6 @@ var newObject;
         },
 
         removeListener: function (obj, type, fn) {  // (HTMLElement, String, Function)
-
-            console.debug("removeListener");
 
             if(document.getElementById("storage-ui-container").innerHTML == ""){
                 $(".leaflet-top.leaflet-right")[0].style.display = "block";
@@ -8522,7 +8476,6 @@ var newObject;
         },
 
         onRemove: function (map) {
-            console.debug("onRemove");
             map
                 .off('layeradd', this._onLayerAdd)
                 .off('layerremove', this._onLayerRemove);
@@ -8583,16 +8536,13 @@ var newObject;
         },
 
         _onLayerAdd: function (e) {
-            //   console.debug("onLayerAdd");
             if (e.layer.getAttribution) {
                 this.addAttribution(e.layer.getAttribution());
             }
         },
 
         _onLayerRemove: function (e) {
-            //    console.debug("_onLayerRemove", e.layer.getAttribution);
             if (e.layer.getAttribution) {
-                //        console.debug("_onLayerRemove", e.layer.getAttribution());
                 this.removeAttribution(e.layer.getAttribution());
             }
 
@@ -8786,7 +8736,6 @@ var newObject;
         },
 
         removeLayer: function (layer) {
-            console.debug("removeLayer");
             var id = L.stamp(layer);
             delete this._layers[id];
             this._update();
@@ -9356,7 +9305,6 @@ var newObject;
             if (L.Draggable) {
 
                 L.Draggable._disabled = false;
-                console.debug("Zoom finish to level " + map.getZoom());
 
                 /*
 
@@ -9376,12 +9324,7 @@ var newObject;
                  labelArray[k].setAttribute("font-size", tmpFontSize );
                  /*
 
-                 console.debug(labelArray[k].getComputedTextLength()," ?>? ",
-
                  document.getElementById(labelArray[k].getAttribute("href").substr(1)).getTotalLength());
-
-                 console.debug("font " + labelArray[k].getAttribute("font-size"));
-
 
                  }
 

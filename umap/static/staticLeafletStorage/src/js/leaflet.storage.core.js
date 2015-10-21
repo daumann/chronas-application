@@ -44,8 +44,6 @@ L.Util.escapeHTML = function (s) {
     return s.replace(/</gm, '&lt;');
 };
 L.Util.toHTML = function (r) {
-    console.debug("include here?", r);
-    
     var ii;
 
     r.replace(/\r\n\r\n/g, '');
@@ -100,7 +98,6 @@ L.Util.toHTML = function (r) {
         r = r.replace(/(http?:[^ \)\n]*)/g, '<img id="loader1" src="/static/staticReqs/customIcons/loadingCA.gif" width="96" height="96" alt="loading gif" style="opacity: 0.6"/>  <iframe id="chronasWiki" class="wikiYear" src="$1" height="100%" frameborder="0" >        &lt;p&gt;Your browser does not support iframes.&lt;/p&gt;    </iframe>');
     }
     else{
-        console.debug("include here?", r);
     // chronas iframes
     r = r.replace(/(http?:[^ \n]*)/g, '<div id="overview" style="display: none; text-align: center;"> <h1> Overview</h1><br>-> <h2 id="regionSpec" style="font-style: italic; cursor: pointer; "></h2> <br></br> with the culture -> <span style="font-style: italic; cursor: pointer;" id="cultureSpec"></span><br> and the religion -> <span style="font-style: italic; cursor: pointer;" id="religionSpec"></span> ( -> <span style="font-style: italic; cursor: pointer;" id="mainRelSpec"></span> ) <br> has a total population of <span style="font-style: italic; cursor: pointer;" id="populationSpec"></span> <br> with the capital -> <span style="font-style: italic; cursor: pointer;" id="capitalSpec""></span> <br> and is ruled by -> <span style="font-style: italic; cursor: pointer;" id="rulerSpec"></span> <br> </div>' +
         '' +
@@ -117,7 +114,6 @@ L.Util.toHTML = function (r) {
     // Preserver line breaks
     if (newline) r = r.replace(new RegExp(newline + '(?=[^]+)', 'g'), '<br>' + newline);
 
-    console.debug("include here?", r);
     /*
         Include here
         
@@ -143,8 +139,6 @@ L.Util.latLngsForGeoJSON = function (latlngs) {
 };
 L.Util.CopyJSON = function (geojson) {
     
-    console.debug("JSON.stringify(geojson)1",JSON.stringify(geojson));
-    
     return JSON.parse(JSON.stringify(geojson));
     
 };
@@ -169,7 +163,6 @@ L.Util.usableOption = function (options, option) {
 };
 
 L.Util.greedyTemplate = function (str, data, ignore) {
-    console.debug("data.wikiUrl", data.wikiUrl);
     if(data.wikiUrl && data.wikiUrl.substring(0,4) == "http" ){
         data.wikiUrl = "WikiURL"+ data.wikiUrl.substr(4) + "?printable=yes";
     } else if ( data.wikiUrl && data.wikiUrl.substring(0,7) != "WikiURL" ){
@@ -382,8 +375,6 @@ L.Storage.Help = L.Class.extend({
     },
 
     hide: function () {
-
-        console.debug("inHIDE");
 
         L.DomUtil.removeClass(document.body, 'storage-help-on');
     },

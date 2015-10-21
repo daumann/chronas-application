@@ -125,7 +125,6 @@ L.Storage.MoreControls = L.Control.extend({
     },
 
     toggle: function () {
-        console.debug('inside this toggle',this)
         var pos = this.getPosition(),
             corner = this._map._controlCorners[pos],
             className = 'storage-more-controls';
@@ -750,20 +749,17 @@ L.S.Editable = L.Editable.extend({
     },
 
     createPolyline: function (latlngs) {
-        console.debug("creating Polyline");
         creatingType = "Polyline";
         return new L.Storage.Polyline(this.map, latlngs);
     },
 
     createPolygon: function (latlngs) {
-        console.debug("creating Polygon");
         var polygon = new L.Storage.Polygon(this.map, latlngs);
         creatingType = "Polygon";
         return polygon;
     },
 
     createMarker: function (latlng) {
-        console.debug("creating Marker");
         creatingType = "Marker";
         return new L.Storage.Marker(this.map, latlng);
     },
@@ -772,7 +768,6 @@ L.S.Editable = L.Editable.extend({
         // Overrided from Leaflet.Editable
         var datalayer = this.map.defaultDataLayer();
         datalayer.addLayer(layer);
-        console.debug("!-! 2")
         layer.isDirty = true;
         return layer;
     },

@@ -196,16 +196,6 @@ toGeoJSON = (function() {
                         properties[simpleDatas[i].getAttribute('name')] = nodeVal(simpleDatas[i]);
                     }
                 }
-
-                console.debug("togeojson-",[{
-                    type: 'Feature',
-                    geometry: (geoms.length === 1) ? geoms[0] : {
-                        type: 'GeometryCollection',
-                        geometries: geoms
-                    },
-                    properties: properties
-                }])
-                
                 
                 return [{
                     type: 'Feature',
@@ -247,14 +237,6 @@ toGeoJSON = (function() {
                 for (var i = 0; i < segments.length; i++) {
                     track.push(getPoints(segments[i], 'trkpt'));
                 }
-                console.debug("-getTrack",{
-                    type: 'Feature',
-                    properties: getProperties(node),
-                    geometry: {
-                        type: track.length === 1 ? 'LineString' : 'MultiLineString',
-                        coordinates: track.length === 1 ? track[0] : track
-                    }
-                });
                 
                 return {
                     type: 'Feature',
@@ -266,14 +248,6 @@ toGeoJSON = (function() {
                 };
             }
             function getRoute(node) {
-                console.debug("-getRoute",{
-                    type: 'Feature',
-                    properties: getProperties(node),
-                    geometry: {
-                        type: track.length === 1 ? 'LineString' : 'MultiLineString',
-                        coordinates: track.length === 1 ? track[0] : track
-                    }
-                });
                 
                 return {
                     type: 'Feature',
@@ -288,16 +262,6 @@ toGeoJSON = (function() {
                 var prop = getProperties(node);
                 prop.sym = nodeVal(get1(node, 'sym'));
 
-                console.debug("-getPoint",{
-                    type: 'Feature',
-                    properties: prop,
-                    geometry: {
-                        type: 'Point',
-                        coordinates: coordPair(node)
-                    }
-                });
-                
-                
                 return {
                     type: 'Feature',
                     properties: prop,
@@ -321,7 +285,6 @@ toGeoJSON = (function() {
         }
     };
 
-    console.debug("togeojson",t);
     return t;
 })();
 

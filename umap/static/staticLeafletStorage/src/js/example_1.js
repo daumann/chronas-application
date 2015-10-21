@@ -10,7 +10,7 @@ $(function() {
     var d = new Date();
     d.setFullYear(2020);
     var d2 = new Date();
-    d2.setFullYear(-1);
+    d2.setFullYear(0);
     // Set timeline options
     var timelineOptions = {
         "width":  "100%",
@@ -123,7 +123,6 @@ $(function() {
     
     // 
     function onCustomTimeChange(properties) {
-             console.debug(properties);
         if (!playback.isPlaying()){
             playback.setCursor(properties.time.getTime());
         }        

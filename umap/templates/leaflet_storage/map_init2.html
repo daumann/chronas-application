@@ -397,7 +397,6 @@
     map.options.minZoom=2
 
     map.on("viewreset", reset);
-    console.debug("before")
     svgProv = d3.select(map.getPanes().overlayPane).append("svg");
 
     svgProv.style("z-index","3");
@@ -484,7 +483,6 @@
     $( "#timeline" ).mouseup(function(event) {
 
         if (isdragging) return;
-        console.debug("!mouseup");
         //      if (staticCore.eventParams.dragging) return;
 
         var deltaX = event.clientX,
@@ -525,7 +523,6 @@
 
 
     $("#coloring li a").click(function(){
-        console.debug("changed coloring")
         $('#coloring li a').removeClass('activeColoring');
         $(this).toggleClass('activeColoring');
         var selText = $(this).text();
@@ -590,7 +587,6 @@
     })
 
     $(".storage-browse-hierarchy").click(function(){
-        console.debug($("#hierarchyForms").css("display"))
         if($("#hierarchyForms").css("display") == "none"){
             $(".storage-browse-hierarchyForms").css("display","block");
             $(".storage-browse-actions").css("display","block");
@@ -826,7 +822,6 @@ $("input:checkbox").change(function(){
 
         setTimeout(function(){  $("#loadingGallery").hide(); }, 500);
         $("#citiesBox").change(function(){
-            console.debug("start go")
             b_sub_cities = document.getElementById("citiesBox").checked;
             if(b_city && b_sub_cities){
                 map.getDataLayerByStorageId(newYear).fetchData();
@@ -837,7 +832,6 @@ $("input:checkbox").change(function(){
                     ClusterSuperGroup.removeLayers(a_settlementsData);
                 }
             }
-            console.debug("end go")
         });
 
         $("#castlesBox").change(function(){
@@ -1001,7 +995,6 @@ $("input:checkbox").change(function(){
 
         $("#peopleChecked").change(function(){
             b_people = document.getElementById("peopleChecked").checked;
-            console.debug("map.datalayers:",map.datalayers);
 
             if(b_people){
                 map.getDataLayerByStorageId(newYear).fetchData()
@@ -1042,7 +1035,6 @@ $("input:checkbox").change(function(){
 
         $("#cityChecked").change(function(){
             b_city = document.getElementById("cityChecked").checked;
-            console.debug("map.datalayers:",map.datalayers)
             // search for storage id of iterate map.datalayers_index    year in object and do:
 
             if(b_city){
@@ -1097,7 +1089,6 @@ $("input:checkbox").change(function(){
 
         $("#otherChecked").change(function(){
             b_other = document.getElementById("otherChecked").checked;
-            console.debug("map.datalayers:",map.datalayers)
             // search for storage id of iterate map.datalayers_index    year in object and do:
 
             if(b_other){

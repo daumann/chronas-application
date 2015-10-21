@@ -150,8 +150,6 @@ toGeoJSON = (function() {
                         properties[simpleDatas[i].getAttribute('name')] = nodeVal(simpleDatas[i]);
                     }
                 }
-                console.debug("!!properties",properties);
-                console.debug(JSON.stringify(properties));
                 return [{
                     type: 'Feature',
                     geometry: (geoms.length === 1) ? geoms[0] : {
@@ -185,8 +183,6 @@ toGeoJSON = (function() {
                     line.push(coordPair(pts[j]));
                 }
                 
-                console.debug("----properties",getProperties(node));
-                
                 return {
                     type: 'Feature',
                     properties: getProperties(node),
@@ -201,8 +197,6 @@ toGeoJSON = (function() {
                 prop.ele = nodeVal(get1(node, 'ele'));
                 prop.sym = nodeVal(get1(node, 'sym'));
 
-                console.debug("--properties",properties);
-                
                 return {
                     type: 'Feature',
                     properties: prop,

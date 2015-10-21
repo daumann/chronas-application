@@ -31,7 +31,6 @@ L.Storage.ElementHelper = L.Class.extend({
     },
 
     sync: function () {
-        console.debug("syncing this:", this)
         if(this.field == "datalayer")
             currentThis = this;
         this.set();
@@ -443,7 +442,6 @@ L.S.ElementHelper.DataLayerSwitcher = L.S.ElementHelper.SelectAbstract.extend({
     
 
     getOptions: function () {
-        console.debug("insideDataLayerSwitcher",this);
         currentDatalayerSelect = this;
         var options = [];
         this.map.eachDataLayer(function (datalayer) {
@@ -455,25 +453,18 @@ L.S.ElementHelper.DataLayerSwitcher = L.S.ElementHelper.SelectAbstract.extend({
     },
 
     toHTML: function () {
-        console.debug("insideDataLayerSwitcher",this);
         currentDatalayerSelect = this;
         return L.stamp(this.obj.datalayer);
     },
 
     toJS: function () {
-        console.debug("insideDataLayerSwitcher",this);
         currentDatalayerSelect = this;
-        console.debug("returning ", this.map.datalayers[this.value()])
         return this.map.datalayers[this.value()];
     },
 
     set: function () {
         
-        console.debug("insideDataLayerSwitcher",this);
         currentDatalayerSelect = this;
-        console.debug("changing datalayer!!!!!!!!!!!!!!!!!!!!!!!! ");
-        console.debug(this);
-        console.debug(this.obj);
         this.obj.changeDataLayer(this.toJS());
         
     }

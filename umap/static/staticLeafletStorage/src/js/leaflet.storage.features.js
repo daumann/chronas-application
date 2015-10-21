@@ -19,7 +19,6 @@ function addFeat(){
         if (typeof thisthis.properties[i] === 'object' ||
             ['name', 'description'].indexOf(i) !== -1) {continue;}
 
-        console.debug('pushing properties.' + i, {label: i})
         properties.push(['properties.' + i, {label: i}]);
     }
     
@@ -89,7 +88,6 @@ L.Storage.FeatureMixin = {
         }
         // DataLayer the marker belongs to
         
-        console.debug("initialize feature_form datalayer",this.datalayer, options.datalayer)
      //   console.debug(options.geojson)
         this.datalayer = options.datalayer || null;
         this.properties = {_storage_options: {}};
@@ -177,8 +175,6 @@ L.Storage.FeatureMixin = {
         input.max = "2100";
         input.value = parseInt(document.getElementsByClassName("datetimeValue")[0].value);
             
-            console.debug("datestart set to", parseInt(document.getElementsByClassName("datetimeValue")[0].value));
-
         var dashBet = document.createElement("label");
         dashBet.innerHTML = " - ";
 
@@ -207,7 +203,6 @@ L.Storage.FeatureMixin = {
         thisthis = this;
         
         var properties = [];
-        console.debug(this);
         for (var i in this.properties) {
             if (typeof this.properties[i] === 'object' ||
                 ['name', 'description'].indexOf(i) !== -1) {continue;}
@@ -216,7 +211,6 @@ L.Storage.FeatureMixin = {
         }
         
         // We always want name and description for now (properties management to come)        
-        console.debug("!x! chosenFeature: "+chosenFeature);
 
         $(".preset-list-pane")[0].parentElement.style.display = "block";
         
@@ -309,10 +303,6 @@ L.Storage.FeatureMixin = {
 
     getDisplayName: function () {
         
-        console.debug("properties of layer:")
-        console.debug(this.properties)
-        console.debug(this)
-        
         return this.properties.name || this.properties.title || this.datalayer.options.name;  //"testTitle!"; // TODO: Check how it is saved and why no properties.name exist! .name is currently the layerTitle
     },
 
@@ -374,7 +364,6 @@ L.Storage.FeatureMixin = {
             this.datalayer.isDirty = true;
             this.datalayer.removeLayer(this);
         }
-        console.debug("!-! 3")
         datalayer.addLayer(this);
         datalayer.isDirty = true;
         this._redraw();
@@ -446,8 +435,6 @@ L.Storage.FeatureMixin = {
     },
 
     toGeoJSON: function () {
-        console.debug("!!! toGeoJSON")
-        console.debug(this);
         return {
             type: 'Feature',
             geometry: this.geometry(),
@@ -474,7 +461,6 @@ L.Storage.FeatureMixin = {
     },
 
     getContextMenuItems: function (e) {
-        console.debug("getting getContextMenuItems");
         var items = [];
         if (this.map.editEnabled && !this.isReadOnly()) {
             items = items.concat(this.getEditContextMenuItems(e));
@@ -483,7 +469,6 @@ L.Storage.FeatureMixin = {
     },
 
     getEditContextMenuItems: function () {
-        console.debug("getting getEditContextMenuItems");
         return ['-',
             {
                 text: L._('Edit this feature'),
@@ -538,13 +523,11 @@ L.Storage.FeatureMixin = {
     },
 
     resetLabel: function () {
-        console.debug("!RESETTING LABEL!",this.properties.name)
         if (this.label) {
             this.hideLabel();
             delete this.label;
         }
         if (this.getOption('showLabel') && this.properties.name) {
-            console.debug("-!-props", this.properties.name);
             this.bindLabel(L.Util.escapeHTML(this.properties.name), {noHide: true});
             this.showLabel();
         }
@@ -583,7 +566,6 @@ L.Storage.Marker = L.Marker.extend({
     },
 
     _onClick: function(e){
-        console.debug("*** inside onclick with e",e)
         if(this.map.editEnabled) {
             this.edit(e);
         }
@@ -1030,7 +1012,6 @@ L.Storage.Polygon = L.Polygon.extend({
     includes: [L.Storage.FeatureMixin, L.Storage.PathMixin, L.Mixin.Events],
 
     geometry: function() {
-        console.debug("inside Polygon -> geometry: function() {", latlngs);
         // TODO: add test!
         /* Return a GeoJSON geometry Object */
         /* see: https://github.com/CloudMade/Leaflet/issues/1135 */
@@ -1138,9 +1119,6 @@ function chooseFeature(event,ele){
     
     
     chosenFeature = ele.className;
-    
-    console.debug("chooseFeature", ele.className);
-    console.debug(".subgrid", $(ele).find(".subgrid")[0]);
     
     if($(ele).find(".subgrid")[0] === undefined){
 

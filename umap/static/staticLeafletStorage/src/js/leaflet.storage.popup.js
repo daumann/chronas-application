@@ -28,8 +28,7 @@ function openDatatable(searchKey){
     
     $('#chronasWiki').hide();
     $('#notFoundNotice').hide();
-    console.debug("hiding notice 0")
-    
+
     var tmpSource =  $("iframe")[0].src; //.replace("?printable=yes","");
 
  //   $('#chronasWiki').hide();
@@ -47,8 +46,6 @@ function openDatatable(searchKey){
 
         $("iframe")[0].src = tmpSource.replace("?printable=yes","");      
         
-        console.debug("1source now: ",$("iframe")[0].src )
-        
         $("#storage-ui-container")[0].style.width = "100%";
         $("#map")[0].style.display = "none";
 
@@ -58,18 +55,15 @@ function openDatatable(searchKey){
         
         $('#chronasWiki').load(function(){
 
-            console.debug("!x!   finished loading");
             if($("iframe")[0].src != 'http://en.wikipedia.org/wiki/' && $("iframe")[0].src != 'http://en.wikipedia.org/wiki/?printable=yes'){
                 $('#notFoundNotice').hide()
                 $('#loader1').hide()
                 $('#chronasWiki').show();
-                console.debug($("iframe")[0].src,"hiding notice 1")
-            } else { 
+            } else {
                 $('#chronasWiki').hide(); 
                 $('#notFoundNotice').show()
                 $('#loader1').hide()
-                console.debug($("iframe")[0].src,"show notice 1")
-            }             
+            }
         });
         
         
@@ -90,8 +84,6 @@ function openDatatable(searchKey){
         else
             $("iframe")[0].src = tmpSource;
 
-        console.debug("2source now: ",$("iframe")[0].src )
-        
         $("#storage-ui-container")[0].style.width = "50%";
         $("#map")[0].style.display = "block";
         $(".halfWidth")[0].title = "Toggle full width";
@@ -101,18 +93,15 @@ function openDatatable(searchKey){
         
         $('#chronasWiki').load(function(){
             
-            console.debug("!x!   finished loading")
-            if(tmpSource != 'http://en.wikipedia.org/wiki/' && tmpSource != 'http://en.wikipedia.org/wiki/?printable=yes'){  
+            if(tmpSource != 'http://en.wikipedia.org/wiki/' && tmpSource != 'http://en.wikipedia.org/wiki/?printable=yes'){
                 
                 $('#notFoundNotice').hide()
                 $('#loader1').hide()
                 $('#chronasWiki').show();
-                console.debug(tmpSource,"hide notice 2")
-            } else { 
+            } else {
                 $('#chronasWiki').hide();
                 $('#loader1').hide()
                 $('#notFoundNotice').show()
-                console.debug(tmpSource,"show notice 2")
             }
         });
         
@@ -148,7 +137,6 @@ L.S.Popup = L.Popup.extend({
     },
 
     initialize: function (feature) {
-        console.debug("!!!!!!! initializing feature: ",feature)
         this.feature = feature;
         this.container = L.DomUtil.create('div', 'storage-popup');
         this.format();
@@ -159,7 +147,7 @@ L.S.Popup = L.Popup.extend({
         $('#loader1').show();
         $('#chronasWiki').load(function(){
             $('#loader1').hide();
-            $('#chronasWiki').show();console.debug("~");
+            $('#chronasWiki').show();
         });
         
     },
@@ -171,7 +159,6 @@ L.S.Popup = L.Popup.extend({
     renderTitle: function () {},
 
     renderBody: function () {
-        console.debug("!!! rendering Body!");
 
         $(".leaflet-top.leaflet-right")[0].style.display = "none";
 
@@ -199,8 +186,7 @@ L.S.Popup = L.Popup.extend({
             // Resolve properties inside description
             properties.description = L.Util.greedyTemplate(this.feature.properties.description || '', properties);
             content = L.Util.greedyTemplate(template, properties);
-            console.debug("inside ha:", content, properties.description);
-            
+
             if(properties){
                 if (properties.description.substring(0,11) == "chronasYear"){
                     content = "WikiYear://en.wikipedia.org/wiki/"+properties.description.substr(11)+"?printable=yes loading year "+properties.description.substr(11);
@@ -208,7 +194,6 @@ L.S.Popup = L.Popup.extend({
             }
         }
         content = L.Util.toHTML(content);
-        console.debug("content received:", content);
         container.innerHTML = content;
         var els = container.querySelectorAll('img,iframe');
         
@@ -220,7 +205,6 @@ L.S.Popup = L.Popup.extend({
             L.DomUtil.add('h3', '', container, this.feature.getDisplayName());
         }
         
-        console.debug(content,properties, "!iframe",$('#chronasWiki'));
         $('#chronasWiki').hide();
         $('#loader1').show();
         $('#chronasWiki').load(function(){
@@ -277,8 +261,6 @@ L.S.Popup = L.Popup.extend({
             this.container.appendChild(title);
         }
         var body = this.renderBody();
-        
-        console.debug("!!", this.container, body);
         
         if (body) {
             L.DomUtil.add('div', 'storage-popup-content', this.container, body);
@@ -394,8 +376,7 @@ L.S.Popup.GeoRSSLink = L.S.Popup.extend({
 L.S.Popup.SimplePanel = L.S.Popup.extend({
 
     allButton: function () {
-        console.debug("L.S.Popup.SimplePanel allButton")
-        
+
         var button = L.DomUtil.create('li', '');
 
         var label0 = L.DomUtil.create('i', 'storage-list', button);
@@ -410,7 +391,6 @@ L.S.Popup.SimplePanel = L.S.Popup.extend({
         return button;
     },
     allButton2: function () {
-        console.debug("L.S.Popup.SimplePanel allButton")
 
         if($($(this)[0].container).find("iframe").length  != 0){
         var button2 = L.DomUtil.create('li', '');
@@ -426,7 +406,6 @@ L.S.Popup.SimplePanel = L.S.Popup.extend({
             return null;
     },
     allButton4: function () {
-        console.debug("L.S.Popup.SimplePanel allButton")
 
         if($($(this)[0].container).find("iframe").length  != 0){
             var button4 = L.DomUtil.create('li', 'overviewContainer');

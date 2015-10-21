@@ -49,7 +49,6 @@ L.Control.MiniMap = L.Control.extend({
 			boxZoom: !this.options.zoomLevelFixed,
 			crs: map.options.crs
 		});
-        console.debug("!-! 8")
 		this._miniMap.addLayer(this._layer);
 
 		//These bools are used to prevent infinite loops of the two maps notifying each other that they've moved.
