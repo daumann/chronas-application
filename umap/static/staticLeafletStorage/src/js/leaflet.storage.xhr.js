@@ -49,7 +49,7 @@ L.Storage.Xhr = {
                     settings.callback.call(settings.context || xhr, xhr.responseText, xhr);
                 }
                 else if (xhr.status === 403) {
-                    L.Storage.fire('ui:alert', {content: L._('Action not allowed :('), level: 'error'});
+                    //L.Storage.fire('ui:alert', {content: L._('Action not allowed :('), level: 'error'});
                 }
                 else if (xhr.status === 412) {
                     var msg = L._('Woops! Someone else seems to have edited the data. You can save anyway, but this will erase the changes made by others.');
@@ -66,11 +66,11 @@ L.Storage.Xhr = {
                             label: L._('Cancel')
                         }
                     ];
-                    L.Storage.fire('ui:alert', {content: msg, level: 'error', duration: 100000, actions: actions});
+                    //L.Storage.fire('ui:alert', {content: msg, level: 'error', duration: 100000, actions: actions});
                 }
                 else {
                     if (xhr.status !== 0) {  // 0 === request cut by user
-                        L.Storage.fire('ui:alert', {'content': L._('Problem in the response'), 'level': 'error'});
+                        //L.Storage.fire('ui:alert', {'content': L._('Problem in the response'), 'level': 'error'});
                     }
                 }
                 loaded();
@@ -116,12 +116,12 @@ L.Storage.Xhr = {
             }
             catch (err) {
                 console.log(err);
-                L.Storage.fire('ui:alert', {content: L._('Problem in the response format'), level: 'error'});
+                //L.Storage.fire('ui:alert', {content: L._('Problem in the response format'), level: 'error'});
                 return;
             }
             if (data.errors) {
                 console.log(data.errors);
-                L.Storage.fire('ui:alert', {content: L._('An error occured'), level: 'error'});
+                //L.Storage.fire('ui:alert', {content: L._('An error occured'), level: 'error'});
             } else if (data.login_required) {
                 // login_required should be an URL for the login form
                 if (settings.login_callback) {
@@ -212,7 +212,7 @@ L.Storage.Xhr = {
             L.Storage.fire('ui:end');
         }
         else if (data.error) {
-            L.Storage.fire('ui:alert', {content: data.error, level: 'error'});
+            //L.Storage.fire('ui:alert', {content: data.error, level: 'error'});
         }
         else if (data.html) {
             var ui_options = {'data': data},

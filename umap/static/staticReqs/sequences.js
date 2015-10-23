@@ -1,6 +1,6 @@
 // Dimensions of sunburst.
 var widthSB = 500;
-var heightSB = 500;
+var heightSB = 468;
 var radiusSB = Math.min(widthSB, heightSB) / 2;
 var currSB="rul";
 

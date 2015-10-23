@@ -2566,7 +2566,7 @@ function key(d) { return d.name; }
 // Chart dimensions.
 var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
     width = 960 - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 449 - margin.top - margin.bottom;
 
 function runRulChart(){
 
