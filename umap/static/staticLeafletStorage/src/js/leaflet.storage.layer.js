@@ -251,7 +251,7 @@ function loadFeatures(that,newYear,type){
             tmpFix="24"+(newYear);
     }
 
-    that.map.get("/en/datalayer/"+tmpFix+"/", {
+    that.map.get("/en/app/datalayer/"+tmpFix+"/", {
         callback: function (geojson, response) {
             var  tmpDataArray = []
             if (geojson._storage) {
@@ -1420,7 +1420,7 @@ L.Storage.DataLayer = L.Class.extend({
             provYearId0="10"+(provYear0);
 
         (function (provYear, provYearId1) {
-            ultimateMarker.datalayer.map.get("/en/datalayer/"+provYearId1+"/", {
+            ultimateMarker.datalayer.map.get("/en/app/datalayer/"+provYearId1+"/", {
 
                 callback: function (geojson, response) {
 
@@ -1440,7 +1440,7 @@ L.Storage.DataLayer = L.Class.extend({
                     formData.append('geojson', blob);
 
                     (function (provYearId, provYear2) {
-                        ultimateMarker.datalayer.map.post("/en/map/6/datalayer/update/"+provYearId+"/", {
+                        ultimateMarker.datalayer.map.post("/en/app/map/6/datalayer/update/"+provYearId+"/", {
                             data: formData,
                             callback: function (data, response) {
 
@@ -1512,7 +1512,7 @@ L.Storage.DataLayer = L.Class.extend({
                     tmpFix="10"+(newYear);
 
                 b_areaLoaded = true;
-                this.map.get("/en/datalayer/"+tmpFix+"/", {
+                this.map.get("/en/app/datalayer/"+tmpFix+"/", {
 
                     callback: function (geojson, response) {
 

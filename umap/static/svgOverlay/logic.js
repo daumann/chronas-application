@@ -1273,7 +1273,7 @@ function setupCollections(myActiveTextFeat) {
                             rulerWiki = countryPlus[key][2];
 
                             if (countryPlus[key][3] !== undefined) {
-                                map.get("/en/datalayer/26" + countryPlus[key][3] + "/", {
+                                map.get("/en/app/datalayer/26" + countryPlus[key][3] + "/", {
                                         callback: function (geojson) {
 
                                             var relKing = getRelevantKing(geojson);
@@ -2607,7 +2607,7 @@ function getObject(theObject, returningObj) {
 }
 
 function loadFullTimeLoaded(ident) {
-    map.get("/en/datalayer/270/", {
+    map.get("/en/app/datalayer/270/", {
         callback: function (geojson) {
 
             fullTimeData = geojson;
