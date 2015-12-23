@@ -253,7 +253,7 @@ function loadFeatures(that,newYear,type){
             tmpFix="24"+(newYear);
     }
 
-    that.map.get("/en/app/datalayer/"+tmpFix+"/", {
+    that.map.get(urlPrefix + "/datalayer/"+tmpFix+"/", {
         callback: function (geojson, response) {
             var  tmpDataArray = []
             if (geojson._storage) {
@@ -1408,7 +1408,7 @@ L.Storage.DataLayer = L.Class.extend({
         return features;
     },
 
-    saveProvinces: function(startProvYear,endProvYear,provName,newDataArray) {
+    saveProvinces: function(startProvYear,endProvYear,provNames,newDataArray) {
 
         var provYear0;
         for (provYear0 = startProvYear; provYear0<=endProvYear; provYear0++){
@@ -1422,16 +1422,18 @@ L.Storage.DataLayer = L.Class.extend({
             provYearId0="10"+(provYear0);
 
         (function (provYear, provYearId1) {
-            ultimateMarker.datalayer.map.get("/en/app/datalayer/"+provYearId1+"/", {
+            ultimateMarker.datalayer.map.get(urlPrefix + "/datalayer/"+provYearId1+"/", {
 
                 callback: function (geojson, response) {
 
-                    for (var k=0; k<newDataArray.length; k++){
-                        if (newDataArray[k] !== undefined){
-                            geojson[provName][k] = newDataArray[k];
-                            editCount++;
-                            $("#EditLog").css("color","#BE3E00")
-                            $("#EditLog").html("<i>Loading: " + editCount + " updates triggered. "+postCount+" updates completed.</i>");
+                    editCount++;
+                    $("#EditLog").css("color","#BE3E00")
+                    $("#EditLog").html("<i>Loading: " + editCount + " updates triggered. "+postCount+" updates completed.</i>");
+                    for (var j=0; j<provNames.length; j++){
+                        for (var k=0; k<newDataArray.length; k++){
+                                if (newDataArray[k] !== undefined){
+                                    geojson[provNames[j]][k] = newDataArray[k];
+                            }
                         }
                     }
 
@@ -1443,7 +1445,7 @@ L.Storage.DataLayer = L.Class.extend({
                     formData.append('geojson', blob);
 
                     (function (provYearId, provYear2) {
-                        ultimateMarker.datalayer.map.post("/en/app/map/6/datalayer/update/"+provYearId+"/", {
+                        ultimateMarker.datalayer.map.post((urlPrefix === "") ? "/en/map/6/datalayer/update/"+provYearId+"/" : urlPrefix + "/map/6/datalayer/update/"+provYearId+"/", {
                             data: formData,
                             callback: function (data, response) {
 
@@ -1529,7 +1531,7 @@ L.Storage.DataLayer = L.Class.extend({
                     tmpFix="10"+(newYear);
 
                 b_areaLoaded = true;
-                this.map.get("/en/app/datalayer/"+tmpFix+"/", {
+                this.map.get(urlPrefix + "/datalayer/"+tmpFix+"/", {
 
                     callback: function (geojson, response) {
 

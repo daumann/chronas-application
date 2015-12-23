@@ -8,6 +8,8 @@ var culList = [];
 var relList = [];
 var capList = [];
 
+var provNameEditList=[];
+
 var fullTimeData = {};
 var activeListFeature = "rel";
 var total = 0;
@@ -1262,6 +1264,24 @@ function setupCollections(myActiveTextFeat) {
             .call(dragBehavior)
             .on('click', function (d, i) {
                 if (!d3.event.defaultPrevented) {
+
+                    if($("#reportBetaText").length !== 0 && $("#reportBetaText").css("display") !== "none")
+                    {
+                        if(provNameEditList.indexOf(d.properties.name) === -1){
+                            provNameEditList.push(d.properties.name);
+                        }
+
+                        //$("#EditProvName")[0].innerHTML = "Editing Province(s): " + provNameEditList;
+
+                        $("#htmlProvList")[0].innerHTML = "";
+                        for (var l = 0; l<provNameEditList.length; l++){
+
+                            $("#htmlProvList")[0].innerHTML = $("#htmlProvList")[0].innerHTML + '<div id="'+provNameEditList[l]+'" class="resource provItem input-group input-group-sm"> <span onclick="removeProvFromList(\''+provNameEditList[l]+'\');" class="input-group-addon"> <i  class="fa fa-times"></i> </span> <input type="text" readonly="" class="form-control" placeholder="'+provNameEditList[l]+'" aria-describedby="btn_mon" title="'+provNameEditList[l]+'"> </div>'
+                        }
+
+                    }
+                    else
+                    {
                     //  if (d3.event.defaultPrevented) return; // click suppressed
 
                     var rulerWiki = "";
@@ -1273,7 +1293,7 @@ function setupCollections(myActiveTextFeat) {
                             rulerWiki = countryPlus[key][2];
 
                             if (countryPlus[key][3] !== undefined) {
-                                map.get("/en/app/datalayer/26" + countryPlus[key][3] + "/", {
+                                map.get(urlPrefix + "/datalayer/26" + countryPlus[key][3] + "/", {
                                         callback: function (geojson) {
 
                                             var relKing = getRelevantKing(geojson);
@@ -1400,11 +1420,25 @@ function setupCollections(myActiveTextFeat) {
 
                         if ($("#EditProvName")[0] !== undefined) {
 
-                            $("#EditProvName")[0].innerHTML = "Editing Province: " + d.properties.name;
-                            $("#EditProvName").attr("title",d.properties.name)
+                            provNameEditList.push(d.properties.name);
 
-                            $("#sinceYear").val(newYear);
-                            $("#untilYear").val(newYear);
+                            //$("#EditProvName")[0].innerHTML = "Editing Province(s): " + provNameEditList;
+
+                            $("#htmlProvList")[0].innerHTML = "";
+                            for (var l = 0; l<provNameEditList.length; l++){
+
+                                $("#htmlProvList")[0].innerHTML = $("#htmlProvList")[0].innerHTML + '<div id="'+provNameEditList[l]+'" class="resource provItem input-group input-group-sm"> <span onclick="removeProvFromList(\''+provNameEditList[l]+'\');" class="input-group-addon"> <i  class="fa fa-times"></i> </span> <input type="text" readonly="" class="form-control" placeholder="'+provNameEditList[l]+'" aria-describedby="btn_mon" title="'+provNameEditList[l]+'"> </div>'
+                            }
+
+
+                            //$("#EditProvName").attr("title",d.properties.name)
+
+
+
+                            if ($("#sinceYear").val() === "" ){
+                                $("#sinceYear").val(newYear);
+                                $("#untilYear").val(newYear);
+                            }
 
 
                             if (relList.length == 0) {
@@ -1655,6 +1689,8 @@ function setupCollections(myActiveTextFeat) {
                          */
                     }
                 }
+                }
+
             });
 
 
@@ -2607,7 +2643,7 @@ function getObject(theObject, returningObj) {
 }
 
 function loadFullTimeLoaded(ident) {
-    map.get("/en/app/datalayer/270/", {
+    map.get(urlPrefix + "/datalayer/270/", {
         callback: function (geojson) {
 
             fullTimeData = geojson;
@@ -4290,10 +4326,27 @@ function submitProvEdit(){
         $("#EditLog").html("ERR: Batch edits for time spans of more than 100 years are not allowed; is your data correct?")
     }
     else {
-        ultimateMarker.datalayer.saveProvinces(tmpSince,tmpUntil,($("#EditProvName").attr("title")),[tmpRul,tmpCul,tmpRel,tmpCap,tmpPop])
+        ultimateMarker.datalayer.saveProvinces(tmpSince,tmpUntil,provNameEditList,[tmpRul,tmpCul,tmpRel,tmpCap,tmpPop])
+
+        provNameEditList=[];
     } //unescape(encodeURIComponent       apparently not necessary
 
 
 
+
+}
+
+function removeProvFromList(provId){
+
+    var i = provNameEditList.indexOf(provId);
+    if(i != -1) {
+        provNameEditList.splice(i, 1);
+    }
+
+    $("#htmlProvList")[0].innerHTML = "";
+    for (var l = 0; l<provNameEditList.length; l++){
+
+        $("#htmlProvList")[0].innerHTML = $("#htmlProvList")[0].innerHTML + '<div id="'+provNameEditList[l]+'" class="resource provItem input-group input-group-sm"> <span onclick="removeProvFromList(\''+provNameEditList[l]+'\');" class="input-group-addon"> <i  class="fa fa-times"></i> </span> <input type="text" readonly="" class="form-control" placeholder="'+provNameEditList[l]+'" aria-describedby="btn_mon" title="'+provNameEditList[l]+'"> </div>'
+    }
 
 }
