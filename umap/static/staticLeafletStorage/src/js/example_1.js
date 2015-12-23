@@ -1,5 +1,5 @@
 var timeline2;
-document.domain = 'chronas.org';
+//document.domain = 'chronas.org';
 
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
