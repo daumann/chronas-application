@@ -1,5 +1,7 @@
 var clusterCount = 0;
 var editCount =0;
+var postCount =0;
+
 var progress = document.getElementById('progress');
 var progressBar = document.getElementById('progress-bar');
 var editHandler;
@@ -1428,7 +1430,8 @@ L.Storage.DataLayer = L.Class.extend({
                         if (newDataArray[k] !== undefined){
                             geojson[provName][k] = newDataArray[k];
                             editCount++;
-                            $("#EditLog").html("<i>" + editCount + " records updated.</i>");
+                            $("#EditLog").css("color","#BE3E00")
+                            $("#EditLog").html("<i>Loading: " + editCount + " updates triggered. "+postCount+" updates completed.</i>");
                         }
                     }
 
@@ -1444,7 +1447,21 @@ L.Storage.DataLayer = L.Class.extend({
                             data: formData,
                             callback: function (data, response) {
 
-                                if (provYear2 == newYear){
+                                postCount++;
+
+                                $("#EditLog").html("<i>Loading: " + editCount + " updates triggered. "+postCount+" updates completed.</i>");
+
+                                if (editCount == postCount){
+
+                                    $("#EditLog").css("color","#4E8000")
+                                    $("#EditLog").html("<i>Completed: " + postCount + " updates successfully applied. Change the year to validate your changes.</i>");
+                                    $.get( "http://chronas.org/api/addEdit/" + moderatorEmail + "/" + postCount, function( data ) {
+                                    });
+
+                                    editCount = 0;
+                                    postCount = 0;
+
+                                    /*
                                     console.debug("triggering reload!");
                                     forceReload=true;
                                     ultimateMarker.datalayer.reset()
@@ -1452,7 +1469,7 @@ L.Storage.DataLayer = L.Class.extend({
                                     $.get( "http://chronas.org/api/addEdit/" + moderatorEmail + "/" + editCount, function( data ) {
                                         setTimeout(function(){ editCount = 0; }, 2000);
                                     });
-
+                                    */
                                 }
                             },
                             context: ultimateMarker.datalayer,
