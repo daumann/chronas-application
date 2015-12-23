@@ -1,6 +1,9 @@
 var clusterCount = 0;
+var editCount =0;
 var progress = document.getElementById('progress');
 var progressBar = document.getElementById('progress-bar');
+var editHandler;
+var forceReload = false;
 
 function updateProgressBar(processed, total, elapsed, layersArray) {
     if (elapsed > 1000) {
@@ -14,13 +17,13 @@ function updateProgressBar(processed, total, elapsed, layersArray) {
         progress.style.display = 'none';
     }
 }
-var ClusterSuperGroup = L.markerClusterGroup({ 
-    spiderfyOnMaxZoom: false, 
-    showCoverageOnHover: false, 
-    zoomToBoundsOnClick: false, 
+var ClusterSuperGroup = L.markerClusterGroup({
+    spiderfyOnMaxZoom: false,
+    showCoverageOnHover: false,
+    zoomToBoundsOnClick: false,
     chunkProgress: updateProgressBar,
     maxClusterRadius: 40
-    /*function() { 
+    /*function() {
         console.debug("clusterCount",clusterCount)
         if (clusterCount>1000) {
             return 80;
@@ -30,7 +33,7 @@ var ClusterSuperGroup = L.markerClusterGroup({
         }
         else {
             return 40;
-        }        
+        }
     }
     */
 });
@@ -84,54 +87,54 @@ var b_areaLoaded = false;
 var newYear;
 
 function hideAllUnchecked(){
-/*
-    if (!b_area && a_areaLoaded) != -1){
-        $('svg').hide()
-    }
-    if (!b_other && a_areaInfoLoaded) != -1){
-        $('.areaInfo').hide()
-    }
-    if (!b_other && a_unclassifiedLoaded) != -1){
-        $('.unc').hide()
-    }
-    
-    if (!b_events && a_eventsLoaded) != -1){
-        $('.events').hide()
-    }
-    if (!b_city && a_castlesLoaded) != -1){
-        $('.castles').hide()
-    }
-    if (!b_city && a_settlementsLoaded) != -1){
-        $('.city').hide()
-    }
-    if (!b_people && a_peopleLoaded) != -1){
-        $('.people').hide()
-    }
-    if (!b_people && a_milLoaded) != -1){
-        $('.mil').hide()
-    }
-    if (!b_people && a_polLoaded) != -1){
-        $('.pol').hide()
-    }
-    if (!b_people && a_sciLoaded) != -1){
-        $('.sci').hide()
-    }
-    if (!b_people && a_relLoaded) != -1){
-        $('.rel').hide()
-    }
-    if (!b_people && a_uncPLoaded) != -1){
-        $('.uncP').hide()
-    }
-    if (!b_people && a_expLoaded) != -1){
-        $('.exp').hide()
-    }
-    if (!b_people && a_artistLoaded) != -1){
-        $('.arti').hide()
-    }
-    if (!b_people && a_athLoaded) != -1){
-        $('.ath').hide()
-    }
-   */ 
+    /*
+     if (!b_area && a_areaLoaded) != -1){
+     $('svg').hide()
+     }
+     if (!b_other && a_areaInfoLoaded) != -1){
+     $('.areaInfo').hide()
+     }
+     if (!b_other && a_unclassifiedLoaded) != -1){
+     $('.unc').hide()
+     }
+
+     if (!b_events && a_eventsLoaded) != -1){
+     $('.events').hide()
+     }
+     if (!b_city && a_castlesLoaded) != -1){
+     $('.castles').hide()
+     }
+     if (!b_city && a_settlementsLoaded) != -1){
+     $('.city').hide()
+     }
+     if (!b_people && a_peopleLoaded) != -1){
+     $('.people').hide()
+     }
+     if (!b_people && a_milLoaded) != -1){
+     $('.mil').hide()
+     }
+     if (!b_people && a_polLoaded) != -1){
+     $('.pol').hide()
+     }
+     if (!b_people && a_sciLoaded) != -1){
+     $('.sci').hide()
+     }
+     if (!b_people && a_relLoaded) != -1){
+     $('.rel').hide()
+     }
+     if (!b_people && a_uncPLoaded) != -1){
+     $('.uncP').hide()
+     }
+     if (!b_people && a_expLoaded) != -1){
+     $('.exp').hide()
+     }
+     if (!b_people && a_artistLoaded) != -1){
+     $('.arti').hide()
+     }
+     if (!b_people && a_athLoaded) != -1){
+     $('.ath').hide()
+     }
+     */
 }
 function loadFeatures(that,newYear,type){
 
@@ -143,7 +146,7 @@ function loadFeatures(that,newYear,type){
         if (newYear<0)
             tmpFix="21"+(newYear*-1);
         else
-            tmpFix="20"+(newYear);   
+            tmpFix="20"+(newYear);
     }
 
     else if (type == "city"){
@@ -248,7 +251,7 @@ function loadFeatures(that,newYear,type){
             tmpFix="24"+(newYear);
     }
 
-    that.map.get("/en/app/datalayer/"+tmpFix+"/", {
+    that.map.get("/en/datalayer/"+tmpFix+"/", {
         callback: function (geojson, response) {
             var  tmpDataArray = []
             if (geojson._storage) {
@@ -260,8 +263,8 @@ function loadFeatures(that,newYear,type){
             } else {
                 that.fromGeoJSON(geojson,tmpDataArray);
             }
- 
-            
+
+
             /*
              var features = geojson instanceof Array ? geojson : geojson.features,
              i, len;
@@ -271,9 +274,9 @@ function loadFeatures(that,newYear,type){
              for (i = 0, len = features.length; i < len; i++) {
              this.geojsonToFeatures(features[i],myDataArray);
              }
-             
+
              */
-            if (type == "events"){ 
+            if (type == "events"){
                 a_eventsData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_eventsData);
             }
@@ -281,57 +284,57 @@ function loadFeatures(that,newYear,type){
                 a_settlementsData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_settlementsData);
             }
-            else if (type == "castles"){ 
+            else if (type == "castles"){
                 a_castlesData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_castlesData);
             }
-            else if (type == "art"){ 
+            else if (type == "art"){
                 a_artefactData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_artefactData);
             }
-            else if (type == "areaInfo"){ 
+            else if (type == "areaInfo"){
                 a_areaInfoData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_areaInfoData);
             }
-            else if (type == "unc"){ 
+            else if (type == "unc"){
                 a_unclassifiedData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_unclassifiedData);
             }
-            else if (type == "mil"){ 
+            else if (type == "mil"){
                 a_milData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_milData);
             }
-            else if (type == "pol"){ 
+            else if (type == "pol"){
                 a_polData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_polData);
             }
-            else if (type == "sci"){ 
+            else if (type == "sci"){
                 a_sciData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_sciData);
             }
-            else if (type == "rel"){ 
+            else if (type == "rel"){
                 a_relData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_relData);
             }
-            else if (type == "uncP"){ 
+            else if (type == "uncP"){
                 a_uncPData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_uncPData);
             }
-            else if (type == "exp"){ 
+            else if (type == "exp"){
                 a_expData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_expData);
             }
-            else if (type == "arti"){ 
+            else if (type == "arti"){
                 a_artistData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_artistData);
             }
-            else if (type == "ath"){ 
+            else if (type == "ath"){
                 a_athData=tmpDataArray;
                 ClusterSuperGroup.addLayers(a_athData);
-                
+
             }
             that._loaded = true;
-            that.fire('loaded');           
+            that.fire('loaded');
         },
         context: that
     });
@@ -356,12 +359,12 @@ function getExtrema(listOfPoints){
 }
 
 function get_polygon_centroid(pts) {
-    
+
     var twicearea=0,
         x=0, y=0,
         nPts = pts.length,
         p1, p2, f;
-    
+
     for ( var i=0, j=nPts-1 ; i<nPts ; j=i++ ) {
         p1 = pts[i]; p2 = pts[j];
         f = p1[0]*p2[1] - p2[0]*p1[1];
@@ -376,27 +379,27 @@ function get_polygon_centroid(pts) {
 
 function getCoordsForPolyLine(myCoords){
     /*myCoords = []
-    
-    for (i=0;i<myCoorrds.length;i++){
-        myCoords.push([myCoorrds[i].lat,myCoorrds[i].lng]);
-    }    
-        */
+
+     for (i=0;i<myCoorrds.length;i++){
+     myCoords.push([myCoorrds[i].lat,myCoorrds[i].lng]);
+     }
+     */
 
     var extremas = getExtrema(myCoords);
     var point = get_polygon_centroid(myCoords);
-    
+
     if ( (Math.abs(extremas[0][0]-extremas[2][0])) > Math.abs((extremas[1][1]-extremas[3][1])) ) {
 
         currLabelSize = Math.sqrt( (  (extremas[0][1]-point[1]) * (extremas[0][1]-point[1])
-            +  (extremas[0][0]-point[0]) * (extremas[0][0]-point[0]) )) 
-                                                +
+            +  (extremas[0][0]-point[0]) * (extremas[0][0]-point[0]) ))
+            +
             Math.sqrt( (extremas[2][1]-point[1]) * (extremas[2][1]-point[1])
                 +  (extremas[2][0]-point[0]) * (extremas[2][0]-point[0])  );
-        
+
 
         return [new L.LatLng(extremas[0][1],extremas[0][0]),new L.LatLng(point[1],point[0]),new L.LatLng(extremas[2][1],extremas[2][0])];  //angle != 0
     }
-          
+
     else {
 
         currLabelSize = Math.sqrt( (  (extremas[0][1]-point[1]) * (extremas[0][1]-point[1])
@@ -427,7 +430,7 @@ L.S.Layer.Default = L.FeatureGroup.extend({
     includes: [L.S.Layer],
 
     initialize: function (datalayer) {
-        
+
         this.datalayer = datalayer;
         this.datalayer.visible = false;
         L.FeatureGroup.prototype.initialize.call(this);
@@ -435,9 +438,9 @@ L.S.Layer.Default = L.FeatureGroup.extend({
             ultimateMarker = new L.Storage.Marker(map, new L.LatLng(42.5,1.4833))
             ultimateMarker.datalayer = datalayer;
         }
-        
-      
-        
+
+
+
     }
 
 });
@@ -498,7 +501,7 @@ L.S.Layer.Heat = L.HeatLayer.extend({
     },
 
     addLayer: function (layer) {
-        
+
         if (layer instanceof L.Marker) {
             var latlng = layer.getLatLng(), alt;
             if (this.datalayer.options.heat && this.datalayer.options.heat.intensityProperty) {
@@ -554,7 +557,7 @@ L.Storage.DataLayer = L.Class.extend({
     },
 
     initialize: function (map, data) {
-        
+
         this.map = map;
         this._index = Array();
         this._layers = {};
@@ -619,7 +622,7 @@ L.Storage.DataLayer = L.Class.extend({
                 }
             }, this);
         });
-        
+
     },
 
     resetLayer: function (force) {
@@ -650,7 +653,7 @@ L.Storage.DataLayer = L.Class.extend({
 
     eachLayer: function (method, context) {
         for (var i in this._layers) {
-        //    console.debug(i,"eachLayer", this._layers, this)
+            //    console.debug(i,"eachLayer", this._layers, this)
             method.call(context || this, this._layers[i]);
         }
         return this;
@@ -667,17 +670,17 @@ L.Storage.DataLayer = L.Class.extend({
 
     fetchData: function () {
 
-       // $("#eventsChecked").off('change');
-  //      $("#eventsChecked").change(function(){
-            
-            // search for storage id of current year in object and do:
-            //map.datalayers[146].toggle()
-  //      });
-        
-        
-        
+        // $("#eventsChecked").off('change');
+        //      $("#eventsChecked").change(function(){
+
+        // search for storage id of current year in object and do:
+        //map.datalayers[146].toggle()
+        //      });
+
+
+
         if (b_events){
-            
+
             if (a_eventsData.length == 0){
                 a_eventsLoaded.push(newYear);
                 loadFeatures(this,newYear,"events");
@@ -689,8 +692,8 @@ L.Storage.DataLayer = L.Class.extend({
 
         }
         else{
-                ClusterSuperGroup.removeLayers(a_eventsData)
-            
+            ClusterSuperGroup.removeLayers(a_eventsData)
+
         }
 
         if (b_art){
@@ -706,10 +709,10 @@ L.Storage.DataLayer = L.Class.extend({
 
         }
         else{
-                ClusterSuperGroup.removeLayers(a_artefactData)
-            
+            ClusterSuperGroup.removeLayers(a_artefactData)
+
         }
-        
+
         if (b_city){
 
             if (b_sub_cities && a_settlementsData.length == 0){
@@ -721,8 +724,8 @@ L.Storage.DataLayer = L.Class.extend({
                 console.log("*** Cities not loaded in for layer",newYear,"Data already loaded.");
             }
 
-            if (b_sub_castles && a_castlesData.length == 0){                
-                a_castlesLoaded.push(newYear);                
+            if (b_sub_castles && a_castlesData.length == 0){
+                a_castlesLoaded.push(newYear);
                 loadFeatures(this,newYear,"castles");
             }
             else if (b_sub_castles){
@@ -731,11 +734,11 @@ L.Storage.DataLayer = L.Class.extend({
 
         }
         else{
-                ClusterSuperGroup.removeLayers(a_castlesData)            
-                ClusterSuperGroup.removeLayers(a_settlementsData)
-            
+            ClusterSuperGroup.removeLayers(a_castlesData)
+            ClusterSuperGroup.removeLayers(a_settlementsData)
+
         }
-        
+
         if (b_people){
 
             if (b_sub_military && a_milData.length == 0){
@@ -802,26 +805,26 @@ L.Storage.DataLayer = L.Class.extend({
                 ClusterSuperGroup.addLayers(a_athData)
             }
             /*
-        this.map.get(this._dataUrl(), {
-            callback: function (geojson, response) {
-                console.debug("ending call2")
-                if (geojson._storage) {
-                    this.setOptions(geojson._storage);
-                }
-                this._etag = response.getResponseHeader('ETag');
-                if (this.isRemoteLayer()) {
-                    this.fetchRemoteData();
-                } else {
-                    this.fromGeoJSON(geojson);
-                }
-                this._loaded = true;
-                this.fire('loaded');
+             this.map.get(this._dataUrl(), {
+             callback: function (geojson, response) {
+             console.debug("ending call2")
+             if (geojson._storage) {
+             this.setOptions(geojson._storage);
+             }
+             this._etag = response.getResponseHeader('ETag');
+             if (this.isRemoteLayer()) {
+             this.fetchRemoteData();
+             } else {
+             this.fromGeoJSON(geojson);
+             }
+             this._loaded = true;
+             this.fire('loaded');
 
-                console.debug("fetchData",geojson)
-            },
-            context: this
-        });
-            */
+             console.debug("fetchData",geojson)
+             },
+             context: this
+             });
+             */
         }
 
         if (b_other){
@@ -844,16 +847,16 @@ L.Storage.DataLayer = L.Class.extend({
 
         }
 
-        
+
     },
 
     fromGeoJSON: function (geojson,myDataArray) {
         /*
-        for (var j=0; j<geojson.features.length; j++){
-            geojson.features[j].properties.ty=type;
-        }
-        */
-        
+         for (var j=0; j<geojson.features.length; j++){
+         geojson.features[j].properties.ty=type;
+         }
+         */
+
         this.addData(geojson,myDataArray);
         this._geojson = geojson;
         this.fire('dataloaded');
@@ -981,19 +984,19 @@ L.Storage.DataLayer = L.Class.extend({
         var id = L.stamp(feature);
         feature.connectToDataLayer(this);
         this._index.push(id);
-        
+
         this._layers[id] = feature;
 
-   //     clusterCount++;
+        //     clusterCount++;
         ClusterSuperGroup.addLayer(feature);
         //this.layer.addLayer(feature);
-        
-     //   console.debug("!-! 5")
+
+        //   console.debug("!-! 5")
         if (this.hasDataLoaded()) {
             this.fire('datachanged');
         }
 
-     //   console.debug("adding feature", feature)
+        //   console.debug("adding feature", feature)
     },
 
     removeLayer: function (feature) {
@@ -1010,15 +1013,15 @@ L.Storage.DataLayer = L.Class.extend({
     addData: function (geojson,myDataArray) {
         //   if (geojson.storage.name != "2014")
 
-       // geojson._storage.displayOnLoad = false;
-        
-     //   console.debug("adding data", geojson)
-        
+        // geojson._storage.displayOnLoad = false;
+
+        //   console.debug("adding data", geojson)
+
         this.geojsonToFeatures(geojson,myDataArray);
     },
 
     addRawData: function (c, type) {
-    //    console.debug("adding RawData", c, type)
+        //    console.debug("adding RawData", c, type)
         var self = this;
         this.rawToGeoJSON(c, type, function (geojson) {
             self.addData(geojson);
@@ -1073,8 +1076,8 @@ L.Storage.DataLayer = L.Class.extend({
     },
 
     geojsonToFeatures: function (geojson,myDataArray) {
-        
-     //   console.debug("geojsonToFeatures", JSON.stringify(geojson));
+
+        //   console.debug("geojsonToFeatures", JSON.stringify(geojson));
         var features = geojson instanceof Array ? geojson : geojson.features,
             i, len;
 
@@ -1083,7 +1086,7 @@ L.Storage.DataLayer = L.Class.extend({
             for (i = 0, len = features.length; i < len; i++) {
                 this.geojsonToFeatures(features[i],myDataArray);
             }
-         //   console.debug(JSON.stringify(this));
+            //   console.debug(JSON.stringify(this));
             return this;
         }
 
@@ -1108,20 +1111,20 @@ L.Storage.DataLayer = L.Class.extend({
                 layer = this._lineToLayer(geojson, latlngs);
                 break;
             case 'Polygon':
-                
+
                 latlngs = L.GeoJSON.coordsToLatLngs(coords, 1);
                 layer = this._polygonToLayer(geojson, latlngs);
 
-/*
-                var polyline = new L.Polyline(getCoordsForPolyLine(coords[0]), {
-                    color: 'red',
-                    weight: 10,
-                    opacity: 0.5,
-                    curved: true,
-                    smoothFactor: 1
+                /*
+                 var polyline = new L.Polyline(getCoordsForPolyLine(coords[0]), {
+                 color: 'red',
+                 weight: 10,
+                 opacity: 0.5,
+                 curved: true,
+                 smoothFactor: 1
 
-                }).addTo(this.map);
-               */ 
+                 }).addTo(this.map);
+                 */
                 break;
             case 'MultiLineString':
                 // Merge instead of failing for now
@@ -1148,8 +1151,8 @@ L.Storage.DataLayer = L.Class.extend({
         }
         if (layer) {
             myDataArray.push(layer)
-          //  this.addLayer(layer);
-         //   ClusterSuperGroup.addLayer(layer);
+            //  this.addLayer(layer);
+            //   ClusterSuperGroup.addLayer(layer);
             return layer;
         }
     },
@@ -1403,75 +1406,142 @@ L.Storage.DataLayer = L.Class.extend({
         return features;
     },
 
+    saveProvinces: function(startProvYear,endProvYear,provName,newDataArray) {
+
+        var provYear0;
+        for (provYear0 = startProvYear; provYear0<=endProvYear; provYear0++){
+
+        var provYearId0 = "";
+
+
+        if (provYear0<0)
+            provYearId0="11"+(provYear0*-1);
+        else
+            provYearId0="10"+(provYear0);
+
+        (function (provYear, provYearId1) {
+            ultimateMarker.datalayer.map.get("/en/datalayer/"+provYearId1+"/", {
+
+                callback: function (geojson, response) {
+
+                    for (var k=0; k<newDataArray.length; k++){
+                        if (newDataArray[k] !== undefined){
+                            geojson[provName][k] = newDataArray[k];
+                            editCount++;
+                            $("#EditLog").html("<i>" + editCount + " records updated.</i>");
+                        }
+                    }
+
+                    var formData = new FormData();
+                    formData.append('name', provYear);
+                    formData.append('display_on_load', !!ultimateMarker.datalayer.map.options.displayOnLoad);
+
+                    var blob = new Blob([JSON.stringify(geojson)], {type: 'application/json'});
+                    formData.append('geojson', blob);
+
+                    (function (provYearId, provYear2) {
+                        ultimateMarker.datalayer.map.post("/en/map/6/datalayer/update/"+provYearId+"/", {
+                            data: formData,
+                            callback: function (data, response) {
+
+                                if (provYear2 == newYear){
+                                    console.debug("triggering reload!");
+                                    forceReload=true;
+                                    ultimateMarker.datalayer.reset()
+
+                                    $.get( "http://chronas.org/api/addEdit/" + moderatorEmail + "/" + editCount, function( data ) {
+                                        setTimeout(function(){ editCount = 0; }, 2000);
+                                    });
+
+                                }
+                            },
+                            context: ultimateMarker.datalayer,
+                            headers: {'If-Match': ultimateMarker.datalayer._etag || ''}
+                        });
+                    })(provYearId1, provYear);
+                },
+                context: ultimateMarker.datalayer
+            });
+        })(provYear0, provYearId0);
+        }
+    },
+
     show: function () {
 
         console.info(" *** fetching data for layer with this.storage_id",this);
-        
+
         if (!this.storage_id) {
             return;
         }
         else{
             newYear = this.storage_id;
-            
+
         }
-        if(newYear != oldYear){
+        if(newYear != oldYear || forceReload){
             oldYear = newYear
-            
-        a_settlementsData = [];
-        a_castlesData = [];
-        a_artefactData = [];
-        a_areaInfoData = [];
-        a_eventsData = [];
-        a_unclassifiedData = [];
-        a_milData = [];
-        a_polData = [];
-        a_sciData = [];
-        a_relData = [];
-        a_uncPData = [];
-        a_expData = [];
-        a_artistData = [];
-        a_athData = [];
-        b_areaLoaded = false;
+
+            a_settlementsData = [];
+            a_castlesData = [];
+            a_artefactData = [];
+            a_areaInfoData = [];
+            a_eventsData = [];
+            a_unclassifiedData = [];
+            a_milData = [];
+            a_polData = [];
+            a_sciData = [];
+            a_relData = [];
+            a_uncPData = [];
+            a_expData = [];
+            a_artistData = [];
+            a_athData = [];
+            b_areaLoaded = false;
 
 
-        if (b_area && !b_areaLoaded && !this.isLoaded()){
-            
-            //query then draw
-            var tmpFix;
+            if (b_area && !b_areaLoaded && !this.isLoaded()  || forceReload ){
 
-            if (newYear<0)
-                tmpFix="11"+(newYear*-1);
-            else
-                tmpFix="10"+(newYear);
-            
-            b_areaLoaded = true;
-            this.map.get("/en/app/datalayer/"+tmpFix+"/", {
+                if (forceReload){
+                    forceReload=false;
+                }
 
-                callback: function (geojson, response) {
-                    
-                    changeYear(newYear,geojson);
+                //query then draw
+                var tmpFix;
 
-                },
-                context: this
-            });
+                if (newYear<0)
+                    tmpFix="11"+(newYear*-1);
+                else
+                    tmpFix="10"+(newYear);
 
-        }
+                b_areaLoaded = true;
+                this.map.get("/en/datalayer/"+tmpFix+"/", {
+
+                    callback: function (geojson, response) {
+
+                        changeYear(newYear,geojson);
+
+                    },
+                    context: this
+                });
 
 
-        console.log("*** showing layer which is already loaded?", this.isLoaded())
 
-       // if(!this.isLoaded()) {
+
+            }
+
+
+            console.log("*** showing layer which is already loaded?", this.isLoaded())
+
+            // if(!this.isLoaded()) {
             console.log("*** fetching data")
             this.fetchData();
-       // }
-      //  console.log("*** adding layer to map: this.layer", this)
+            // }
+            //  console.log("*** adding layer to map: this.layer", this)
 
- //       clusterCount = 0;
-        ClusterSuperGroup.clearLayers();
+            //       clusterCount = 0;
+            ClusterSuperGroup.clearLayers();
 
 
-        this.fire('show');
-    }
+            this.fire('show');
+        }
     },
 
     hide: function () {
@@ -1560,25 +1630,13 @@ L.Storage.DataLayer = L.Class.extend({
             features: this.isRemoteLayer() ? [] : this.featuresToGeoJSON(),
             _storage: this.options
         };
+
+
         this.backupOptions();
         var formData = new FormData();
-        // console.debug(document.getElementsByName("name")[0].value)
-        
-        
-        // formData.append('name', document.getElementsByClassName("datetimeValue")[0].innerHTML);//this.options.name //staticName);   formData.append('name',document.getElementsByName("name")[0].value);//this.options.name);
-
         formData.append('name', this.options.name);
-/*
-        var option = document.createElement("option");
-        option.text = document.getElementsByClassName("datetimeValue")[0].innerHTML;
-
-        document.getElementsByName("datalayer")[0].add(option);
-
-        document.getElementsByClassName("datetimeValue")[0].innerHTML
-        */
-
         formData.append('display_on_load', !!this.options.displayOnLoad);
-        // filename support is shaky, don't do it for now
+
         var blob = new Blob([JSON.stringify(geojson)], {type: 'application/json'});
         formData.append('geojson', blob);
         this.map.post(this.getSaveUrl(), {

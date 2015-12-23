@@ -305,12 +305,14 @@ L.Storage.Map.include({
             this._controls.datalayersControl = new L.Storage.DataLayersControl().addTo(this);
         }
         if (this.options.allowEdit) {
+            /*
             this._controls.toggleEdit = new L.Storage.EditControl(this);
             this.addControl(this._controls.toggleEdit);
             this._controls.drawToolbar = new L.S.DrawToolbar(this);
             this.addControl(this._controls.drawToolbar);
             this._controls.settingsToolbar = new L.S.SettingsToolbar(this);
             this.addControl(this._controls.settingsToolbar);
+            */
         }
         if (this.options.moreControl) {
             this._controls.moreControl = (new L.Storage.MoreControls()).addTo(this);
