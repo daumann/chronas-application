@@ -4290,8 +4290,8 @@ function submitProvEdit(){
         $("#EditLog").html("ERR: Batch edits for time spans of more than 100 years are not allowed; is your data correct?")
     }
     else {
-        ultimateMarker.datalayer.saveProvinces(tmpSince,tmpUntil,unescape(encodeURIComponent($("#EditProvName").attr("title"))),[tmpRul,tmpCul,tmpRel,tmpCap,tmpPop])
-    }
+        ultimateMarker.datalayer.saveProvinces(tmpSince,tmpUntil,($("#EditProvName").attr("title")),[tmpRul,tmpCul,tmpRel,tmpCap,tmpPop])
+    } //unescape(encodeURIComponent       apparently not necessary
 
 
 
