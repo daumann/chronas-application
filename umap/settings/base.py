@@ -80,9 +80,9 @@ PROJECT_DIR = os.path.dirname(os.path.realpath(project_module.__file__))
 
 ROOT_URLCONF = 'umap.urls'
 
-LOGIN_URL = '/login/'
-LOGOUT_URL = '/logout/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/app/login/'
+LOGOUT_URL = '/app/logout/'
+LOGIN_REDIRECT_URL = '/app/'
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/uploads/'
@@ -161,8 +161,8 @@ COMPRESS_OFFLINE = True
 
 SOCIAL_AUTH_DEFAULT_USERNAME = lambda u: slugify(u)
 SOCIAL_AUTH_ASSOCIATE_BY_EMAIL = True
-LOGIN_URL = "login"
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/login/popup/end/"
+LOGIN_URL = "/app/login"
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/app/login/popup/end/"
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
     'social.pipeline.social_auth.social_uid',
