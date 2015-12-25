@@ -4321,19 +4321,15 @@ function submitProvEdit(){
         $("#EditLog").css("color","rgb(213, 0, 0)")
         $("#EditLog").html("ERR: Specified until year is before the since year.")
     }
-    else if (tmpSince<tmpUntil-101 ){
+    else if (tmpSince<tmpUntil-1000 ){
         $("#EditLog").css("color","rgb(213, 0, 0)")
-        $("#EditLog").html("ERR: Batch edits for time spans of more than 100 years are not allowed; is your data correct?")
+        $("#EditLog").html("ERR: Batch edits for time spans of more than 1000 years are not allowed; is your data correct?")
     }
     else {
         ultimateMarker.datalayer.saveProvinces(tmpSince,tmpUntil,provNameEditList,[tmpRul,tmpCul,tmpRel,tmpCap,tmpPop])
 
         provNameEditList=[];
-    } //unescape(encodeURIComponent       apparently not necessary
-
-
-
-
+    }
 }
 
 function removeProvFromList(provId){
