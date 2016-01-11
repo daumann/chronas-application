@@ -15,13 +15,16 @@ function openDatatable(searchKey){
     
 }
     function openReportDisclaimer(){
-        if($("#reportBetaText").is(":visible") ){
+        if($(".headerEdits").is(":visible") ){
             $("#chronasWiki").show()
             $("#reportBetaText").hide()
+            $(".headerEdits").hide()
+
         }
         else{
             $("#chronasWiki").hide()
             $("#reportBetaText").show()
+            $(".headerEdits").show()
         }
     }
     function  openfullWidth(){

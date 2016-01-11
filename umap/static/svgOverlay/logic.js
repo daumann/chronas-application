@@ -5,6 +5,7 @@ var alert = function () {
 };
 var rulList = [];
 var culList = [];
+var relGenList = ["na", "Christianity", "Islam", "Buddhism", "Hinduism", "Other Dharmic", "Paganism", "Eastern", "Polytheism", "iranian", "Judaism", "Secularism", "Totemism", "Shamanism"];
 var relList = [];
 var capList = [];
 
@@ -102,8 +103,8 @@ function goToRuler(e) {
     var rulerAcr = e;
     var provinceToCenter = e;
 
-    for (var key in countryPlus) {
-        if (countryPlus[key][0] == e)
+    for (var key in rulPlus) {
+        if (rulPlus[key][0] == e)
             rulerAcr = key;
     }
 
@@ -210,9 +211,9 @@ function goTomRel(e) {
 
 function detailsToRul(e) {
 
-    for (var key in countryPlus) {
-        if (countryPlus[key][0] == e) {
-            ultimateMarker.properties.wikiUrl = escape(countryPlus[key][2]);
+    for (var key in rulPlus) {
+        if (rulPlus[key][0] == e) {
+            ultimateMarker.properties.wikiUrl = escape(rulPlus[key][2]);
             ultimateMarker.attachPopup()
 
             $('#chronasWiki').hide();
@@ -308,21 +309,20 @@ function reloadHierarchy() {
         total += tmpKey[4]
         total2 += provArea[key];
 
-        if (culPlus[tmpKey[1]] !== undefined)
-            sortAll.push([key, countryPlus[tmpKey[0]][0], culPlus[tmpKey[1]][0], relPlus[tmpKey[2]][0], relGen[tmpKey[2]][0], tmpKey[3], tmpArea, tmpPop, "<span class='centerClass' onclick='goToAll(&#39;" + key + "&#39;)'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class='detailsClass' onclick='detailsToAll(&#39;" + key + "&#39;)'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"])
-        else {
-            tmpKey[1] = "sapmi";
-            sortAll.push([key, countryPlus[tmpKey[0]][0], culPlus[tmpKey[1]][0], relPlus[tmpKey[2]][0], relGen[tmpKey[2]][0], tmpKey[3], tmpArea, tmpPop, "<span class='centerClass' onclick='goToAll(&#39;" + key + "&#39;)'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class='detailsClass' onclick='detailsToAll(&#39;" + key + "&#39;)'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"])
+        if (culPlus[tmpKey[1]] !== undefined){
 
-        }
 
-        sunburstRel.push([relGen[tmpKey[2]][0] + "-" + relPlus[tmpKey[2]][0] + "-" + countryPlus[tmpKey[0]][0] + "-" + culPlus[tmpKey[1]][0] + "-" + key, tmpPop]);
+            sortAll.push([key, rulPlus[tmpKey[0]][0], culPlus[tmpKey[1]][0], relPlus[tmpKey[2]][0], relGen[tmpKey[2]][0], tmpKey[3], tmpArea, tmpPop, "<span class='centerClass' onclick='goToAll(&#39;" + key + "&#39;)'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class='detailsClass' onclick='detailsToAll(&#39;" + key + "&#39;)'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"])
 
-        sunburstRul.push([countryPlus[tmpKey[0]][0] + "-" + relGen[tmpKey[2]][0] + "-" + relPlus[tmpKey[2]][0] + "-" + tmpKey[1] + "-" + key, tmpPop]);
-        if (isNaN(rulerPops[countryPlus[tmpKey[0]][0]])) {
-            rulerPops[countryPlus[tmpKey[0]][0]] = tmpPop;
+
+        sunburstRel.push([relGen[tmpKey[2]][0] + "-" + relPlus[tmpKey[2]][0] + "-" + rulPlus[tmpKey[0]][0] + "-" + culPlus[tmpKey[1]][0] + "-" + key, tmpPop]);
+
+        sunburstRul.push([rulPlus[tmpKey[0]][0] + "-" + relGen[tmpKey[2]][0] + "-" + relPlus[tmpKey[2]][0] + "-" + tmpKey[1] + "-" + key, tmpPop]);
+
+        if (isNaN(rulerPops[rulPlus[tmpKey[0]][0]])) {
+            rulerPops[rulPlus[tmpKey[0]][0]] = tmpPop;
         } else {
-            rulerPops[countryPlus[tmpKey[0]][0]] += tmpPop;
+            rulerPops[rulPlus[tmpKey[0]][0]] += tmpPop;
         }
 
         if (isNaN(culPlus[tmpKey[1]][0])) {
@@ -344,10 +344,10 @@ function reloadHierarchy() {
         }
 
 
-        if (isNaN(rulerPops2[countryPlus[tmpKey[0]][0]])) {
-            rulerPops2[countryPlus[tmpKey[0]][0]] = tmpArea;
+        if (isNaN(rulerPops2[rulPlus[tmpKey[0]][0]])) {
+            rulerPops2[rulPlus[tmpKey[0]][0]] = tmpArea;
         } else {
-            rulerPops2[countryPlus[tmpKey[0]][0]] += tmpArea;
+            rulerPops2[rulPlus[tmpKey[0]][0]] += tmpArea;
         }
 
         if (isNaN(culPops2[culPlus[tmpKey[1]][0]])) {
@@ -367,6 +367,14 @@ function reloadHierarchy() {
         } else {
             mainRelPops2[relGen[tmpKey[2]][0]] += tmpArea;
         }
+
+
+        }
+        else {
+            //tmpKey[1] = "_List_of_uninhabited_regions";
+            //sortAll.push([key, rulPlus[tmpKey[0]][0], culPlus[tmpKey[1]][0], relPlus[tmpKey[2]][0], relGen[tmpKey[2]][0], tmpKey[3], tmpArea, tmpPop, "<span class='centerClass' onclick='goToAll(&#39;" + key + "&#39;)'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class='detailsClass' onclick='detailsToAll(&#39;" + key + "&#39;)'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"])
+
+        }
     }
 
     sortRuler = [];
@@ -383,14 +391,6 @@ function reloadHierarchy() {
     for (var key in mainRelPops)
         sortmRel.push([key, mainRelPops2[key], mainRelPops[key], "<span class='centerClass' onclick='goTomRel(&#39;" + key + "&#39;)'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class='detailsClass' onclick='detailsTomRel(&#39;" + key + "&#39;)'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"])
 
-    // createVisualization(buildHierarchy(sunburstRul));
-
-    /*
-     sortRuler.sort(function(b, a) {return a[1] - b[1]})
-     sortCul.sort(function(b, a) {return a[1] - b[1]})
-     sortRel.sort(function(b, a) {return a[1] - b[1]})
-     sortmRel.sort(function(b, a) {return a[1] - b[1]})
-     */
 }
 
 function aud_play_pause() {
@@ -961,12 +961,16 @@ function fillCollectionId(myId, addTo, postfix) {
     };
     for (var key in myId) {
 
-        if (postfix != "co" && postfix != "r") {
+        if (postfix == "co") {
+            tmpName = "";
+            if (rulPlus[key]) tmpName = rulPlus[key][0];
+        }
+        else if (postfix == "rg") {
             tmpName = key
         }
-        else if (postfix == "co") {
+        else if (postfix == "cu") {
             tmpName = "";
-            if (countryPlus[key]) tmpName = countryPlus[key][0];
+            if (culPlus[key]) tmpName = culPlus[key][0];
         }
         else if (postfix == "r") {
             tmpName = "";
@@ -1107,8 +1111,8 @@ function setupCollections(myActiveTextFeat) {
             provinceCollection.features[i].properties.Pop = tmpPop;
             provinceCollection.features[i].properties.Cap = tmpCap;
 
-            if (countryPlus[tmpCountry]) {
-                provinceCollection.features[i].properties.nameCountry = countryPlus[tmpCountry][0];
+            if (rulPlus[tmpCountry]) {
+                provinceCollection.features[i].properties.nameCountry = rulPlus[tmpCountry][0];
             }
 
         }
@@ -1288,12 +1292,12 @@ function setupCollections(myActiveTextFeat) {
 
                     var i = 0;
 
-                    for (var key in countryPlus) {
-                        if (countryPlus[key][0] == d.properties.nameCountry) {
-                            rulerWiki = countryPlus[key][2];
+                    for (var key in rulPlus) {
+                        if (rulPlus[key][0] == d.properties.nameCountry) {
+                            rulerWiki = rulPlus[key][2];
 
-                            if (countryPlus[key][3] !== undefined) {
-                                map.get(urlPrefix + "/datalayer/26" + countryPlus[key][3] + "/", {
+                            if (rulPlus[key][3] !== undefined) {
+                                map.get(urlPrefix + "/datalayer/26" + rulPlus[key][3] + "/", {
                                         callback: function (geojson) {
 
                                             var relKing = getRelevantKing(geojson);
@@ -1418,7 +1422,7 @@ function setupCollections(myActiveTextFeat) {
                          }
                          */
 
-                        if ($("#EditProvName")[0] !== undefined) {
+                        if ($("#EditProvName")[0] !== undefined && allowEdit) {
 
                             provNameEditList.push(d.properties.name);
 
@@ -1429,10 +1433,6 @@ function setupCollections(myActiveTextFeat) {
 
                                 $("#htmlProvList")[0].innerHTML = $("#htmlProvList")[0].innerHTML + '<div id="'+provNameEditList[l]+'" class="resource provItem input-group input-group-sm"> <span onclick="removeProvFromList(\''+provNameEditList[l]+'\');" class="input-group-addon"> <i  class="fa fa-times"></i> </span> <input type="text" readonly="" class="form-control" placeholder="'+provNameEditList[l]+'" aria-describedby="btn_mon" title="'+provNameEditList[l]+'"> </div>'
                             }
-
-
-                            //$("#EditProvName").attr("title",d.properties.name)
-
 
 
                             if ($("#sinceYear").val() === "" ){
@@ -1451,26 +1451,219 @@ function setupCollections(myActiveTextFeat) {
                                 for (var property in culPlus) {
                                     culList.push(culPlus[property][0]);
                                 }
-                                for (var property in countryPlus) {
-                                    rulList.push(countryPlus[property][0]);
+                                for (var property in rulPlus) {
+                                    rulList.push(rulPlus[property][0]);
                                 }
 
                                 relList.sort();
                                 capList.sort();
                                 culList.sort();
                                 rulList.sort();
+                                relGenList.sort();
                             }
 
-                                $( "#EditProvRul" ).autocomplete({
+
+                            $( "#AddMetaRul" ).autocomplete({
+                                source: rulList,
+                                select: function (a, b) {
+                                    if (rulList.indexOf( b.item.value ) !== -1){
+                                        setTimeout(function(){$( "#AddMetaRul").val("");}, 500);
+                                    }
+                                }
+                            });
+                            $( "#EditMetaRul" ).autocomplete({
+                                source: rulList,
+                                select: function (a, b) {
+                                    for (var property in rulPlus) {
+                                        if (rulPlus[property][0] == b.item.value){
+                                            $( "#EditMetaRulNew").val(rulPlus[property][0]);
+                                            $( ".colorRulEdits").val(colorToHex(rulPlus[property][1]));
+                                            $( ".colorRulEdits").prop('disabled', false);
+                                            $( "#EditRulURL").val("en.wikipedia.org/wiki/"+rulPlus[property][2]);
+                                        }
+
+                                    }
+                                }
+                            });
+                            $( "#EditMetaCul" ).autocomplete({
+                                source: culList,
+                                select: function (a, b) {
+                                    for (var property in culPlus) {
+                                        if (culPlus[property][0] ==  b.item.value){
+                                            $( "#EditMetaCulNew").val(culPlus[property][0]);
+                                            $( ".colorCulEdits").val(colorToHex(culPlus[property][1]));
+                                            $( ".colorCulEdits").prop('disabled', false);
+                                            $( "#EditCulURL").val("en.wikipedia.org/wiki/"+culPlus[property][2]);
+                                        }
+                                    }
+                                }
+                            });
+                            $( "#AddMetaCul" ).autocomplete({
+                                source: culList,
+                                select: function (a, b) {
+                                    if (culList.indexOf( b.item.value ) !== -1){
+                                        setTimeout(function(){$( "#AddMetaCul").val("");}, 500);
+                                    }
+                                }
+                            });
+                            $( "#AddMetaRel" ).autocomplete({
+                                source: relList,
+                                select: function (a, b) {
+                                    if (relList.indexOf( b.item.value ) !== -1){
+                                        setTimeout(function(){$( "#AddMetaRel").val("");}, 500);
+                                    }
+                                }
+                            });
+                            $( "#AddMetamRel" ).autocomplete({
+                                source: relGenList,
+                                select: function (a, b) {
+                                    if (relGenList.indexOf( b.item.value ) == -1){
+                                        setTimeout(function(){$( "#AddMetamRel").val("");}, 500);
+                                    }
+                                }
+                            });
+                            $( "#EditMetaRel" ).autocomplete({
+                                source: relList,
+                                select: function (a, b) {
+                                    for (var property in relPlus) {
+                                        if (relPlus[property][0] == b.item.value){
+                                            $( "#EditMetaRelNew").val(relPlus[property][0]);
+                                            $( ".colorRelEdits").val(colorToHex(relPlus[property][1]));
+                                            $( ".colorRelEdits").prop('disabled', false);
+                                            $( "#EditRelURL").val("en.wikipedia.org/wiki/"+relPlus[property][2]);
+                                        }
+                                    }
+                                }
+                            });
+                            $( "#AddMetaCap" ).autocomplete({
+                                source: capList,
+                                select: function (a, b) {
+                                    if (capList.indexOf( b.item.value ) !== -1){
+                                        setTimeout(function(){$( "#AddMetaCap").val("");}, 500);
+                                    }
+                                }
+                            });
+                            $( "#EditMetaCap" ).autocomplete({
+                                source: capList,
+                                select: function (a, b) {
+                                    if (capitalURL[property] == b.item.value){
+                                        $( "#EditMetaCapNew").val(property);
+                                        $( "#EditCapURL").val("en.wikipedia.org/wiki/"+capitalURL[property]);
+                                    }
+                                }
+                            });
+
+                            $( "#AddMetaRul" ).change(function() {
+                                if (rulList.indexOf($( "#AddMetaRul").val()) !== -1){
+                                    $( "#AddMetaRul").val("");
+                                }
+                            });
+                            $( "#AddMetaCul" ).change(function() {
+                                if (culList.indexOf($( "#AddMetaCul").val()) !== -1){
+                                    $( "#AddMetaCul").val("");
+                                }
+                            });
+                            $( "#AddMetamRel" ).change(function() {
+                                if (relGenList.indexOf($( "#AddMetamRel").val()) === -1){
+                                    $( "#AddMetamRel").val("");
+                                }
+                            });
+                            $( "#AddMetaRel" ).change(function() {
+                                if (relList.indexOf($( "#AddMetaRel").val()) !== -1){
+                                    $( "#AddMetaRel").val("");
+                                }
+                            });
+                            $( "#AddMetaCap" ).change(function() {
+                                if (capList.indexOf($( "#AddMetaCap").val()) !== -1){
+                                    $( "#AddMetaCap").val("");
+                                }
+                            });
+
+                            $( "#EditMetaRul" ).change(function() {
+                                if (rulList.indexOf($( "#EditMetaRul").val()) == -1){
+                                    $( "#EditMetaRul").val("");
+                                    $( "#EditMetaRulNew").val("");
+                                    $( ".colorRulEdits").prop('disabled', true);
+                                    $( ".colorRulEdits").val("#efefef");
+                                    $( "#EditRulURL").val("");
+
+                                } else {
+
+                                    for (var property in rulPlus) {
+                                        if (rulPlus[property][0] == $( "#EditMetaRul" ).val()){
+                                            $( "#EditMetaRulNew").val(rulPlus[property][0]);
+                                            $( ".colorRulEdits").val(colorToHex(rulPlus[property][1]));
+                                            $( ".colorRulEdits").prop('disabled', false);
+                                            $( "#EditRulURL").val("en.wikipedia.org/wiki/"+rulPlus[property][2]);
+                                        }
+
+                                    }
+                                }
+                            });
+                            $( "#EditMetaCul" ).change(function() {
+                                if (culList.indexOf($( "#EditMetaCul").val()) == -1){
+                                    $( "#EditMetaCul").val("");
+                                    $( "#EditMetaCulNew").val("");
+                                    $( ".colorCulEdits").prop('disabled', true);
+                                    $( ".colorCulEdits").val("#efefef");
+                                    $( "#EditCulURL").val("");
+
+                                } else {
+                                    for (var property in culPlus) {
+                                        if (culPlus[property][0] == $( "#EditMetaCul" ).val()){
+                                            $( "#EditMetaCulNew").val(culPlus[property][0]);
+                                            $( ".colorCulEdits").val(colorToHex(culPlus[property][1]));
+                                            $( ".colorCulEdits").prop('disabled', false);
+                                            $( "#EditCulURL").val("en.wikipedia.org/wiki/"+culPlus[property][2]);
+                                        }
+                                    }
+                                }
+                            });
+                            $( "#EditMetaRel" ).change(function() {
+                                if (relList.indexOf($( "#EditMetaRel").val()) == -1){
+                                    $( "#EditMetaRel").val("");
+                                    $( "#EditMetaRelNew").val("");
+                                    $( ".colorRelEdits").prop('disabled', true);
+                                    $( ".colorRelEdits").val("#efefef");
+                                    $( "#EditRelURL").val("");
+
+                                } else {
+                                    for (var property in relPlus) {
+                                        if (relPlus[property][0] == $( "#EditMetaRel" ).val()){
+                                            $( "#EditMetaRelNew").val(relPlus[property][0]);
+                                            $( ".colorRelEdits").val(colorToHex(relPlus[property][1]));
+                                            $( ".colorRelEdits").prop('disabled', false);
+                                            $( "#EditRelURL").val("en.wikipedia.org/wiki/"+relPlus[property][2]);
+                                        }
+                                    }
+                                }
+                            });
+
+                            $( "#EditMetaCap" ).change(function() {
+                                if (capList.indexOf($( "#EditMetaCap").val()) == -1){
+                                    $( "#EditMetaCap").val("");
+                                    $( "#EditMetaCapNew").val("");
+                                    $( "#EditCapURL").val("");
+                                } else {
+                                    for (var property in capitalURL) {
+                                        if (capitalURL[property] == $( "#EditMetaCap" ).val()){
+                                            $( "#EditMetaCapNew").val(property);
+                                            $( "#EditCapURL").val("en.wikipedia.org/wiki/"+capitalURL[property]);
+                                        }
+                                    }
+                                }
+                            });
+
+                            $( "#EditProvRul" ).autocomplete({
                                     source: rulList
-                                });
+                            });
                             $( "#EditProvRul" ).change(function() {
                                 if (rulList.indexOf($( "#EditProvRul").val()) == -1){
                                     $( "#EditProvRul").val("");
                                 }
                             });
 
-                                $( "#EditProvCul" ).autocomplete({
+                            $( "#EditProvCul" ).autocomplete({
                                     source: culList
                                 });
                             $( "#EditProvRel" ).change(function() {
@@ -1479,7 +1672,7 @@ function setupCollections(myActiveTextFeat) {
                                 }
                             });
 
-                                $( "#EditProvCap" ).autocomplete({
+                            $( "#EditProvCap" ).autocomplete({
                                     source: capList
                                 });
                             $( "#EditProvCap" ).change(function() {
@@ -1488,7 +1681,7 @@ function setupCollections(myActiveTextFeat) {
                                 }
                             });
 
-                                $( "#EditProvRel" ).autocomplete({
+                            $( "#EditProvRel" ).autocomplete({
                                     source: relList
                                 });
                             $( "#EditProvRel" ).change(function() {
@@ -1498,14 +1691,16 @@ function setupCollections(myActiveTextFeat) {
                             });
 
 
-
-
                         }
 
 
 
 
-                        $("#cultureSpec")[0].innerHTML = d.properties.Cul;
+                        if (culPlus[d.properties.Cul] !== undefined)
+                            $("#cultureSpec")[0].innerHTML = culPlus[d.properties.Cul][0];
+                        else
+                            $("#cultureSpec")[0].innerHTML = d.properties.Cul;
+
                         $("#religionSpec")[0].innerHTML = relPlus[d.properties.Rel][0];
                         $("#rulerSpec")[0].innerHTML = (d.properties.nameCountry === undefined) ? "[unsettled]" : d.properties.nameCountry;
                         $("#mainRelSpec")[0].innerHTML = relGen[d.properties.Rel][0];
@@ -1665,28 +1860,6 @@ function setupCollections(myActiveTextFeat) {
                             $('#notFoundNotice').show()
                             $('#loader1').hide()
                         }
-
-
-                        //            $('#chronasWiki').hide(); $('#overview')[0].style.display = 'none'; $('#loader1')[0].style.display = 'block';  $('#specific')[0].style.display = 'block';  var tmpURL=''; tmpURL='http://en.wikipedia.org/wiki/Dacians'; if($('#storage-ui-container')[0].style.width != '100%'){tmpURL=tmpURL+'?printable=yes'}  $('iframe')[0].src=+"'"+tmpURL+"'"; $('#chronasWiki').load(function(){ $('#chronasWiki').show(); });
-
-
-                        /*
-                         alert(d.properties.name +
-                         " \n(http://en.wikipedia.org/wiki/" + provURL[d.properties.name] +
-                         "\n\nRuled by " +
-                         ( (d.properties.nameCountry === undefined) ? "[unsettled]" : d.properties.nameCountry) +
-                         " \n(http://en.wikipedia.org/wiki/" + rulerWiki +
-
-                         "\nCapital:" + d.properties.Cap +
-                         " \n(http://en.wikipedia.org/wiki/" + capitalURL[d.properties.Cap] +
-                         "\nCulture: " + d.properties.Cul +
-                         " \n(http://en.wikipedia.org/wiki/" + culPlus[d.properties.Cul][2] +
-                         "\nReligion: " + relPlus[d.properties.Rel][0] +
-                         " \n(http://en.wikipedia.org/wiki/" + relPlus[d.properties.Rel][2] +
-                         ")\n part of: " + relGen[d.properties.Rel][0] +
-                         "\n(http://en.wikipedia.org/wiki/" + relGen[d.properties.Rel][2] +
-                         ")\n Population: " + d.properties.Pop)
-                         */
                     }
                 }
                 }
@@ -1779,7 +1952,7 @@ function addAreaFeat(setActiveFeat) {
 
 
                     if (tmpCountry != "undefined")
-                        provinceCollection.features[i].properties.Acolor = countryPlus[tmpCountry][1];
+                        provinceCollection.features[i].properties.Acolor = rulPlus[tmpCountry][1];
                     else {
                         provinceCollection.features[i].properties.Acolor = undefinedColor;
                     }
@@ -1899,8 +2072,8 @@ function addTextFeat(setActiveFeat) {
                 provinceCollection.features[i].properties.Pop = tmpPop;
                 provinceCollection.features[i].properties.Cap = tmpCap;
 
-                if (countryPlus[tmpCountry]) {
-                    provinceCollection.features[i].properties.nameCountry = countryPlus[tmpCountry][0];
+                if (rulPlus[tmpCountry]) {
+                    provinceCollection.features[i].properties.nameCountry = rulPlus[tmpCountry][0];
                 }
 
             }
@@ -4276,6 +4449,232 @@ function compareLast(source, key) {
         return false;
 }
 
+
+function submitEditMeta(){
+
+    var newOB = {};
+
+    newOB.relPlus = relPlus;
+    newOB.relGen = relGen;
+    newOB.culPlus = culPlus;
+    newOB.rulPlus = rulPlus;
+    newOB.capitalURL = capitalURL;
+    newOB.provURL = provURL;
+
+
+
+    if (!IsJsonString(newOB)){
+        $("#EditLog").css("color","rgb(213, 0, 0)")
+        $("#EditLog").html("Error occured while adding new entry.")
+    }
+
+    else {
+        ultimateMarker.datalayer.updateDataDef(newOB);
+
+        provNameEditList=[];
+    }
+}
+
+
+
+function submitAddMeta(){
+
+    var newOB = {};
+
+    newOB.relPlus = relPlus;
+    newOB.relGen = relGen;
+    newOB.culPlus = culPlus;
+    newOB.rulPlus = rulPlus;
+    newOB.capitalURL = capitalURL;
+    newOB.provURL = provURL;
+
+
+    var newRul0, newRul1, newRul2;
+    var newCul0, newCul1, newCul2;
+    var newRel0, newRel1, newRel2, newRel3;
+    var newCap0, newCap2;
+
+    if($("#AddMetaRul").val() !== "" && $("#AddRulURL").val().substring($("#AddRulURL").val().indexOf("/wiki/")+6,$("#AddRulURL").val().length) !== ""){
+        newRul0 = $("#AddMetaRul").val();
+        newRul1 = hexToRgb($(".colorRulAdd").val());
+        newRul2 = $("#AddRulURL").val().substring($("#AddRulURL").val().indexOf("/wiki/")+6,$("#AddRulURL").val().length);
+        newOB.rulPlus['_'+newRul2] = [newRul0,newRul1,newRul2]
+    }
+    
+    if($("#AddMetaCul").val() !== "" && $("#AddCulURL").val().substring($("#AddCulURL").val().indexOf("/wiki/")+6,$("#AddCulURL").val().length) !== ""){
+        newCul0 = $("#AddMetaCul").val();
+        newCul1 = hexToRgb($(".colorCulAdd").val());
+        newCul2 = $("#AddCulURL").val().substring($("#AddCulURL").val().indexOf("/wiki/")+6,$("#AddCulURL").val().length);
+        newOB.culPlus[newCul0] = [newCul0,newCul1,newCul2]
+    }
+    
+    if($("#AddMetaRel").val() !== "" && $("#AddMetamRel").val() !== "" && $("#AddRelURL").val().substring($("#AddRelURL").val().indexOf("/wiki/")+6,$("#AddRelURL").val().length) !== ""){
+        newRel0 = $("#AddMetaRel").val();
+        newRel1 = hexToRgb($(".colorRelAdd").val());
+        newRel2 = $("#AddRelURL").val().substring($("#AddRelURL").val().indexOf("/wiki/")+6,$("#AddRelURL").val().length);
+        newOB.relPlus['_'+newRel2] = [newRel0,newRel1,newRel2]
+
+        for (var property in relGen) {
+            if (relGen[property][0] == $("#AddMetamRel").val())
+                newOB.relGen['_'+newRel2] = [relGen[property][0],relGen[property][1],relGen[property][2]]
+        }
+
+
+    }
+    
+    if($("#AddMetaCap").val() !== "" && $("#AddCapURL").val().substring($("#AddCapURL").val().indexOf("/wiki/")+6,$("#AddCapURL").val().length) !== ""){
+        newCap0 = $("#AddMetaCap").val();
+        newCap2 = $("#AddCapURL").val().substring($("#AddCapURL").val().indexOf("/wiki/")+6,$("#AddCapURL").val().length);
+        newOB.capitalURL[newCap0] = newCap2;
+    }
+    
+
+    var editingRul0, editingRul01, editingRul1, editingRul2;
+    var editingCul0, editingCul01, editingCul1, editingCul2;
+    var editingRel0, editingRel01, editingRel1, editingRel2, editingRel3;
+    var editingCap0, editingCap01, editingCap2;
+
+    if($("#EditMetaRul").val() !== "" && $("#EditRulURL").val().substring($("#EditRulURL").val().indexOf("/wiki/")+6,$("#EditRulURL").val().length) !== ""){
+        editingRul0 = $("#EditMetaRul").val();
+        editingRul01 = $("#EditMetaRulNew").val();
+        editingRul1 = hexToRgb($(".colorRulEdits").val());
+        editingRul2 = $("#EditRulURL").val().substring($("#EditRulURL").val().indexOf("/wiki/")+6,$("#EditRulURL").val().length);
+
+        for (var property in rulPlus) {
+            if (rulPlus[property][0] == editingRul0)
+                newOB.rulPlus[property] = [editingRul01,editingRul1,editingRul2];
+        }
+    }
+
+    if($("#EditMetaCul").val() !== "" && $("#EditCulURL").val().substring($("#EditCulURL").val().indexOf("/wiki/")+6,$("#EditCulURL").val().length) !== ""){
+        editingCul0 = $("#EditMetaCul").val();
+        editingCul01 = $("#EditMetaCulNew").val();
+        editingCul1 = hexToRgb($(".colorCulEdits").val());
+        editingCul2 = $("#EditCulURL").val().substring($("#EditCulURL").val().indexOf("/wiki/")+6,$("#EditCulURL").val().length);
+
+        for (var property in culPlus) {
+            if (culPlus[property][0] == editingCul0)
+                newOB.culPlus[property] = [editingCul01,editingCul1,editingCul2];
+        }
+    }
+
+    if($("#EditMetaRel").val() !== "" && $("#EditRelURL").val().substring($("#EditRelURL").val().indexOf("/wiki/")+6,$("#EditRelURL").val().length) !== ""){
+        editingRel0 = $("#EditMetaRel").val();
+        editingRel01 = $("#EditMetaRelNew").val();
+        editingRel1 = hexToRgb($(".colorRelEdits").val());
+        editingRel2 = $("#EditRelURL").val().substring($("#EditRelURL").val().indexOf("/wiki/")+6,$("#EditRelURL").val().length);
+
+        for (var property in relPlus) {
+            if (relPlus[property][0] == editingRel0)
+                newOB.relPlus[property] = [editingRel01,editingRel1,editingRel2];
+        }
+    }
+
+    if($("#EditMetaCap").val() !== "" && $("#EditCapURL").val().substring($("#EditCapURL").val().indexOf("/wiki/")+6,$("#EditCapURL").val().length) !== ""){
+        editingCap0 = $("#EditMetaCap").val();
+        editingCap01 = $("#EditMetaCapNew").val();
+        editingCap2 = $("#EditCapURL").val().substring($("#EditCapURL").val().indexOf("/wiki/")+6,$("#EditCapURL").val().length);
+        newOB.capitalURL[editingCap01] = editingCap2;
+    }
+
+    if (!IsJsonString(newOB)){
+        $("#EditMetaLog").css("color","rgb(213, 0, 0)")
+        $("#EditMetaLog").html("Error occured while adding new entry.")
+    }
+
+    else {
+
+        relPlus = newOB.relPlus ;
+        relGen = newOB.relGen;
+        culPlus = newOB.culPlus;
+        rulPlus = newOB.rulPlus;
+        capitalURL = newOB.capitalURL;
+        provURL = newOB.provURL;
+
+
+
+        relList = [];
+        capList = [];
+        culList = [];
+        rulList = [];
+
+        if (relList.length == 0) {
+            for (var property in relPlus) {
+                relList.push(relPlus[property][0]);
+            }
+            for (var property in capitalURL) {
+                capList.push(property);
+            }
+            for (var property in culPlus) {
+                culList.push(culPlus[property][0]);
+            }
+            for (var property in rulPlus) {
+                rulList.push(rulPlus[property][0]);
+            }
+
+            relList.sort();
+            capList.sort();
+            culList.sort();
+            rulList.sort();
+        }
+
+
+
+        $( "#EditProvRul" ).autocomplete({
+            source: rulList
+        });
+        $( "#EditProvCul" ).autocomplete({
+            source: culList
+        });
+        $( "#EditProvRel" ).autocomplete({
+            source: relList
+        });
+        $( "#EditProvCap" ).autocomplete({
+            source: capList
+        });
+
+
+
+        $( "#AddMetaRul" ).autocomplete({
+            source: rulList
+        });
+        $( "#EditMetaRul" ).autocomplete({
+            source: rulList
+        });
+        $( "#EditAMetaCul" ).autocomplete({
+            source: culList
+        });
+        $( "#AddMetaCul" ).autocomplete({
+            source: culList
+        });
+        $( "#AddMetaRel" ).autocomplete({
+            source: relList
+        });
+        $( "#EditMetaRel" ).autocomplete({
+            source: relList
+        });
+        $( "#AddMetaCap" ).autocomplete({
+            source: capList
+        });
+        $( "#EditMetaCap" ).autocomplete({
+            source: capList
+        });
+
+        $( "#AddMetamRel" ).autocomplete({
+            source: relGenList,
+            select: function (a, b) {
+                if (relGenList.indexOf( b.item.value ) == -1){
+                    setTimeout(function(){$( "#AddMetamRel").val("");}, 500);
+                }
+            }
+        });
+        ultimateMarker.datalayer.updateDataDef(newOB);
+        provNameEditList=[];
+    }
+
+}
+
+
 function submitProvEdit(){
     //ultimateMarker.datalayer.saveProvinces(1,100,"Bamberg",[undefined,undefined,undefined,undefined,1000000])
     //prov[unescape(encodeURIComponent("Småland"))]
@@ -4288,8 +4687,8 @@ function submitProvEdit(){
     var tmpSince=parseInt($( "#sinceYear" ).val());
     var tmpUntil=parseInt($( "#untilYear" ).val());
     if($( "#EditProvRul" ).val() !== ""){
-        for (var property in countryPlus) {
-            if (countryPlus[property][0] == $( "#EditProvRul" ).val())
+        for (var property in rulPlus) {
+            if (rulPlus[property][0] == $( "#EditProvRul" ).val())
                 tmpRul = property;
         }
     }
@@ -4346,3 +4745,76 @@ function removeProvFromList(provId){
     }
 
 }
+
+function openEdit(editId){
+    switch(editId){
+        case "Area":
+            $("#areaEditBtn").addClass("active");
+            $("#markerEditBtn").removeClass("active");
+            $("#metaEditBtn").removeClass("active");
+
+            $("#reportBetaText").show();
+            $("#markerBetaText").hide();
+            $("#metaBetaText").hide();
+
+            break;
+        case "Marker":
+            $("#areaEditBtn").removeClass("active");
+            $("#markerEditBtn").addClass("active");
+            $("#metaEditBtn").removeClass("active");
+
+            $("#reportBetaText").hide();
+            $("#markerBetaText").show();
+            $("#metaBetaText").hide();
+            break;
+        case "Meta":
+            $("#areaEditBtn").removeClass("active");
+            $("#markerEditBtn").removeClass("active");
+            $("#metaEditBtn").addClass("active");
+
+            $("#reportBetaText").hide();
+            $("#markerBetaText").hide();
+            $("#metaBetaText").show();
+            break;
+    }
+}
+
+
+function IsJsonString(str) {
+    try {
+        JSON.stringify(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? "rgb("+parseInt(result[1], 16)+","+parseInt(result[2], 16)+","+parseInt(result[3], 16)+")" : "rgb(101,134,153)";
+}
+
+function colorToHex(rgb){
+    rgb = rgb.match(/^rgb?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+    return (rgb && rgb.length === 4) ? "#" +
+    ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+    ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+    ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+}
+
+
+/*
+function colorToHex(color) {
+    if (color.substr(0, 1) === '#') {
+        return color;
+    }
+    var digits = /(.*?)rgb\((\d+),(\d+),(\d+)\)/.exec(color);
+
+    var red = parseInt(digits[2]);
+    var green = parseInt(digits[3]);
+    var blue = parseInt(digits[4]);
+
+    var rgb = blue | (green << 8) | (red << 16);
+    return digits[1] + '#' + rgb.toString(16);
+};
+    */

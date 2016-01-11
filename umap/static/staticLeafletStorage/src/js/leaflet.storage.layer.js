@@ -1457,6 +1457,7 @@ L.Storage.DataLayer = L.Class.extend({
 
                                     $("#EditLog").css("color","#4E8000")
                                     $("#EditLog").html("<i>Completed: " + postCount + " updates successfully applied. Change the year to validate your changes.</i>");
+
                                     $.get( "http://chronas.org/api/addEdit/" + moderatorEmail + "/" + postCount, function( data ) {
                                     });
 
@@ -1484,6 +1485,31 @@ L.Storage.DataLayer = L.Class.extend({
         })(provYear0, provYearId0);
         }
     },
+    updateDataDef: function(newObj) {
+
+        var formData = new FormData();
+        formData.append('name', 'datadef');
+        formData.append('display_on_load', !!ultimateMarker.datalayer.map.options.displayOnLoad);
+
+        var blob = new Blob([JSON.stringify(newObj)], {type: 'application/json'});
+        formData.append('geojson', blob);
+
+        ultimateMarker.datalayer.map.post((urlPrefix === "") ? "/en/map/6/datalayer/update/1/" : urlPrefix + "/map/6/datalayer/update/1/", {
+            data: formData,
+            callback: function (data, response) {
+
+                    $("#EditMetaLog").css("color","#4E8000");
+                    $("#EditMetaLog").html("<i>Meta updated.</i>");
+
+                    $.get( "http://chronas.org/api/addEdit/" + moderatorEmail + "/1", function( data ) {
+                    });
+
+            },
+            context: ultimateMarker.datalayer,
+            headers: {'If-Match': ultimateMarker.datalayer._etag || ''}
+        });
+    },
+
 
     show: function () {
 

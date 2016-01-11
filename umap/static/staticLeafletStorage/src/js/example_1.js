@@ -1,4 +1,11 @@
 var timeline2;
+var colorAreas = {}
+var relPlus;
+var relGen;
+var culPlus;
+var rulPlus;
+var capitalURL;
+var provURL;
 //document.domain = 'chronas.org';
 
 function getRandomArbitrary(min, max) {
@@ -6,6 +13,35 @@ function getRandomArbitrary(min, max) {
 }
 
 $(function() {
+
+     map.get(urlPrefix + "/datalayer/1/", {
+     callback: function (dataDefObj) {
+
+
+         relPlus = dataDefObj.relPlus;
+         relGen =  dataDefObj.relGen;
+         culPlus =  dataDefObj.culPlus;
+         rulPlus =  dataDefObj.rulPlus;
+         capitalURL = dataDefObj.capitalURL;
+         provURL = dataDefObj.provURL;
+
+         colorAreas = {}
+
+         for (var property in relPlus) {
+             colorAreas[relPlus[property][0]] = relPlus[property][1];
+         }
+         for (var property in relGen) {
+             colorAreas[relGen[property][0]] = relGen[property][1];
+         }
+         for (var property in culPlus) {
+             colorAreas[culPlus[property][0]] = culPlus[property][1];
+         }
+         for (var property in rulPlus) {
+             colorAreas[rulPlus[property][0]] = rulPlus[property][1];
+         }
+
+
+    //TODO: get data first.
     // Get start end times
     var d = new Date();
     d.setFullYear(2020);
@@ -154,4 +190,8 @@ $(function() {
     playback.setCursor(startTime);
 
     timeline2.setWindow(new Date().setFullYear(0),new Date().setFullYear(2000));
+}
+
+     });
+
 });

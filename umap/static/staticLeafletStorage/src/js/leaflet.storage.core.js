@@ -102,13 +102,41 @@ L.Util.toHTML = function (r) {
         provNameEditList=[];
         r = r.replace(/(http?:[^ \n]*)/g, '<div id="overview" style="display: none; text-align: center;"> <h1> Overview</h1><br>-> <h2 id="regionSpec" style="font-style: italic; cursor: pointer; "></h2> <br></br> with the culture -> <span style="font-style: italic; cursor: pointer;" id="cultureSpec"></span><br> and the religion -> <span style="font-style: italic; cursor: pointer;" id="religionSpec"></span> ( -> <span style="font-style: italic; cursor: pointer;" id="mainRelSpec"></span> ) <br> has a total population of <span style="font-style: italic; cursor: pointer;" id="populationSpec"></span> <br> with the capital -> <span style="font-style: italic; cursor: pointer;" id="capitalSpec""></span> <br> and is ruled by -> <span style="font-style: italic; cursor: pointer;" id="rulerSpec"></span> <br> </div>' +
             '' +
-            '<img id="loader1" src="/static/staticReqs/customIcons/loadingCA.gif"  style="opacity: 0.6" width="96" height="96" alt="loading gif"/> <div id="specific" style="display: block;"> <div style="display: none; text-align: center;" id="notFoundNotice">[no Wikipedia page linked for entry "<span id="missingEntry"></span>", contribute and click <strong>here</strong> to make a suggestion]</div><div style="display: none;" id="reportBetaText"><h2 id="EditProvName">Editing Province(s)</h2> <br> <li class="divider"></li>' +
-            '<strong>Dear user '+moderatorEmail+', before you submit your changes, understand that data will be overwritten which is not easily recoverable. Therefore it is very important that you cross-check your input and submit carefully.</a></strong> <li class="divider"></li> <br> <p> Select the new data in the according fields and the time span it applies to. Fill only the fields which you want to change.</p><br> <table style="width:350px"> <tbody> <tr> <td style=" width: 80px;">Ruler</td> <td colspan="2"><input  id="EditProvRul" type="text" placeholder="No Change"></td> </tr> <tr> <td>Culture</td> <td colspan="2"><input  id="EditProvCul" type="text" placeholder="No Change"></td> </tr> <tr> <td>Religion</td> <td colspan="2"><input  id="EditProvRel" type="text" placeholder="No Change"></td> </tr> <tr> <td>Capital</td> <td colspan="2"><input  id="EditProvCap" type="text" placeholder="No Change"></td> </tr> <tr> <td>Population</td> <td colspan="2"><input type="number" id="EditProvPop" min="1" max="2000" step="1" placeholder="No Change"></td> </tr> </tbody></table> <br>' +
+            '<img id="loader1" src="/static/staticReqs/customIcons/loadingCA.gif"  style="opacity: 0.6" width="96" height="96" alt="loading gif"/> <div id="specific" style="display: block;"> <div style="display: none; text-align: center;" id="notFoundNotice">[no Wikipedia page linked for entry "<span id="missingEntry"></span>", contribute and click <strong>here</strong> to make a suggestion]</div><div class="headerEdits"  style="display: none;"><button id="areaEditBtn" onclick="openEdit(\'Area\')" title="Edit Area" type="submit" class="btn btn-default lowerButton active"> Edit Area </button>&nbsp;<button style="display:none" id="markerEditBtn" onclick="openEdit(\'Marker\')" title="Edit Marker" type="submit" class="btn btn-default lowerButton"> Edit Marker </button>&nbsp;<button id="metaEditBtn" onclick="openEdit(\'Meta\')" title="Edit Meta" type="submit" class="btn btn-default lowerButton"> Edit Meta </button></div>' +
+
+            '<div style="display: none;" id="reportBetaText"><h2 id="EditProvName">Editing Area</h2> <li class="divider"></li>' +
+            'Dear user <strong>'+moderatorEmail+'</strong>, before you submit your changes, understand that data will be <span style="color: red;">overwritten</span> which is not easily recoverable. Therefore it is very important that you cross-check your input and submit carefully.</a> <li class="divider"></li> <br> <p> Select the new data in the according fields and the time span it applies to. Fill only the fields which you want to change.</p><br> <table style="width:350px"> <tbody> <tr> <td style=" width: 80px;">Ruler</td> <td colspan="2"><input  id="EditProvRul" type="text" placeholder="No Change"></td> </tr> <tr> <td>Culture</td> <td colspan="2"><input  id="EditProvCul" type="text" placeholder="No Change"></td> </tr> <tr> <td>Religion</td> <td colspan="2"><input  id="EditProvRel" type="text" placeholder="No Change"></td> </tr> <tr> <td>Capital</td> <td colspan="2"><input  id="EditProvCap" type="text" placeholder="No Change"></td> </tr> <tr> <td>Population</td> <td colspan="2"><input type="number" id="EditProvPop" min="1" max="2000" step="1" placeholder="No Change"></td> </tr> </tbody></table> <br>' +
             'Applies from year <input style=" width: 65px; padding-right: 0; " type="number" id="sinceYear"  step="1" min="1" max="2000" value=newYear> until <input style=" width: 65px; padding-right: 0; " type="number" id="untilYear" min="1" max="2000" step="1"  value=newYear>' +
             '<p style=" margin-top: 2em; ">To the following province(s): </p> </p><p> <span id="htmlProvList">' +
             '</span></p><p style=" clear: both; padding-top: 0.5em; "><i>Add more provinces by clicking on the map</i></p>' +
             ' <ul class="nav nav-list tree" style="display: block;"></ul><br><br> <button type="button" onclick="submitProvEdit()" class="btn btn-default">Submit</button>' +
-            '<button type="button" onclick="$(\'.report\').parent().click()" class="btn btn-default">Back</button> <br><p id="EditLog" style=" margin: 10px 0 10px; "></p></div> <iframe id="chronasWiki" src="$1" onload="$(\'#loader1\').hide();" height="100%" frameborder="0" >        &lt;p&gt;Your browser does not support iframes.&lt;/p&gt;    </iframe></div>');
+            '<button type="button" onclick="$(\'.report\').parent().click()" class="btn btn-default">Back</button> <br><p id="EditLog" style=" margin: 10px 0 10px; "></p></div> ' +
+
+
+
+            '<div style="display: none;" id="markerBetaText"><h2 id="EditMarkerName">Editing Marker</h2> <li class="divider"></li>' +
+            'Dear user <strong>'+moderatorEmail+'</strong>, before you submit your changes, understand that data will be <span style="color: red;">overwritten</span> which is not easily recoverable. Therefore it is very important that you cross-check your input and submit carefully.</a></strong> <li class="divider"></li> <br> <p> Select the new data in the according fields and the time span it applies to. Fill only the fields which you want to change.</p><br> <table style="width:350px"> <tbody> <tr> <td style=" width: 80px;">Ruler</td> <td colspan="2"><input  id="EditProvRul" type="text" placeholder="No Change"></td> </tr> <tr> <td>Culture</td> <td colspan="2"><input  id="EditProvCul" type="text" placeholder="No Change"></td> </tr> <tr> <td>Religion</td> <td colspan="2"><input  id="EditProvRel" type="text" placeholder="No Change"></td> </tr> <tr> <td>Capital</td> <td colspan="2"><input  id="EditProvCap" type="text" placeholder="No Change"></td> </tr> <tr> <td>Population</td> <td colspan="2"><input type="number" id="EditProvPop" min="1" max="2000" step="1" placeholder="No Change"></td> </tr> </tbody></table> <br>' +
+            'Applies from year <input style=" width: 65px; padding-right: 0; " type="number" id="sinceYear"  step="1" min="1" max="2000" value=newYear> until <input style=" width: 65px; padding-right: 0; " type="number" id="untilYear" min="1" max="2000" step="1"  value=newYear>' +
+            '<p style=" margin-top: 2em; ">To the following province(s): </p> </p><p> <span id="htmlProvList">' +
+            '</span></p><p style=" clear: both; padding-top: 0.5em; "><i>Add more provinces by clicking on the map</i></p>' +
+            ' <ul class="nav nav-list tree" style="display: block;"></ul><br><br> <button type="button" onclick="submitProvEdit()" class="btn btn-default">Submit</button>' +
+            '<button type="button" onclick="$(\'.report\').parent().click()" class="btn btn-default">Back</button> <br><p id="EditLog" style=" margin: 10px 0 10px; "></p></div> ' +
+
+
+
+            '<div style="display: none;" id="metaBetaText"><h2 id="EditMetaName">Editing Meta</h2> <li class="divider"></li>' +
+            'Dear user <strong>'+moderatorEmail+'</strong>, before you submit your changes, understand that data will be <span style="color: red;">overwritten</span> which is not easily recoverable. Therefore it is very important that you cross-check your input and submit carefully.</a></strong> <li class="divider"></li> <br><h3>Add New Meta Entities</h3> <p> Select the new data in the according fields and the time span it applies to. Fill only the fields which you want to change.</p> <table style="width:80%"> <tbody> <tr> <td style=" width: 120px;">Add new Ruler</td> <td colspan="2"><input  id="AddMetaRul" type="text" placeholder="Displayed Name"></td> <td ><input class="colorRulAdd" type="color" value="'+getRandomColor()+'"></td><td><input  id="AddRulURL" type="text" placeholder="Full Wikipedia URL"></td></tr> <tr> <td>Add new Culture</td> <td colspan="2"><input  id="AddMetaCul" type="text" placeholder="Displayed Name"></td> <td ><input class="colorCulAdd" type="color" value="'+getRandomColor()+'"></td><td><input  id="AddCulURL" type="text" placeholder="Full Wikipedia URL"></td></tr> <tr> <td>Add new Religion</td> <td colspan="1"><input  id="AddMetaRel" type="text" placeholder="Displayed Name"></td><td colspan="1"><input id="AddMetamRel" type="text" placeholder="Main Religion"></td> <td><input class="colorRelAdd" type="color" value="'+getRandomColor()+'"></td> <td><input  id="AddRelURL" type="text" placeholder="Full Wikipedia URL"></td></tr> <tr> <td>Add new Capital</td> <td colspan="2"><input  id="AddMetaCap" type="text" placeholder="Displayed Name"></td> <td></td><td><input  id="AddCapURL" type="text" placeholder="Full Wikipedia URL"></td></tr> </tbody></table> <br>' +
+            'or<h3>Edit Meta Entities</h3> <p> Select the entity you want to change an attribute of by typing in the according field.</p> <table style="width:80%"> <tbody> <tr> <td style=" width: 120px;">Edit a Ruler</td> <td colspan="1"><input  id="EditMetaRul" type="text" placeholder="Displayed Name"></td><td colspan="1"><input  id="EditMetaRulNew" type="text" placeholder="New Name"></td><td><input class="colorRulEdits" type="color" value="#efefef" disabled=""></td> <td><input  id="EditRulURL" type="text" placeholder="Full Wikipedia URL"></td></tr> <tr> <td>Edit a Culture</td> <td colspan="1"><input  id="EditMetaCul" type="text" placeholder="Displayed Name"></td><td colspan="1"><input  id="EditMetaCulNew" type="text" placeholder="New Name"></td><td ><input class="colorCulEdits" type="color" value="#efefef" disabled=""></td> <td><input  id="EditCulURL" type="text" placeholder="Full Wikipedia URL"></td></tr> <tr> <td>Edit a Religion</td> <td colspan="1"><input  id="EditMetaRel" type="text" placeholder="Displayed Name"></td><td colspan="1"><input  id="EditMetaRelNew" type="text" placeholder="New Name"></td><td ><input class="colorRelEdits" type="color"  value="#efefef" disabled=""></td> <td><input  id="EditRelURL" type="text" placeholder="Full Wikipedia URL"></td></tr> <tr> <td>Edit a Capital</td> <td colspan="1"><input  id="EditMetaCap" type="text" placeholder="Displayed Name"></td> <td colspan="1"><input  id="EditMetaCapNew" type="text" placeholder="New Name"></td> <td></td><td><input  id="EditCapURL" type="text" placeholder="Full Wikipedia URL"></td></tr> </tbody></table> <br>' +
+            ' <ul class="nav nav-list tree" style="display: block;"></ul><br> <button type="button" onclick="submitAddMeta()" class="btn btn-default">Submit</button>' +
+            '<button type="button" onclick="$(\'.report\').parent().click()" class="btn btn-default">Back</button> <br><p id="EditMetaLog" style=" margin: 10px 0 10px; "></p></div> ' +
+
+
+
+
+
+
+
+            '<iframe id="chronasWiki" src="$1" onload="$(\'#loader1\').hide();" height="100%" frameborder="0" >        &lt;p&gt;Your browser does not support iframes.&lt;/p&gt;    </iframe></div>');
     }
     else{
     // chronas iframes
@@ -353,8 +381,9 @@ L.Storage.Help = L.Class.extend({
         L.DomEvent.on(closeLink, 'click', function(){
 
 
-            if($("#reportBetaText").is(":visible") ){
+            if($(".headerEdits").is(":visible") ){
                 $("#reportBetaText").hide()
+                $(".headerEdits").hide()
             }
             
             if ($("#storage-ui-container")[0].style.width == "100%"){
@@ -492,3 +521,13 @@ L.Storage.Help = L.Class.extend({
     formatIconURL: L._('You can use feature properties as variables: ex.: with "http://myserver.org/images/{name}.png", the {name} variable will be replaced by the "name" value of each markers.')
 
 });
+
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
