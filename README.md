@@ -18,7 +18,6 @@ Create a virtual environment
 Install dependencies and project
 
     cd YOUR_SOURCE_DIR
-    git clone git@github.com:umap-project/umap.git
     pip install -r requirements.txt
     pip install -e .
 
