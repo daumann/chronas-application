@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 import umap
 
-long_description = codecs.open('README.rst', "r", "utf-8").read()
+long_description = codecs.open('README.md', "r", "utf-8").read()
 
 setup(
     name="umap",
