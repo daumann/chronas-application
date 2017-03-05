@@ -15,7 +15,7 @@ Create a virtual environment
     virtualenv umap
     source umap/bin/activate
 
-Install dependencies and project
+Install dependencies and project (make sure you the library libpq-dev installed)
 
     cd YOUR_SOURCE_DIR
     pip install -r requirements.txt
