@@ -541,8 +541,8 @@ a.storage-control-text {
     transition: all 0.5s ease;
     padding: 10px;
     /* position: absolute; */
-    /* margin-left: 38px; */
-    display: none;
+    /* margin-left: 38px;
+    display: none;*/
     line-height: 24px;
     border-radius: 2px;
     background: rgba(255, 255, 255, 0.9);

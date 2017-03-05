@@ -153,7 +153,7 @@ L.Storage.DataLayersControl = L.Control.extend({
     onAdd: function (map) {
         var container = L.DomUtil.create('div', 'leaflet-control-browse storage-control');
             
-        var toggle = L.DomUtil.create('a', 'storage-browse-toggle', container), hierarchy = L.DomUtil.create('a', 'storage-browse-hierarchy', container), actions = L.DomUtil.create('div', 'storage-browse-actions', container);
+        var toggle = L.DomUtil.create('a', 'storage-browse-toggle storage-browse-toggle-active', container), hierarchy = L.DomUtil.create('a', 'storage-browse-hierarchy', container), actions = L.DomUtil.create('div', 'storage-browse-actions', container);
         toggle.href = '#';
         hierarchy.href = '#';
 
@@ -165,6 +165,7 @@ L.Storage.DataLayersControl = L.Control.extend({
         $(hierarchy).attr("data-placement","right");
 
         toggle.title="Change area dimension and add markers"
+        toggle.id = "layerDataToggle"
 
         hierarchy.title="Browse specific tables and analytics"
 

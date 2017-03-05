@@ -3,7 +3,7 @@
 <div id="progress"><div id="progress-bar"></div></div>
 <div id="map" style="width: 100%;position: absolute;top: 0; /* bottom: 0; */left: 0;right: 0;bottom: 120px;">
 
-<div id="featureForms" style="display:none; position: relative; /*margin-top: 200px; margin-left: 20px;*/  z-index: 20; transition: all 0.5s ease;  /*width: 150px; */">
+<div id="featureForms" style="position: relative; /*display:none; margin-top: 200px; margin-left: 20px;*/  z-index: 20; transition: all 0.5s ease;  /*width: 150px; */">
         <div  >
             <div id="featureTree" style="overflow: hidden; ">
                 <ul class="nav nav-list">
@@ -1174,8 +1174,9 @@ $("input:checkbox").change(function(){
         });
 
         $('#featureTree .tree-toggler').click()
-        $('#markerIcon').click()
+        /*    $('#markerIcon').click()
         $('#areaIcon').click()
+        */
        // $('#toggle-one').bootstrapToggle();
 
 
